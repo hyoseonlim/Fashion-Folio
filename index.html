@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Folio</title>
+    <link rel="stylesheet" types="text/css" href="./style.css">
+</head>
+
+<body>
+    <video muted autoplay loop>
+        <source src="./assets/bgvideo2.mp4" type="video/mp4">
+    </video>
+    <div class="container">
+        <header class="header">
+            <img class="logo-image" src="./assets/logo-w.png" />
+            <nav class="nav">
+                <div class="nav-item" onclick="showPage('discover')">Discover</div>
+                <div class="nav-item" onclick="showPage('favorites')">Favorites</div>
+                <div class="nav-item" onclick="showPage('journal')">Journal</div>
+            </nav>
+            <div class="user-icon"></div>
+        </header>
+
+        <main class="content">
+            <!-- Discover Page -->
+            <div id="discover" class="page active">
+                <div class="search-section">
+                    <input type="text" class="search-input" placeholder="오늘의 기분이나 일정을 알려주세요">
+                    <button class="style-recommendation">스타일 추천 요청</button>
+                </div>
+
+                <div class="section-header">
+                    <h2 class="section-title">Today's Trend Collection</h2>
+                    <select class="category-select">
+                        <option>성별</option>
+                        <option>남성</option>
+                        <option>여성</option>
+                    </select>
+                    <select class="category-select">
+                        <option>TPO</option>
+                        <option>데일리</option>
+                        <option>캠퍼스</option>
+                        <option>출근</option>
+                        <option>데이트</option>
+                        <option>여행</option>
+                    </select>
+                </div>
+
+                <div class="items-grid">
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorites Page -->
+            <div id="favorites" class="page">
+                <div class="section-header">
+                    <h2 class="section-title">Your Favorite Trends</h2>
+                    <select class="category-select">
+                        <option>성별</option>
+                        <option>남성</option>
+                        <option>여성</option>
+                    </select>
+                    <select class="category-select">
+                        <option>TPO</option>
+                        <option>데일리</option>
+                        <option>캠퍼스</option>
+                        <option>출근</option>
+                        <option>데이트</option>
+                        <option>여행</option>
+                    </select>
+                </div>
+
+                <div class="items-grid">
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon liked"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+
+                        <div class="heart-icon liked"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon liked"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+
+                        <div class="heart-icon liked"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon liked"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+
+                        <div class="heart-icon liked"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+                        <div class="heart-icon liked"></div>
+                    </div>
+                    <div class="item-card" onclick="toggleHeart(this)">
+                        <img
+                            src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
+
+                        <div class="heart-icon liked"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Journal Page -->
+            <!-- 우석 -->
+            <div id="journal" class="page">
+                <div class="diary-header">
+                    <h2 class="section-title">Style Journal</h2>
+                    <button class="add-button" onclick="showPage('edit')">+ Add</button>
+                </div>
+            </div>
+
+            <!-- Edit Page -->
+            <!-- 주인 -->
+            <div id="edit" class="page">
+                <h2 class="section-title">Create New Look</h2>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Remove active class from nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Add active class to corresponding nav item
+            if (pageId !== 'edit') {
+                const navItem = Array.from(navItems).find(item =>
+                    item.textContent.toLowerCase().includes(pageId.toLowerCase())
+                );
+                if (navItem) {
+                    navItem.classList.add('active');
+                }
+            }
+        }
+
+        function toggleHeart(card) {
+            const heart = card.querySelector('.heart-icon');
+            heart.classList.toggle('liked');
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function () {
+            showPage('discover');
+
+            // Set up search functionality
+            const searchInput = document.querySelector('.search-input');
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    console.log('Searching for:', this.value);
+                    // Add search functionality here
+                }
+            });
+
+            // Set up style recommendation
+            const recommendButton = document.querySelector('.style-recommendation');
+            recommendButton.addEventListener('click', function () {
+                const mood = searchInput.value;
+                if (mood) {
+                    alert(`"${mood}"에 맞는 스타일을 추천해드릴게요!`);
+                } else {
+                    alert('기분이나 일정을 먼저 입력해주세요.');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
