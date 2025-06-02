@@ -133,9 +133,52 @@
                     <h2 class="section-title">Your Personal Stylist</h2>
                 </div>
                 <div class="search-section">
-                    <input type="text" class="search-input" placeholder="오늘의 기분이나 일정을 알려주세요">
-                    <button class="style-recommendation">스타일 추천 요청</button>
+                    <input type="text" class="search-input" placeholder="오늘의 기분이나 일정을 알려주세요" id="moodInput">
+                    <button class="style-recommendation" onclick="getStyleRecommendation()">스타일 추천 요청</button>
                 </div>
+                <!-- 로딩 스피너 -->
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <div class="loading-text">당신만의 스타일을 찾고 있어요...</div>
+                </div>
+
+                <!-- 추천 결과 표시 영역 -->
+                <div class="recommendation-result" id="recommendationResult">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">🎨 오늘의 스타일 추천</h3>
+                        <button class="close-recommendation" onclick="closeRecommendation()">×</button>
+                    </div>
+
+                    <div class="recommendation-content">
+                        <div class="summary-section">
+                            <h4 class="summary-title">📝 한 줄 요약</h4>
+                            <p class="summary-text" id="summaryText"></p>
+                        </div>
+
+                        <div class="outfit-section">
+                            <div class="outfit-item">
+                                <div class="outfit-item-type">👕 상의</div>
+                                <div class="outfit-item-description" id="topItem"></div>
+                            </div>
+
+                            <div class="outfit-item">
+                                <div class="outfit-item-type">👖 하의</div>
+                                <div class="outfit-item-description" id="bottomItem"></div>
+                            </div>
+
+                            <div class="outfit-item">
+                                <div class="outfit-item-type">👟 신발</div>
+                                <div class="outfit-item-description" id="shoesItem"></div>
+                            </div>
+
+                            <div class="outfit-item">
+                                <div class="outfit-item-type">💎 액세서리</div>
+                                <div class="outfit-item-description" id="accessoriesItem"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Journal Page -->
@@ -319,9 +362,7 @@
             const recommendButton = document.querySelector('.style-recommendation');
             recommendButton.addEventListener('click', function () {
                 const mood = searchInput.value;
-                if (mood) {
-                    alert(`"${mood}"에 맞는 스타일을 추천해드릴게요!`);
-                } else {
+                if (!mood) {
                     alert('기분이나 일정을 먼저 입력해주세요.');
                 }
             });
@@ -452,6 +493,79 @@
             document.getElementById('userInfo').innerHTML = `${age}세 ${gender}<br>${height}cm, ${weight}kg<br>${job}`;
             closeEditModal();
         }
+
+        // 스타일 추천 요청 함수
+        function getStyleRecommendation() {
+            const moodInput = document.getElementById('moodInput');
+            const mood = moodInput.value.trim();
+
+            if (!mood) {
+                alert('기분이나 일정을 먼저 입력해주세요.');
+                return;
+            }
+
+            // 로딩 스피너 표시
+            showLoading();
+
+            // 실제 서버 연결 전이므로 예시 데이터로 시뮬레이션
+            setTimeout(() => {
+                const exampleRecommendation = {
+                    summary: '청량한 대학생 발표룩, 어깨 넓은 상체에 잘 어울리는 슬림핏 코디',
+                    outfit: {
+                        top: '블랙 컬러의 오버핏 티셔츠',
+                        bottom: '네이비 컬러의 슬림핏 청바지',
+                        shoes: '화이트 컬러의 스니커즈',
+                        accessories: '심플한 블랙 컬러의 소가죽 스트랩 시계, 실버 컬러의 체인 목걸이'
+                    }
+                };
+
+                displayRecommendation(exampleRecommendation);
+                hideLoading();
+            }, 2000); // 2초 후 결과 표시 (서버 응답 시뮬레이션)
+        }
+
+        // 로딩 스피너 표시
+        function showLoading() {
+            document.getElementById('loadingSpinner').classList.add('show');
+            document.getElementById('recommendationResult').classList.remove('show');
+        }
+
+        // 로딩 스피너 숨기기
+        function hideLoading() {
+            document.getElementById('loadingSpinner').classList.remove('show');
+        }
+
+        // 추천 결과 표시
+        function displayRecommendation(recommendation) {
+            // 데이터 채우기
+            document.getElementById('summaryText').textContent = recommendation.summary;
+            document.getElementById('topItem').textContent = recommendation.outfit.top;
+            document.getElementById('bottomItem').textContent = recommendation.outfit.bottom;
+            document.getElementById('shoesItem').textContent = recommendation.outfit.shoes;
+            document.getElementById('accessoriesItem').textContent = recommendation.outfit.accessories;
+
+            // 결과 영역 표시
+            document.getElementById('recommendationResult').classList.add('show');
+
+            // 결과 영역으로 스크롤
+            document.getElementById('recommendationResult').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // 추천 결과 닫기
+        function closeRecommendation() {
+            document.getElementById('recommendationResult').classList.remove('show');
+            document.getElementById('moodInput').value = ''; // 입력창 초기화
+        }
+
+        // Enter 키로도 추천 요청 가능하도록
+        document.getElementById('moodInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                getStyleRecommendation();
+            }
+        });
     </script>
 </body>
 
