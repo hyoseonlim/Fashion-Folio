@@ -29,9 +29,10 @@ function displayTrends(trends) {
         let trendTag = document.createElement('div');
         trendTag.className = 'item-card';
         let trendImg = document.createElement('img');
+        trendImg.className = 'item-card__image';
         trendImg.src = trend.imageUrl;
         let heartIcon = document.createElement('div');
-        heartIcon.className = 'heart-icon'
+        heartIcon.className = 'item-card__heart';
         trendTag.append(trendImg, heartIcon);
         document.getElementById('trends').appendChild(trendTag);
         // TODO: 위시리스트 추가 기능, 바로가기 기능 (trend.linkUrl을 href로)
@@ -40,7 +41,6 @@ function displayTrends(trends) {
     //     <img src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
     //     <div class="heart-icon"></div>
     // </div>
-    document.getElementById('trends').appendChild(trendTag);
 }
 
 // 페이지 전환 함수
@@ -451,8 +451,8 @@ function checkDuplicateId() {
 
 // 초기화 및 이벤트 리스너 설정
 document.addEventListener('DOMContentLoaded', function () {
-    // 기본 페이지 표시
     showPage('trend');
+    getTrends();
 
     // 검색 기능 설정
     const searchInput = document.querySelector('.search-section__input');

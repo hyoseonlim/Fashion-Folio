@@ -28,7 +28,6 @@ body {
     z-index: -1;
 }
 
-/* Form Focus Styles */
 input:focus,
 select:focus,
 textarea:focus {
@@ -37,12 +36,10 @@ textarea:focus {
     box-shadow: 0 0 0 2px rgb(255, 255, 255);
 }
 
-/* App Container */
 .app-container {
     margin: 0 auto;
 }
 
-/* Header Styles */
 .header {
     padding: 20px 40px;
     display: flex;
@@ -147,14 +144,12 @@ textarea:focus {
     background-color: #f0f0f0;
 }
 
-/* Main Content */
 .main-content {
     padding: 40px;
     margin: 0 auto;
     width: 80%;
 }
 
-/* Page System */
 .page {
     display: none;
 }
@@ -163,7 +158,6 @@ textarea:focus {
     display: block;
 }
 
-/* Section Header */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -215,7 +209,6 @@ textarea:focus {
     accent-color: darkgray;
 }
 
-/* Items Grid */
 .items-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -223,7 +216,6 @@ textarea:focus {
     margin-bottom: 40px;
 }
 
-/* Item Card */
 .item-card {
     width: 300px;
     height: 360px;
@@ -265,7 +257,6 @@ textarea:focus {
     content: '♥';
 }
 
-/* Auth Pages */
 .auth-page__heading {
     font-size: 26px;
     font-weight: 600;

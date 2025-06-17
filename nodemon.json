@@ -1,0 +1,14 @@
+{
+    "watch": [
+        "*.js",
+        "services/",
+        "public/"
+    ],
+    "ignore": [
+        "data/",
+        "node_modules/",
+        "*.json"
+    ],
+    "ext": "js",
+    "delay": "1000"
+}
