@@ -1,0 +1,34 @@
+{
+    "users": [
+        {
+            "id": "test",
+            "password": "1234",
+            "age": 25,
+            "gender": "남성",
+            "height": 175,
+            "weight": 70,
+            "job": "대학생",
+            "bodyType": "normal",
+            "joinDate": "2024-01-15",
+            "likedTrends": [],
+            "likedUsers": []
+        },
+        {
+            "id": "admin",
+            "password": "admin",
+            "age": 30,
+            "gender": "여성",
+            "height": 165,
+            "weight": 55,
+            "job": "개발자",
+            "bodyType": "slim",
+            "joinDate": "2024-01-01",
+            "likedTrends": [
+                1,
+                2,
+                3
+            ],
+            "likedUsers": []
+        }
+    ]
+}

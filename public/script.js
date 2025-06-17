@@ -1,5 +1,117 @@
 const API_BASE_URL = 'http://localhost:3000/api';
 
+function updateUserUI(user) {
+    // 로그인 버튼 숨기고 유저 아이콘 표시
+    document.querySelector('.header__login-btn').style.display = 'none';
+    document.querySelector('.header__user-icon').style.display = 'block';
+
+    // 유저 정보 표시
+    document.getElementById('userInfo').innerHTML =
+        `${user.age}세 ${user.gender}<br>${user.height}cm, ${user.weight}kg<br>${user.job}`;
+}
+
+// 로그인 처리
+async function handleLogin() {
+    const id = document.getElementById('loginID').value;
+    const password = document.getElementById('loginPW').value;
+
+    if (!id || !password) {
+        alert('아이디와 비밀번호를 입력해주세요.');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, password })
+        });
+
+        console.log(response);
+
+        const result = await response.json();
+
+
+        if (result.success) {
+
+            // 세션 정보 저장
+            localStorage.setItem('sessionId', result.sessionId);
+            localStorage.setItem('userId', result.user.id);
+            localStorage.setItem('userInfo', JSON.stringify(result.user));
+
+            // 입력 필드 초기화
+            document.getElementById('loginID').value = '';
+            document.getElementById('loginPW').value = '';
+
+            console.log('✔ 저장 확인');
+            console.log('세션 ID 확인:', localStorage.getItem('sessionId'));
+            console.log('사용자 ID 확인:', localStorage.getItem('userId'));
+            console.log('사용자 정보 확인:', JSON.parse(localStorage.getItem('userInfo')));
+
+            // UI 업데이트
+            updateUserUI(result.user);
+            showPage('trend');
+            getTrends();
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        alert('로그인 중 오류가 발생했습니다.');
+    }
+}
+
+// 회원가입 처리
+async function handleRegister() {
+    const id = document.getElementById('registerId').value;
+    const password = document.getElementById('registerPw').value;
+    const passwordConfirm = document.getElementById('registerPwConfirm').value;
+    const age = document.getElementById('registerAge').value;
+    const job = document.getElementById('registerJob').value;
+    const height = document.getElementById('registerHeight').value;
+    const weight = document.getElementById('registerWeight').value;
+    const bodyType = document.getElementById('registerBodyType').value;
+
+    // 성별 추가 (select로 변경하거나 radio button 추가 필요)
+    const gender = '남성'; // 임시값
+
+    // 유효성 검사
+    if (!id || !password) {
+        alert('아이디와 비밀번호는 필수입니다.');
+        return;
+    }
+
+    if (password !== passwordConfirm) {
+        alert('비밀번호가 일치하지 않습니다.');
+        return;
+    }
+
+    if (password.length < 4) {
+        alert('비밀번호는 4자 이상이어야 합니다.');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/users`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id, password, age, gender, height, weight, job, bodyType
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('회원가입이 완료되었습니다. 로그인해주세요.');
+            showPage('login');
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        alert('회원가입 중 오류가 발생했습니다.');
+    }
+}
+
 // 전역 변수
 let showingFavoritesOnly = false;
 let currentFilters = {
@@ -71,12 +183,6 @@ function showPage(pageId) {
 function toggleUserDropdown() {
     const dropdown = document.getElementById('userDropdown');
     dropdown.classList.toggle('header__user-dropdown--active');
-}
-
-// 하트 아이콘 토글
-function toggleHeart(card) {
-    const heart = card.querySelector('.item-card__heart');
-    heart.classList.toggle('item-card__heart--liked');
 }
 
 // 사용자 정보 모달 관련
@@ -433,12 +539,6 @@ function searchById() {
     console.log('ID 검색 기능 구현 예정');
 }
 
-// 인증 관련 함수들 (추가 예정)
-function handleLogin() {
-    // TODO: 로그인 처리
-    console.log('로그인 처리 예정');
-}
-
 function handleRegister() {
     // TODO: 회원가입 처리
     console.log('회원가입 처리 예정');
@@ -526,6 +626,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 외부 클릭시 드롭다운 닫기
     document.addEventListener('click', function (event) {
+
+        // 로그인 Enter 키
+        document.getElementById('loginPW')?.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') handleLogin();
+        });
+
+        // 회원가입 Enter 키
+        document.getElementById('registerBodyType')?.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') handleRegister();
+        });
+
         const userSection = document.querySelector('.header__user-section');
         const dropdown = document.querySelector('.header__user-dropdown');
 

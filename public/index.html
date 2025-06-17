@@ -16,20 +16,22 @@
 
     <div class="app-container">
         <header class="header">
-            <img class="header__logo-img" src="./assets/logo-w.png" onclick="getTrends()" />
+            <img class="header__logo-img" src="./assets/logo-w.png" onclick="showPage('trend'); getTrends();" />
 
             <nav class="header__nav">
                 <div class="header__nav-item" onclick="showPage('trend')">TREND</div>
                 <div class="header__nav-item" onclick="showPage('discover')">STYLIST</div>
                 <div class="header__nav-item" onclick="showPage('gallery')">GALLERY</div>
+                <div class="header__nav-item" onclick="showMyDiary()" style="display: none;">MY DIARY</div>
             </nav>
 
             <div class="header__user-section">
                 <!-- 로그인 전 -->
-                <button onclick="showPage('login')" class="header__login-btn">로그인</button>
+                <button class="header__login-btn" id="headerLoginBtn" onclick="showPage('login')">로그인</button>
 
                 <!-- 로그인 후 -->
-                <div class="header__user-icon" onclick="toggleUserDropdown()">
+                <div class="header__user-icon" id="headerUserIcon" onclick="toggleUserDropdown()"
+                    style="display: none;">
                 </div>
 
                 <div class="header__user-dropdown" id="userDropdown">
@@ -39,38 +41,43 @@
                         {{USER_JOB}}
                     </div>
                     <button onclick="openEditModal()" class="header__edit-btn">편집하기</button>
+                    <button onclick="showMyDiary()" class="header__diary-btn">내 다이어리</button>
+                    <button onclick="logout()" class="header__logout-btn">로그아웃</button>
                 </div>
 
                 <div id="userModal" class="modal modal--user">
-                    <div class="modal__content">
+                    <div class="modal__content modal__content--user">
                         <h5 class="modal__title">*패션 추천을 위한 정보를 입력해주세요*</h5>
 
                         <div class="modal__input-row">
                             <span class="modal__input-label">성별</span>
-                            <input id="genderInput" type="text" value="{{USER_GENDER}}" class="modal__input" />
+                            <select id="genderInput" class="modal__input">
+                                <option value="남성">남성</option>
+                                <option value="여성">여성</option>
+                            </select>
                         </div>
 
                         <div class="modal__input-row">
                             <span class="modal__input-label">나이</span>
-                            <input id="ageInput" type="number" value="{{USER_AGE}}" class="modal__input" />
+                            <input id="ageInput" type="number" class="modal__input" />
                             <span class="modal__unit">세</span>
                         </div>
 
                         <div class="modal__input-row">
                             <span class="modal__input-label">키</span>
-                            <input id="heightInput" type="number" value="{{USER_HEIGHT}}" class="modal__input" />
+                            <input id="heightInput" type="number" class="modal__input" />
                             <span class="modal__unit">cm</span>
                         </div>
 
                         <div class="modal__input-row">
                             <span class="modal__input-label">몸무게</span>
-                            <input id="weightInput" type="number" value="{{USER_WEIGHT}}" class="modal__input" />
+                            <input id="weightInput" type="number" class="modal__input" />
                             <span class="modal__unit">kg</span>
                         </div>
 
                         <div class="modal__input-row">
                             <span class="modal__input-label">직업</span>
-                            <input id="jobInput" type="text" value="{{USER_JOB}}" class="modal__input" />
+                            <input id="jobInput" type="text" class="modal__input" />
                         </div>
 
                         <div class="modal__buttons">
@@ -88,13 +95,13 @@
                 <div class="section-header">
                     <div class="section-header__left">
                         <h2 class="section-header__title">Today's Trend Collection</h2>
-                        <select class="section-header__category-select">
-                            <option>TPO</option>
-                            <option>데일리</option>
-                            <option>캠퍼스</option>
-                            <option>출근</option>
-                            <option>데이트</option>
-                            <option>여행</option>
+                        <select class="section-header__category-select" onchange="filterByCategory(this.value)">
+                            <option value="all">전체</option>
+                            <option value="데일리">데일리</option>
+                            <option value="캠퍼스">캠퍼스</option>
+                            <option value="출근">출근</option>
+                            <option value="데이트">데이트</option>
+                            <option value="여행">여행</option>
                         </select>
                     </div>
                     <label class="section-header__favorites-filter">
@@ -114,15 +121,18 @@
                 <div class="auth-page__box">
                     <div class="auth-page__row">
                         <label for="loginID" class="auth-page__label">ID</label>
-                        <input type="text" id="loginID" class="auth-page__input" />
+                        <input type="text" id="loginID" class="auth-page__input"
+                            onkeypress="if(event.key === 'Enter') handleLogin()" />
                     </div>
                     <div class="auth-page__row">
                         <label for="loginPW" class="auth-page__label">PW</label>
-                        <input type="password" id="loginPW" class="auth-page__input" />
+                        <input type="password" id="loginPW" class="auth-page__input"
+                            onkeypress="if(event.key === 'Enter') handleLogin()" />
                     </div>
                     <button class="auth-page__submit" onclick="handleLogin()">로그인</button>
                     <div class="auth-page__link">
-                        <a href="#" onclick="showPage('register')" class="auth-page__link-text">회원가입</a>
+                        <a href="#" onclick="showPage('register'); event.preventDefault();"
+                            class="auth-page__link-text">회원가입</a>
                     </div>
                 </div>
             </div>
@@ -133,9 +143,9 @@
                 <div class="auth-page__box">
                     <div class="auth-page__row auth-page__row--relative">
                         <label for="registerId" class="auth-page__label">아이디</label>
-                        <input type="text" id="registerId" class="auth-page__input" />
+                        <input type="text" id="registerId" class="auth-page__input" onblur="checkDuplicateId()" />
                         <button type="button" onclick="checkDuplicateId()" class="auth-page__check-btn">중복확인</button>
-                        <div id="idCheckMessage" class="auth-page__message">{{ID_CHECK_MESSAGE}}</div>
+                        <div id="idCheckMessage" class="auth-page__message"></div>
                     </div>
 
                     <div class="auth-page__row">
@@ -146,6 +156,15 @@
                     <div class="auth-page__row">
                         <label for="registerPwConfirm" class="auth-page__label">비밀번호 확인</label>
                         <input type="password" id="registerPwConfirm" class="auth-page__input" />
+                    </div>
+
+                    <div class="auth-page__row">
+                        <label for="registerGender" class="auth-page__label">성별</label>
+                        <select id="registerGender" class="auth-page__input" required>
+                            <option value="">선택</option>
+                            <option value="남성">남성</option>
+                            <option value="여성">여성</option>
+                        </select>
                     </div>
 
                     <div class="auth-page__row">
@@ -182,7 +201,8 @@
                     <button class="auth-page__submit" onclick="handleRegister()">회원가입</button>
 
                     <div class="auth-page__link">
-                        <a href="#" onclick="showPage('login')" class="auth-page__link-text">이미 계정이 있으신가요? 로그인</a>
+                        <a href="#" onclick="showPage('login'); event.preventDefault();" class="auth-page__link-text">이미
+                            계정이 있으신가요? 로그인</a>
                     </div>
                 </div>
             </div>
@@ -194,7 +214,8 @@
                 </div>
 
                 <div class="search-section">
-                    <input type="text" class="search-section__input" placeholder="오늘의 기분이나 일정을 알려주세요" id="moodInput">
+                    <input type="text" class="search-section__input" placeholder="오늘의 기분이나 일정을 알려주세요" id="moodInput"
+                        onkeypress="if(event.key === 'Enter') getStyleRecommendation()">
                     <button class="search-section__btn" onclick="getStyleRecommendation()">스타일 추천 요청</button>
                 </div>
 
@@ -214,29 +235,28 @@
                     <div class="recommendation-result__content">
                         <div class="recommendation-result__summary">
                             <h4 class="recommendation-result__summary-title">📝 한 줄 요약</h4>
-                            <p class="recommendation-result__summary-text" id="summaryText">{{STYLE_SUMMARY}}</p>
+                            <p class="recommendation-result__summary-text" id="summaryText"></p>
                         </div>
 
                         <div class="recommendation-result__outfit">
                             <div class="recommendation-result__outfit-item">
                                 <div class="recommendation-result__outfit-type">👕 상의</div>
-                                <div class="recommendation-result__outfit-desc" id="topItem">{{STYLE_TOP}}</div>
+                                <div class="recommendation-result__outfit-desc" id="topItem"></div>
                             </div>
 
                             <div class="recommendation-result__outfit-item">
                                 <div class="recommendation-result__outfit-type">👖 하의</div>
-                                <div class="recommendation-result__outfit-desc" id="bottomItem">{{STYLE_BOTTOM}}</div>
+                                <div class="recommendation-result__outfit-desc" id="bottomItem"></div>
                             </div>
 
                             <div class="recommendation-result__outfit-item">
                                 <div class="recommendation-result__outfit-type">👟 신발</div>
-                                <div class="recommendation-result__outfit-desc" id="shoesItem">{{STYLE_SHOES}}</div>
+                                <div class="recommendation-result__outfit-desc" id="shoesItem"></div>
                             </div>
 
                             <div class="recommendation-result__outfit-item">
                                 <div class="recommendation-result__outfit-type">💎 액세서리</div>
-                                <div class="recommendation-result__outfit-desc" id="accessoriesItem">
-                                    {{STYLE_ACCESSORIES}}</div>
+                                <div class="recommendation-result__outfit-desc" id="accessoriesItem"></div>
                             </div>
                         </div>
                     </div>
@@ -256,7 +276,7 @@
                         <button onclick="openFilterModal('style')" class="filter-bar__btn">스타일 ▾</button>
                         <button onclick="openFilterModal('body')" class="filter-bar__btn">키/몸무게 ▾</button>
 
-                        <div class="filter-bar__selected" id="selectedFilters">{{SELECTED_FILTERS}}</div>
+                        <div class="filter-bar__selected" id="selectedFilters"></div>
                         <button onclick="resetAllFilters()" class="filter-bar__reset">초기화</button>
                     </div>
                 </div>
@@ -275,7 +295,7 @@
                         </div>
 
                         <!-- 선택된 항목 미리보기 -->
-                        <div class="modal__tags" id="modalSelectedTags">{{MODAL_SELECTED_TAGS}}</div>
+                        <div class="modal__tags" id="modalSelectedTags"></div>
 
                         <div class="modal__body">
                             <!-- 성별 -->
@@ -333,26 +353,26 @@
                 <div class="gallery-options">
                     <div class="gallery-options__sort">
                         <label class="gallery-options__sort-label"><input type="radio" name="sort" value="join" checked
-                                class="gallery-options__sort-input"> 가입일순</label>
+                                class="gallery-options__sort-input" onchange="sortGallery('join')"> 가입일순</label>
                         <label class="gallery-options__sort-label"><input type="radio" name="sort" value="popular"
-                                class="gallery-options__sort-input"> 인기순</label>
+                                class="gallery-options__sort-input" onchange="sortGallery('popular')"> 인기순</label>
                     </div>
 
                     <div class="gallery-options__search">
-                        <input type="text" id="idSearchInput" placeholder="ID 검색"
-                            class="gallery-options__search-input" />
+                        <input type="text" id="idSearchInput" placeholder="ID 검색" class="gallery-options__search-input"
+                            onkeypress="if(event.key === 'Enter') searchById()" />
                         <button onclick="searchById()" class="gallery-options__search-btn">조회</button>
                     </div>
 
                     <label class="gallery-options__favorites">
-                        <input type="checkbox" id="favoriteOnlyCheckbox" class="gallery-options__favorites-input" />
+                        <input type="checkbox" id="favoriteOnlyCheckbox" class="gallery-options__favorites-input"
+                            onchange="toggleFavoriteUsers()" />
                         찜한 유저만
                     </label>
                 </div>
 
                 <!-- 갤러리 카드 컨테이너 -->
-                <div class="gallery-grid">
-                    {{GALLERY_USER_CARDS}}
+                <div class="gallery-grid" id="galleryGrid">
                 </div>
             </div>
 
@@ -360,26 +380,27 @@
             <div id="user-detail" class="page">
                 <div class="section-header">
                     <h2 class="section-header__title">Style Profile</h2>
+                    <button onclick="showPage('gallery')" class="section-header__back-btn">← 뒤로</button>
                 </div>
 
                 <div class="user-detail">
                     <!-- 왼쪽: 유저 정보 -->
                     <div class="user-detail__info-panel">
-                        <div class="user-detail__name">{{DETAIL_USER_NAME}}</div>
-                        <div class="user-detail__tags">{{DETAIL_USER_TAGS}}</div>
-                        <div class="user-detail__body">{{DETAIL_USER_HEIGHT}}cm, {{DETAIL_USER_WEIGHT}}kg,
-                            {{DETAIL_USER_AGE}}세 {{DETAIL_USER_JOB}}</div>
+                        <div class="user-detail__name" id="detailUserName"></div>
+                        <div class="user-detail__tags" id="detailUserTags"></div>
+                        <div class="user-detail__body" id="detailUserBody"></div>
                         <div class="user-detail__profile-img"></div>
                         <div class="user-detail__likes">
-                            <span class="user-detail__likes-count">{{DETAIL_USER_LIKES}} Likes</span>
-                            <button class="user-detail__like-btn"><span class="user-detail__heart-icon"></span></button>
+                            <span class="user-detail__likes-count" id="detailUserLikes">0 Likes</span>
+                            <button class="user-detail__like-btn" onclick="toggleUserLike()">
+                                <span class="user-detail__heart-icon" id="detailUserHeart"></span>
+                            </button>
                         </div>
                     </div>
 
                     <!-- 오른쪽: 스타일 다이어리 -->
                     <div class="user-detail__diary-panel">
-                        <div class="user-detail__polaroid-grid">
-                            {{DETAIL_USER_DIARY_CARDS}}
+                        <div class="user-detail__polaroid-grid" id="detailUserDiaries">
                         </div>
                     </div>
                 </div>
@@ -387,26 +408,27 @@
 
             <!-- Each Detail Page -->
             <div id="each-detail" class="page">
+                <div class="section-header">
+                    <h2 class="section-header__title">Style Detail</h2>
+                    <button onclick="goBackFromDetail()" class="section-header__back-btn">← 뒤로</button>
+                </div>
+
                 <div class="each-detail">
                     <!-- 왼쪽: 큰 이미지 -->
                     <div class="each-detail__image-panel">
-                        <img src="{{EACH_DETAIL_IMAGE_URL}}" alt="스타일 이미지" class="each-detail__main-img" />
+                        <img src="" alt="스타일 이미지" class="each-detail__main-img" id="eachDetailImage" />
                     </div>
 
                     <!-- 오른쪽: 날짜, 내용, 유저 정보 -->
                     <div class="each-detail__info-panel">
-                        <div class="each-detail__date">{{EACH_DETAIL_DATE}}</div>
-                        <div class="each-detail__content">
-                            {{EACH_DETAIL_CONTENT}}
-                        </div>
-                        <div class="each-detail__userbox">
+                        <div class="each-detail__date" id="eachDetailDate"></div>
+                        <div class="each-detail__content" id="eachDetailContent"></div>
+                        <div class="each-detail__userbox" onclick="goToUserDetail()">
                             <div class="each-detail__user-img"></div>
                             <div class="each-detail__user-meta">
-                                <div class="each-detail__username"><b>{{EACH_DETAIL_USERNAME}}</b></div>
-                                <div class="each-detail__tags">{{EACH_DETAIL_USER_TAGS}}</div>
-                                <div class="each-detail__body">{{EACH_DETAIL_USER_HEIGHT}}cm,
-                                    {{EACH_DETAIL_USER_WEIGHT}}kg, {{EACH_DETAIL_USER_AGE}}세 {{EACH_DETAIL_USER_JOB}}
-                                </div>
+                                <div class="each-detail__username" id="eachDetailUsername"></div>
+                                <div class="each-detail__tags" id="eachDetailUserTags"></div>
+                                <div class="each-detail__body" id="eachDetailUserBody"></div>
                             </div>
                         </div>
                     </div>
@@ -416,7 +438,7 @@
             <!-- Diary Page -->
             <div id="diary" class="page">
                 <div class="diary-header">
-                    <h2 class="section-header__title">Style Diary</h2>
+                    <h2 class="section-header__title">My Style Diary</h2>
 
                     <div class="diary-header__date-filter">
                         <select id="preset-range" onchange="applyPresetRange()" class="diary-header__preset-select">
@@ -426,16 +448,15 @@
                             <option value="6m">6개월</option>
                             <option value="1y">1년</option>
                         </select>
-                        <input type="date" id="start-date" class="diary-header__date-input" />
-                        <input type="date" id="end-date" class="diary-header__date-input" />
+                        <input type="date" id="start-date" class="diary-header__date-input" onchange="filterByDate()" />
+                        <input type="date" id="end-date" class="diary-header__date-input" onchange="filterByDate()" />
                         <button class="diary-header__filter-btn" onclick="filterByDate()">설정</button>
                     </div>
 
                     <button class="diary-header__add-btn" onclick="showPage('add')">+ Add</button>
                 </div>
 
-                <div class="items-grid diary-grid">
-                    {{USER_DIARY_CARDS}}
+                <div class="items-grid diary-grid" id="myDiaryGrid">
                 </div>
             </div>
 
@@ -448,24 +469,22 @@
                 <div class="style-diary">
                     <div class="style-diary__group">
                         <div class="style-diary__label">날짜</div>
-                        <input type="date" id="edit-date" value="{{EDIT_DIARY_DATE}}" class="style-diary__input" />
+                        <input type="date" id="edit-date" class="style-diary__input" />
                     </div>
 
                     <div class="style-diary__group">
                         <div class="style-diary__label">사진</div>
-                        <input type="file" id="edit-photo" class="style-diary__input" />
-                        <!-- 현재 이미지 미리보기 -->
-                        <img src="{{EDIT_DIARY_IMAGE_URL}}" alt="현재 이미지" class="style-diary__preview-img" />
+                        <input type="file" id="edit-photo" class="style-diary__input" accept="image/*" />
+                        <img id="edit-preview" alt="현재 이미지" class="style-diary__preview-img" style="display: none;" />
                     </div>
 
                     <div class="style-diary__group">
                         <div class="style-diary__label">글</div>
-                        <textarea id="edit-text" placeholder="내용을 입력하세요."
-                            class="style-diary__textarea">{{EDIT_DIARY_CONTENT}}</textarea>
+                        <textarea id="edit-text" placeholder="내용을 입력하세요." class="style-diary__textarea"></textarea>
                     </div>
 
                     <div class="style-diary__actions">
-                        <button class="style-diary__btn style-diary__btn--save">수정하기</button>
+                        <button class="style-diary__btn style-diary__btn--save" onclick="updateDiary()">수정하기</button>
                         <button class="style-diary__btn style-diary__btn--delete"
                             onclick="openDeleteModal()">삭제하기</button>
                     </div>
@@ -481,21 +500,23 @@
                 <div class="style-diary">
                     <div class="style-diary__group">
                         <div class="style-diary__label">날짜</div>
-                        <input type="date" id="date" class="style-diary__input" />
+                        <input type="date" id="add-date" class="style-diary__input" />
                     </div>
 
                     <div class="style-diary__group">
                         <div class="style-diary__label">사진</div>
-                        <input type="file" id="photo" class="style-diary__input" />
+                        <input type="file" id="add-photo" class="style-diary__input" accept="image/*" />
                     </div>
 
                     <div class="style-diary__group">
                         <div class="style-diary__label">글</div>
-                        <textarea id="text" placeholder="내용을 입력하세요." class="style-diary__textarea"></textarea>
+                        <textarea id="add-text" placeholder="내용을 입력하세요." class="style-diary__textarea"></textarea>
                     </div>
 
                     <div class="style-diary__actions">
-                        <button class="style-diary__btn style-diary__btn--save">저장하기</button>
+                        <button class="style-diary__btn style-diary__btn--save" onclick="saveDiary()">저장하기</button>
+                        <button class="style-diary__btn style-diary__btn--cancel"
+                            onclick="showPage('diary')">취소</button>
                     </div>
                 </div>
             </div>
