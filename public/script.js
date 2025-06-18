@@ -112,6 +112,80 @@ async function handleRegister() {
     }
 }
 
+// 아이디 중복 확인
+async function checkDuplicateId() {
+    const id = document.getElementById('registerId').value;
+
+    if (!id) {
+        alert('아이디를 입력해주세요.');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/check-id/${id}`);
+        const result = await response.json();
+
+        const messageDiv = document.getElementById('idCheckMessage');
+        messageDiv.textContent = result.message;
+        messageDiv.className = result.available ?
+            'auth-page__message auth-page__message--success' :
+            'auth-page__message';
+    } catch (error) {
+        alert('중복 확인 중 오류가 발생했습니다.');
+    }
+}
+
+// 사용자 정보 수정
+async function saveUserInfo() {
+    const sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+        alert('로그인이 필요합니다.');
+        return;
+    }
+
+    const gender = document.getElementById('genderInput').value;
+    const age = document.getElementById('ageInput').value;
+    const height = document.getElementById('heightInput').value;
+    const weight = document.getElementById('weightInput').value;
+    const job = document.getElementById('jobInput').value;
+
+    try {
+        const response = await apiCall('/user/update', {
+            method: 'POST',
+            body: JSON.stringify({ gender, age, height, weight, job })
+        });
+
+        if (response.success) {
+            // localStorage 업데이트
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            Object.assign(userInfo, { gender, age, height, weight, job });
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+            // UI 업데이트
+            updateUserUI(userInfo);
+            closeEditModal();
+            alert('정보가 수정되었습니다.');
+        }
+    } catch (error) {
+        alert('정보 수정 중 오류가 발생했습니다.');
+    }
+}
+
+// 로그아웃 함수
+function logout() {
+    localStorage.removeItem('sessionId');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userInfo');
+
+    // UI 초기화
+    document.querySelector('.header__login-btn').style.display = 'block';
+    document.querySelector('.header__user-icon').style.display = 'none';
+    document.querySelector('.header__user-dropdown').style.display = 'none';
+
+    // 트렌드 목록 새로고침 (좋아요 정보 제거)
+    getTrends();
+}
+
 // 전역 변수
 let showingFavoritesOnly = false;
 let currentFilters = {
@@ -537,16 +611,6 @@ function resetAllFilters() {
 function searchById() {
     // TODO: 서버와 연동하여 ID 검색 기능 구현
     console.log('ID 검색 기능 구현 예정');
-}
-
-function handleRegister() {
-    // TODO: 회원가입 처리
-    console.log('회원가입 처리 예정');
-}
-
-function checkDuplicateId() {
-    // TODO: 아이디 중복 확인
-    console.log('아이디 중복 확인 예정');
 }
 
 // 초기화 및 이벤트 리스너 설정

@@ -180,7 +180,8 @@ app.get('/api/trends', (req, res) => {
 // 스크래핑 함수 (로깅 추가)
 async function runScraping() {
     try {
-        console.log(`[${new Date().toLocaleString()}] 스크래핑 시작...`);
+        console.log(`[${new
+            Date().toLocaleString()}] 스크래핑 시작...`);
         await scrapeMusinsa();
         console.log(`[${new Date().toLocaleString()}] 스크래핑 완료!`);
     } catch (error) {
