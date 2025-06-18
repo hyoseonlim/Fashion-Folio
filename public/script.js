@@ -2,12 +2,33 @@ const API_BASE_URL = 'http://localhost:3000/api';
 
 function updateUserUI(user) {
     // 로그인 버튼 숨기고 유저 아이콘 표시
-    document.querySelector('.header__login-btn').style.display = 'none';
-    document.querySelector('.header__user-icon').style.display = 'block';
+    const loginBtn = document.getElementById('headerLoginBtn');
+    const userIcon = document.getElementById('headerUserIcon');
+
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (userIcon) userIcon.style.display = 'block';
 
     // 유저 정보 표시
-    document.getElementById('userInfo').innerHTML =
-        `${user.age}세 ${user.gender}<br>${user.height}cm, ${user.weight}kg<br>${user.job}`;
+    const userInfoDiv = document.getElementById('userInfo');
+    if (userInfoDiv) {
+        userInfoDiv.innerHTML =
+            `${user.age}세 ${user.gender}<br>${user.height}cm, ${user.weight}kg<br>${user.job}`;
+    }
+
+    // 편집 모달의 입력 필드들도 업데이트
+    if (document.getElementById('genderInput')) {
+        document.getElementById('genderInput').value = user.gender || '';
+        document.getElementById('ageInput').value = user.age || '';
+        document.getElementById('heightInput').value = user.height || '';
+        document.getElementById('weightInput').value = user.weight || '';
+        document.getElementById('jobInput').value = user.job || '';
+    }
+
+    // MY DIARY 메뉴 표시
+    const diaryNav = document.querySelector('.header__nav-item:nth-child(4)');
+    if (diaryNav) {
+        diaryNav.style.display = 'block';
+    }
 }
 
 // 로그인 처리
@@ -173,16 +194,32 @@ async function saveUserInfo() {
 
 // 로그아웃 함수
 function logout() {
+    // 로컬 스토리지 클리어
     localStorage.removeItem('sessionId');
     localStorage.removeItem('userId');
     localStorage.removeItem('userInfo');
 
     // UI 초기화
-    document.querySelector('.header__login-btn').style.display = 'block';
-    document.querySelector('.header__user-icon').style.display = 'none';
-    document.querySelector('.header__user-dropdown').style.display = 'none';
+    const loginBtn = document.getElementById('headerLoginBtn');
+    const userIcon = document.getElementById('headerUserIcon');
 
-    // 트렌드 목록 새로고침 (좋아요 정보 제거)
+    if (loginBtn) loginBtn.style.display = 'block';
+    if (userIcon) userIcon.style.display = 'none';
+
+    // MY DIARY 메뉴 숨기기
+    const diaryNav = document.querySelector('.header__nav-item:nth-child(4)');
+    if (diaryNav) {
+        diaryNav.style.display = 'none';
+    }
+
+    // 드롭다운 닫기
+    const dropdown = document.getElementById('userDropdown');
+    if (dropdown) {
+        dropdown.classList.remove('header__user-dropdown--active');
+    }
+
+    // 메인 페이지로 이동
+    showPage('trend');
     getTrends();
 }
 
@@ -409,6 +446,25 @@ function applyPresetRange() {
     filterByDate();
 }
 
+function showMyDiary() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('로그인이 필요합니다.');
+        showPage('login');
+        return;
+    }
+
+    // 드롭다운 닫기
+    const dropdown = document.getElementById('userDropdown');
+    if (dropdown) {
+        dropdown.classList.remove('header__user-dropdown--active');
+    }
+
+    // 다이어리 페이지로 이동
+    showPage('diary');
+    loadMyDiaries(); // 내 다이어리 목록 로드
+}
+
 function filterByDate() {
     const startVal = document.getElementById('start-date').value;
     const endVal = document.getElementById('end-date').value;
@@ -614,7 +670,29 @@ function searchById() {
 }
 
 // 초기화 및 이벤트 리스너 설정
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+    // 로컬 스토리지에서 세션 정보 확인
+    const sessionId = localStorage.getItem('sessionId');
+    const userInfo = localStorage.getItem('userInfo');
+
+    if (sessionId && userInfo) {
+        try {
+            // 사용자 정보가 있으면 UI 업데이트
+            const user = JSON.parse(userInfo);
+            updateUserUI(user);
+
+            // MY DIARY 메뉴 표시
+            const diaryNav = document.querySelector('.header__nav-item:nth-child(4)');
+            if (diaryNav) {
+                diaryNav.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('사용자 정보 파싱 실패:', error);
+            // 파싱 실패 시 로그아웃 처리
+            logout();
+        }
+    }
+
     showPage('trend');
     getTrends();
 
