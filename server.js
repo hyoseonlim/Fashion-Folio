@@ -65,16 +65,6 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-function getAllTrends() {
-    try {
-        const dataPath = path.join(__dirname, './server/data', 'trends.json');
-        const data = fs.readFileSync(dataPath, 'utf8');
-        return JSON.parse(data);
-    } catch (error) {
-        console.error('데이터 읽기 오류:', error);
-    }
-}
-
 // 회원가입
 app.post('/api/users', async (req, res) => {
     try {
@@ -161,6 +151,27 @@ const authenticate = (req, res, next) => {
     next();
 };
 
+function getAllTrends() {
+    try {
+        const dataPath = path.join(__dirname, './server/data', 'trends.json');
+        const data = fs.readFileSync(dataPath, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('데이터 읽기 오류:', error);
+    }
+}
+
+// 스크래핑 함수 (로깅 추가)
+async function runScraping() {
+    try {
+        console.log(`[${new
+            Date().toLocaleString()}] 스크래핑 시작...`);
+        await scrapeMusinsa();
+        console.log(`[${new Date().toLocaleString()}] 스크래핑 완료!`);
+    } catch (error) {
+        console.error(`[${new Date().toLocaleString()}] 스크래핑 실패:`, error);
+    }
+}
 
 app.get('/api/trends', (req, res) => {
     try {
@@ -177,28 +188,81 @@ app.get('/api/trends', (req, res) => {
     }
 });
 
-// 스크래핑 함수 (로깅 추가)
-async function runScraping() {
+// TODO
+app.get('/api/styles', (req, res) => {
     try {
-        console.log(`[${new
-            Date().toLocaleString()}] 스크래핑 시작...`);
-        await scrapeMusinsa();
-        console.log(`[${new Date().toLocaleString()}] 스크래핑 완료!`);
+        const usersData = getAllUsers();
+        res.json({
+            success: true,
+            data: usersData
+        });
     } catch (error) {
-        console.error(`[${new Date().toLocaleString()}] 스크래핑 실패:`, error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+function getAllUsers() {
+    try {
+        const dataPath = path.join(__dirname, './server/data', 'users.json');
+        const data = fs.readFileSync(dataPath, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('데이터 읽기 오류:', error);
     }
 }
+
+app.get('/api/users', (req, res) => {
+    try {
+        const usersData = getAllUsers();
+        res.json({
+            success: true,
+            data: usersData
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+function getAllPosts() {
+    try {
+        const dataPath = path.join(__dirname, './server/data', 'posts.json');
+        const data = fs.readFileSync(dataPath, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('데이터 읽기 오류:', error);
+    }
+}
+
+app.get('/api/posts', (req, res) => {
+    try {
+        const postsData = getAllPosts();
+        res.json({
+            success: true,
+            data: postsData
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 
 // 스크래핑 실행 후 서버 시작
 app.listen(PORT, async () => {
     console.log(`서버가 http://localhost:${PORT}에서 실행 중입니다.`);
 
     await runScraping(); // 서버 시작 시 한 번 실행
-    cron.schedule('0 6 * * *', runScraping, { // 매일 오전 9시에 스크래핑 실행
+    module.exports = app;
+    cron.schedule('0 6 * * *', runScraping, { // 매일 6시 스크래핑 
         timezone: "Asia/Seoul"
     });
-
-    console.log('매일 오전 9시에 자동 스크래핑이 실행됩니다.');
 });
 
 module.exports = app;

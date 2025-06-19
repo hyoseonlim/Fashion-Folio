@@ -266,6 +266,43 @@ function displayTrends(trends) {
     // </div>
 }
 
+async function getUsers() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/users`);
+        const result = await response.json();
+        if (result.success) {
+            displayUsers(result.data.users);
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (err) {
+        console.error('데이터 가져오기 실패', err);
+    }
+}
+
+function displayUsers(users) {
+    for (const user of users) {
+        let userTag = document.createElement('div');
+        userTag.className = 'user-card';
+        let userImg = document.createElement('img');
+        userImg.src = user.profileImage;
+        let userIdP = document.createElement('p');
+        userIdP.className = 'user-card__id';
+        userIdP.innerText = user.id;
+        let userTagsP = document.createElement('p');
+        userTagsP.className = 'user-card__tags';
+        userTagsP.innerText = user.styles;
+        userTag.append(userImg, userIdP, userTagsP);
+        document.getElementById('galleryGrid').appendChild(userTag);
+        // TODO: 바로가기
+    }
+    // <div class="user-card">
+    //     <img src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" alt="패션 이미지" />
+    //     <p class="user-id">user1</p>
+    //     <p class="user-tags">#미니멀 #클래식</p>
+    // </div>
+}
+
 // 페이지 전환 함수
 function showPage(pageId) {
     // 모든 페이지 숨기기
