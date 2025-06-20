@@ -1,5 +1,15 @@
 const API_BASE_URL = 'http://localhost:3000/api';
 
+// 로그인 확인 함수
+function checkLoginRequired() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        showPage('login');
+        return false;
+    }
+    return true;
+}
+
 function updateUserUI(user) {
     // 로그인 버튼 숨기고 유저 아이콘 표시
     const loginBtn = document.getElementById('headerLoginBtn');
@@ -48,10 +58,7 @@ async function handleLogin() {
             body: JSON.stringify({ id, password })
         });
 
-        console.log(response);
-
         const result = await response.json();
-
 
         if (result.success) {
             // 세션 정보 저장
@@ -77,14 +84,12 @@ async function handleRegister() {
     const id = document.getElementById('registerId').value;
     const password = document.getElementById('registerPw').value;
     const passwordConfirm = document.getElementById('registerPwConfirm').value;
+    const gender = document.getElementById('registerGender').value;
     const age = document.getElementById('registerAge').value;
     const job = document.getElementById('registerJob').value;
     const height = document.getElementById('registerHeight').value;
     const weight = document.getElementById('registerWeight').value;
     const bodyType = document.getElementById('registerBodyType').value;
-
-    // 성별 추가 (select로 변경하거나 radio button 추가 필요)
-    const gender = '남성'; // 임시값
 
     // 유효성 검사
     if (!id || !password) {
@@ -209,7 +214,7 @@ function logout() {
 
     // 메인 페이지로 이동하고 전체 트렌드 보기
     showPage('trend');
-    getTrends(); // ✨ 전체 트렌드로 새로고침
+    getTrends();
 }
 
 // 전역 변수
@@ -221,6 +226,58 @@ let currentFilters = {
     weight: null
 };
 let appliedFilters = {};
+let myTrends = []; // 사용자가 좋아요한 트렌드 목록
+
+// 내 트렌드 데이터 로드
+async function loadMyTrends() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/my-trends/${userId}`);
+        if (response.ok) {
+            const result = await response.json();
+            myTrends = result.success ? result.data : [];
+        }
+    } catch (error) {
+        console.error('내 트렌드 로드 실패:', error);
+    }
+}
+
+// 트렌드 좋아요 토글
+async function toggleTrendLike(trendData) {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('로그인이 필요합니다.');
+        showPage('login');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/my-trends`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId,
+                imageUrl: trendData.imageUrl,
+                linkUrl: trendData.linkUrl
+            })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            // 로컬 상태 업데이트
+            await loadMyTrends();
+
+            // UI 업데이트 (현재 화면이 favorites only라면 다시 필터링)
+            if (showingFavoritesOnly) {
+                toggleFavoritesFilter();
+            }
+        }
+    } catch (error) {
+        console.error('트렌드 좋아요 실패:', error);
+    }
+}
 
 async function getTrends() {
     try {
@@ -234,6 +291,9 @@ async function getTrends() {
             const genderParam = user.gender === '남성' ? 'men' :
                 user.gender === '여성' ? 'women' : 'all';
             apiUrl += `/${genderParam}`;
+
+            // 내 트렌드 데이터 로드
+            await loadMyTrends();
         } else {
             // 로그인하지 않은 경우 모든 데이터
             apiUrl += '/all';
@@ -266,7 +326,7 @@ function displayTrends(trends) {
     for (const trend of trends) {
         let trendTag = document.createElement('div');
         trendTag.className = 'item-card';
-        trendTag.onclick = () => window.open(trend.linkUrl, '_blank'); // 클릭시 새창으로 링크 열기
+        trendTag.onclick = () => window.open(trend.linkUrl, '_blank');
 
         let trendImg = document.createElement('img');
         trendImg.className = 'item-card__image';
@@ -275,9 +335,19 @@ function displayTrends(trends) {
 
         let heartIcon = document.createElement('div');
         heartIcon.className = 'item-card__heart';
+
+        // 좋아요 상태 확인
+        const isLiked = myTrends.some(myTrend =>
+            myTrend.imageUrl === trend.imageUrl && myTrend.linkUrl === trend.linkUrl
+        );
+        if (isLiked) {
+            heartIcon.classList.add('item-card__heart--liked');
+        }
+
         heartIcon.onclick = (e) => {
-            e.stopPropagation(); // 부모 클릭 이벤트 방지
-            toggleHeart(heartIcon);
+            e.stopPropagation();
+            toggleTrendLike(trend);
+            heartIcon.classList.toggle('item-card__heart--liked');
         };
 
         trendTag.append(trendImg, heartIcon);
@@ -285,20 +355,17 @@ function displayTrends(trends) {
     }
 }
 
-// 하트 토글 기능 추가
-function toggleHeart(heartElement) {
-    heartElement.classList.toggle('item-card__heart--liked');
-
-    // 여기서 localStorage나 서버에 좋아요 상태 저장
-    // 추후 구현 예정
-}
-
 async function getUsers() {
+    if (!checkLoginRequired()) return;
+
     try {
         const response = await fetch(`${API_BASE_URL}/users`);
         const result = await response.json();
         if (result.success) {
-            displayUsers(result.data.users);
+            // 로그인한 사용자 제외
+            const userId = localStorage.getItem('userId');
+            const filteredUsers = result.data.users.filter(user => user.id !== userId);
+            displayUsers(filteredUsers);
         } else {
             throw new Error(result.message);
         }
@@ -308,8 +375,13 @@ async function getUsers() {
 }
 
 function displayUsers(users) {
-    document.getElementById('galleryGrid').innerHTML = '';
-    for (const user of users) {
+    const container = document.getElementById('galleryGrid');
+    container.innerHTML = '';
+
+    // 필터링 적용
+    let filteredUsers = filterUsers(users);
+
+    for (const user of filteredUsers) {
         let userTag = document.createElement('div');
         userTag.className = 'user-card';
         userTag.addEventListener('click', function () {
@@ -324,9 +396,39 @@ function displayUsers(users) {
         userTagsP.className = 'user-card__tags';
         userTagsP.innerText = `${user.height}cm, ${user.weight}kg`;
         userTag.append(userImg, userIdP, userTagsP);
-        document.getElementById('galleryGrid').appendChild(userTag);
-        showPage('gallery');
+        container.appendChild(userTag);
     }
+    showPage('gallery');
+}
+
+// 사용자 필터링 함수
+function filterUsers(users) {
+    let filtered = [...users];
+
+    // 성별 필터
+    if (appliedFilters.gender && appliedFilters.gender !== '전체') {
+        filtered = filtered.filter(user => user.gender === appliedFilters.gender);
+    }
+
+    // 키 필터
+    if (appliedFilters.height) {
+        const [minHeight, maxHeight] = appliedFilters.height.replace('cm', '').split('-').map(Number);
+        filtered = filtered.filter(user => {
+            const height = parseInt(user.height);
+            return height >= minHeight && height <= maxHeight;
+        });
+    }
+
+    // 몸무게 필터
+    if (appliedFilters.weight) {
+        const [minWeight, maxWeight] = appliedFilters.weight.replace('kg', '').split('-').map(Number);
+        filtered = filtered.filter(user => {
+            const weight = parseInt(user.weight);
+            return weight >= minWeight && weight <= maxWeight;
+        });
+    }
+
+    return filtered;
 }
 
 async function getUser(user) {
@@ -335,12 +437,14 @@ async function getUser(user) {
     document.getElementById('detailUserBody').innerText = `${user.height}cm, ${user.weight}kg`;
     document.getElementById('detailUserImg').src = user.profileImage;
 
-    // 우측 게시글 데이터
+    // 해당 유저의 게시글만 가져오기
     try {
-        const response = await fetch(`${API_BASE_URL}/posts`); // TODO: 유저별 포스트로
+        const response = await fetch(`${API_BASE_URL}/posts`);
         const result = await response.json();
         if (result.success) {
-            displayUser(result.data.posts);
+            // 해당 유저의 게시글만 필터링
+            const userPosts = result.data.posts.filter(post => post.userId === user.id);
+            displayUser(userPosts, user);
         } else {
             throw new Error(result.message);
         }
@@ -349,7 +453,7 @@ async function getUser(user) {
     }
 }
 
-function displayUser(posts) {
+function displayUser(posts, userData) {
     const container = document.getElementById('detailUserDiaries');
 
     // 기존 내용 지우기
@@ -364,7 +468,7 @@ function displayUser(posts) {
         let postDiv = document.createElement('div');
         postDiv.className = 'polaroid-card';
         postDiv.addEventListener('click', function () {
-            displayPost(post);
+            displayPost(post, userData);
         });
 
         let postImg = document.createElement('img');
@@ -374,7 +478,7 @@ function displayUser(posts) {
         postCaption.className = 'polaroid-caption';
         let postDate = document.createElement('div');
         postDate.className = 'date';
-        postDate.innerText = post.createdAt;
+        postDate.innerText = post.date;
         let postContents = document.createElement('div');
         postContents.className = 'desc';
         postContents.innerText = post.content.substr(0, 7) + "...";
@@ -384,21 +488,26 @@ function displayUser(posts) {
         container.appendChild(postDiv);
     }
     showPage('user-detail');
-
 }
 
-function displayPost(post) {
+function displayPost(post, userData) {
     document.getElementById('eachDetailImage').src = post.imageUrl;
     document.getElementById('eachDetailContent').innerText = post.content;
-    document.getElementById('eachDetailDate').innerText = post.createdAt;
-    document.getElementById('eachDetailUsername').innerText = post.userId;
-    document.getElementById('eachDetailUserTags').innerText = post.styles;
+    document.getElementById('eachDetailDate').innerText = post.date;
+    document.getElementById('eachDetailUsername').innerText = userData.id;
+    document.getElementById('eachDetailUserTags').innerText = `${userData.age}세 ${userData.gender}`;
+    document.getElementById('eachDetailUserBody').innerText = `${userData.height}cm, ${userData.weight}kg`;
 
     showPage('each-detail');
 }
 
-// 페이지 전환 함수
+// 페이지 전환 함수 (로그인 체크 포함)
 function showPage(pageId) {
+    // 로그인이 필요한 페이지들 체크
+    if (['discover', 'gallery', 'diary'].includes(pageId)) {
+        if (!checkLoginRequired()) return;
+    }
+
     // 모든 페이지 숨기기
     const pages = document.querySelectorAll('.page');
     pages.forEach(page => page.classList.remove('page--active'));
@@ -438,19 +547,10 @@ function closeEditModal() {
     document.querySelector('.bg-overlay').style.filter = 'none';
 }
 
-function saveUserInfo() {
-    const gender = document.getElementById('genderInput').value;
-    const age = document.getElementById('ageInput').value;
-    const height = document.getElementById('heightInput').value;
-    const weight = document.getElementById('weightInput').value;
-    const job = document.getElementById('jobInput').value;
-
-    document.getElementById('userInfo').innerHTML = `${age}세 ${gender}<br>${height}cm, ${weight}kg<br>${job}`;
-    closeEditModal();
-}
-
 // 즐겨찾기 필터 토글
 function toggleFavoritesFilter() {
+    if (!checkLoginRequired()) return;
+
     const checkbox = document.getElementById('favoritesCheckbox');
     const itemCards = document.querySelectorAll('.item-card');
 
@@ -758,6 +858,9 @@ function applyFilters() {
     console.log("✅ 적용된 필터:", appliedFilters);
     closeFilterModal();
     updateMainTagUI();
+
+    // 필터 적용 후 사용자 목록 다시 로드
+    getUsers();
 }
 
 function updateMainTagUI() {
@@ -808,17 +911,23 @@ function removeTag(id) {
     }
 
     updateMainTagUI();
-    updateModalTagUI(); // ❗ 모달 태그 UI도 업데이트해줘야 함
+    updateModalTagUI();
+
+    // 필터 제거 후 사용자 목록 다시 로드
+    getUsers();
 }
 
 function resetAllFilters() {
-    currentFilters = { gender: null, height: null, weight: null };
+    currentFilters = { gender: null, height: null, weight: null, styles: [] };
     appliedFilters = {};
     updateModalTagUI();
     updateMainTagUI();
     document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = r.value === '전체');
     document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
     document.querySelectorAll('input[type="number"]').forEach(num => num.value = '');
+
+    // 필터 리셋 후 사용자 목록 다시 로드
+    getUsers();
 }
 
 // 검색 기능 (추가 예정)
@@ -853,6 +962,30 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     showPage('trend');
     getTrends();
+
+    // 네비게이션 이벤트 리스너 추가
+    const navItems = document.querySelectorAll('.header__nav-item');
+    navItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes('trend')) {
+                showPage('trend');
+                getTrends();
+            } else if (text.includes('stylist')) {
+                showPage('discover');
+            } else if (text.includes('gallery')) {
+                getUsers();
+            } else if (text.includes('diary')) {
+                showMyDiary();
+            }
+        });
+    });
+
+    // Favorites Only 체크박스 이벤트
+    const favoritesCheckbox = document.getElementById('favoritesCheckbox');
+    if (favoritesCheckbox) {
+        favoritesCheckbox.addEventListener('change', toggleFavoritesFilter);
+    }
 
     // 검색 기능 설정
     const searchInput = document.querySelector('.search-section__input');
@@ -926,7 +1059,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // 외부 클릭시 드롭다운 닫기
     document.addEventListener('click', function (event) {
-
         // 로그인 Enter 키
         document.getElementById('loginPW')?.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') handleLogin();

@@ -15,22 +15,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // JSON 파일 읽기/쓰기 헬퍼
 const readJsonFile = (filename) => {
-    const data = fs.readFileSync(path.join(__dirname, './server/data', filename), 'utf8');
-    return JSON.parse(data);
+    try {
+        const data = fs.readFileSync(path.join(__dirname, './server/data', filename), 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error(`Error reading ${filename}:`, error);
+        return null;
+    }
 };
 
 const writeJsonFile = async (filename, data) => {
-    await fs.writeFile(
-        path.join(__dirname, 'server/data', filename),
-        JSON.stringify(data, null, 2)
-    );
+    try {
+        await fs.writeFileSync(
+            path.join(__dirname, 'server/data', filename),
+            JSON.stringify(data, null, 2)
+        );
+        return true;
+    } catch (error) {
+        console.error(`Error writing ${filename}:`, error);
+        return false;
+    }
 };
 
 // 로그인
 app.post('/api/login', async (req, res) => {
     try {
         const { id, password } = req.body;
-        const usersData = await readJsonFile('users.json');
+        const usersData = readJsonFile('users.json');
+
+        if (!usersData) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 데이터를 읽을 수 없습니다.'
+            });
+        }
+
         const user = usersData.users.find(u => u.id === id);
 
         if (!user || user.password !== password) {
@@ -72,7 +91,14 @@ app.post('/api/users', async (req, res) => {
             });
         }
 
-        const usersData = await readJsonFile('users.json');
+        const usersData = readJsonFile('users.json');
+
+        if (!usersData) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 데이터를 읽을 수 없습니다.'
+            });
+        }
 
         if (usersData.users.find(u => u.id === id)) {
             return res.status(400).json({
@@ -96,7 +122,14 @@ app.post('/api/users', async (req, res) => {
         };
 
         usersData.users.push(newUser);
-        await writeJsonFile('users.json', usersData);
+        const writeSuccess = await writeJsonFile('users.json', usersData);
+
+        if (!writeSuccess) {
+            return res.status(500).json({
+                success: false,
+                message: '회원가입 처리 중 오류가 발생했습니다.'
+            });
+        }
 
         res.json({
             success: true,
@@ -114,7 +147,15 @@ app.post('/api/users', async (req, res) => {
 app.get('/api/check-id/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const usersData = await readJsonFile('users.json');
+        const usersData = readJsonFile('users.json');
+
+        if (!usersData) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 데이터를 읽을 수 없습니다.'
+            });
+        }
+
         const exists = usersData.users.some(u => u.id === id);
 
         res.json({
@@ -130,14 +171,115 @@ app.get('/api/check-id/:id', async (req, res) => {
     }
 });
 
+// 내 트렌드 가져오기
+app.get('/api/my-trends/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const myTrendsData = readJsonFile('my-trends.json');
+
+        if (!myTrendsData) {
+            // 파일이 없으면 빈 배열 반환
+            return res.json({
+                success: true,
+                data: []
+            });
+        }
+
+        const userTrends = myTrendsData.trends ?
+            myTrendsData.trends.filter(trend => trend.userId === userId) : [];
+
+        res.json({
+            success: true,
+            data: userTrends
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// 내 트렌드 토글 (추가/제거)
+app.post('/api/my-trends', async (req, res) => {
+    try {
+        const { userId, imageUrl, linkUrl } = req.body;
+
+        if (!userId || !imageUrl || !linkUrl) {
+            return res.status(400).json({
+                success: false,
+                message: '필수 데이터가 누락되었습니다.'
+            });
+        }
+
+        let myTrendsData = readJsonFile('my-trends.json');
+
+        if (!myTrendsData) {
+            // 파일이 없으면 새로 생성
+            myTrendsData = { trends: [] };
+        }
+
+        if (!myTrendsData.trends) {
+            myTrendsData.trends = [];
+        }
+
+        // 이미 존재하는지 확인
+        const existingIndex = myTrendsData.trends.findIndex(
+            trend => trend.userId === userId &&
+                trend.imageUrl === imageUrl &&
+                trend.linkUrl === linkUrl
+        );
+
+        if (existingIndex >= 0) {
+            // 이미 존재하면 제거 (좋아요 취소)
+            myTrendsData.trends.splice(existingIndex, 1);
+        } else {
+            // 존재하지 않으면 추가 (좋아요)
+            myTrendsData.trends.push({
+                userId,
+                imageUrl,
+                linkUrl,
+                createdAt: new Date().toISOString()
+            });
+        }
+
+        const writeSuccess = await writeJsonFile('my-trends.json', myTrendsData);
+
+        if (!writeSuccess) {
+            return res.status(500).json({
+                success: false,
+                message: '트렌드 저장 중 오류가 발생했습니다.'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: existingIndex >= 0 ? '트렌드 좋아요를 취소했습니다.' : '트렌드를 좋아요했습니다.'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 // 패션 추천
 app.post('/api/fashion-recommend', async (req, res) => {
     try {
         const { dailyInfo } = req.body;
-        const userId = req.userId;
+        const userId = req.headers['user-id'];
 
         // 사용자 정보 가져오기
-        const usersData = await readJsonFile('users.json');
+        const usersData = readJsonFile('users.json');
+
+        if (!usersData) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 데이터를 읽을 수 없습니다.'
+            });
+        }
+
         const user = usersData.users.find(u => u.id === userId);
 
         if (!user) {
@@ -196,6 +338,7 @@ function getAllTrends() {
         return JSON.parse(data);
     } catch (error) {
         console.error('데이터 읽기 오류:', error);
+        return null;
     }
 }
 
@@ -213,6 +356,14 @@ async function runScraping() {
 app.get('/api/trends', (req, res) => {
     try {
         const trendsData = getAllTrends();
+
+        if (!trendsData) {
+            return res.status(500).json({
+                success: false,
+                message: '트렌드 데이터를 읽을 수 없습니다.'
+            });
+        }
+
         res.json({
             success: true,
             data: trendsData
@@ -229,6 +380,13 @@ app.get('/api/trends/:gender', (req, res) => {
     try {
         const { gender } = req.params;
         const trendsData = getAllTrends();
+
+        if (!trendsData) {
+            return res.status(500).json({
+                success: false,
+                message: '트렌드 데이터를 읽을 수 없습니다.'
+            });
+        }
 
         let filteredTrends = [];
 
@@ -259,12 +417,21 @@ function getAllUsers() {
         return JSON.parse(data);
     } catch (error) {
         console.error('데이터 읽기 오류:', error);
+        return null;
     }
 }
 
 app.get('/api/users', (req, res) => {
     try {
         const usersData = getAllUsers();
+
+        if (!usersData) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 데이터를 읽을 수 없습니다.'
+            });
+        }
+
         res.json({
             success: true,
             data: usersData
@@ -284,15 +451,52 @@ function getAllPosts() {
         return JSON.parse(data);
     } catch (error) {
         console.error('데이터 읽기 오류:', error);
+        return null;
     }
 }
 
 app.get('/api/posts', (req, res) => {
     try {
         const postsData = getAllPosts();
+
+        if (!postsData) {
+            return res.status(500).json({
+                success: false,
+                message: '게시글 데이터를 읽을 수 없습니다.'
+            });
+        }
+
         res.json({
             success: true,
             data: postsData
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// 특정 사용자의 게시글 가져오기
+app.get('/api/posts/user/:userId', (req, res) => {
+    try {
+        const { userId } = req.params;
+        const postsData = getAllPosts();
+
+        if (!postsData) {
+            return res.status(500).json({
+                success: false,
+                message: '게시글 데이터를 읽을 수 없습니다.'
+            });
+        }
+
+        const userPosts = postsData.posts ?
+            postsData.posts.filter(post => post.userId === userId) : [];
+
+        res.json({
+            success: true,
+            data: { posts: userPosts }
         });
     } catch (error) {
         res.status(500).json({
@@ -307,7 +511,7 @@ app.listen(PORT, async () => {
     console.log(`서버가 http://localhost:${PORT}에서 실행 중입니다.`);
 
     await runScraping();
-    module.exports = app;
+
     cron.schedule('0 6 * * *', runScraping, {
         timezone: "Asia/Seoul"
     });

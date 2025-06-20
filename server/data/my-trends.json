@@ -1,0 +1,16 @@
+{
+  "trends": [
+    {
+      "userId": "woman_user1",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/5fecf01f5c8840ab88efe159f54a76a2.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385276764019526142",
+      "createdAt": "2025-06-20T13:32:16.140Z"
+    },
+    {
+      "userId": "woman_user1",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/123d610ab806426d82f3cda02082b009.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384682715075941688",
+      "createdAt": "2025-06-20T13:32:49.690Z"
+    }
+  ]
+}
