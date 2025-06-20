@@ -408,24 +408,134 @@ function displayUsers(users) {
     // 필터링 적용
     let filteredUsers = filterUsers(users);
 
+    if (filteredUsers.length === 0) {
+        container.innerHTML = '<div class="no-data">조건에 맞는 사용자가 없습니다.</div>';
+        return;
+    }
+
+    const currentUserId = localStorage.getItem('userId');
+    const currentUserInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
     for (const user of filteredUsers) {
-        let userTag = document.createElement('div');
-        userTag.className = 'user-card';
-        userTag.addEventListener('click', function () {
+        let userCard = document.createElement('div');
+        userCard.className = 'user-card';
+
+        // 사용자 이미지
+        let userImg = document.createElement('img');
+        userImg.className = 'user-card__image';
+        userImg.src = user.profileImage || '/images/default-profile.png';
+        userImg.alt = `${user.id} 프로필`;
+
+        // 사용자 정보 컨테이너
+        let userInfo = document.createElement('div');
+        userInfo.className = 'user-card__info';
+
+        // 아이디
+        let userIdElement = document.createElement('h3');
+        userIdElement.className = 'user-card__id';
+        userIdElement.textContent = user.id;
+
+        // 상세 정보 컨테이너
+        let userDetails = document.createElement('div');
+        userDetails.className = 'user-card__details';
+
+        // 기본 정보 (나이, 성별)
+        let basicInfo = document.createElement('p');
+        basicInfo.className = 'user-card__basic-info';
+        basicInfo.textContent = `${user.age}세 ${user.gender}`;
+
+        // 신체 정보 (키, 몸무게)
+        let bodyInfo = document.createElement('p');
+        bodyInfo.className = 'user-card__body-info';
+        bodyInfo.textContent = `${user.height}cm, ${user.weight}kg`;
+
+        // 직업
+        let jobInfo = document.createElement('span');
+        jobInfo.className = 'user-card__job';
+        jobInfo.textContent = user.job || '직업 미공개';
+
+        userDetails.append(basicInfo, bodyInfo, jobInfo);
+        userInfo.append(userIdElement, userDetails);
+
+        // 구독 버튼
+        let subscribeBtn = document.createElement('button');
+        subscribeBtn.className = 'user-card__subscribe-btn';
+
+        // 구독 상태 확인
+        const isSubscribed = currentUserInfo.subscribed &&
+            currentUserInfo.subscribed.includes(user.id);
+
+        if (isSubscribed) {
+            subscribeBtn.classList.add('user-card__subscribe-btn--subscribed');
+            subscribeBtn.textContent = '구독취소';
+        } else {
+            subscribeBtn.textContent = '구독하기';
+        }
+
+        subscribeBtn.onclick = (e) => {
+            e.stopPropagation();
+            toggleSubscribe(user.id, subscribeBtn);
+        };
+
+        // 카드 클릭 이벤트 (사용자 상세 페이지로)
+        userCard.addEventListener('click', function (e) {
+            if (e.target === subscribeBtn) return;
             getUser(user);
         });
-        let userImg = document.createElement('img');
-        userImg.src = user.profileImage;
-        let userIdP = document.createElement('p');
-        userIdP.className = 'user-card__id';
-        userIdP.innerText = user.id;
-        let userTagsP = document.createElement('p');
-        userTagsP.className = 'user-card__tags';
-        userTagsP.innerText = `${user.height}cm, ${user.weight}kg`;
-        userTag.append(userImg, userIdP, userTagsP);
-        container.appendChild(userTag);
+
+        userCard.append(userImg, userInfo, subscribeBtn);
+        container.appendChild(userCard);
     }
     showPage('gallery');
+}
+
+// 구독 토글 함수
+async function toggleSubscribe(targetUserId, buttonElement) {
+    const currentUserId = localStorage.getItem('userId');
+    if (!currentUserId) {
+        alert('로그인이 필요합니다.');
+        showPage('login');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/user/subscribe`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'user-id': currentUserId
+            },
+            body: JSON.stringify({
+                targetUserId: targetUserId
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // localStorage의 사용자 정보 업데이트
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            userInfo.subscribed = result.subscribed;
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+            // 버튼 UI 업데이트
+            const isSubscribed = result.subscribed.includes(targetUserId);
+            if (isSubscribed) {
+                buttonElement.classList.add('user-card__subscribe-btn--subscribed');
+                buttonElement.textContent = '구독취소';
+            } else {
+                buttonElement.classList.remove('user-card__subscribe-btn--subscribed');
+                buttonElement.textContent = '구독하기';
+            }
+
+            console.log(result.message);
+        } else {
+            alert(result.message || '구독 처리 중 오류가 발생했습니다.');
+        }
+    } catch (error) {
+        console.error('구독 처리 오류:', error);
+        alert('서버 연결에 실패했습니다.');
+    }
 }
 
 // 사용자 필터링 함수
@@ -1122,10 +1232,154 @@ function resetAllFilters() {
     getUsers();
 }
 
-// 검색 기능 (추가 예정)
-function searchById() {
-    // TODO: 서버와 연동하여 ID 검색 기능 구현
-    console.log('ID 검색 기능 구현 예정');
+// ID 검색 기능
+async function searchById() {
+    const searchInput = document.getElementById('idSearchInput');
+    const searchQuery = searchInput.value.trim();
+
+    if (!searchQuery) {
+        // 검색어가 없으면 전체 사용자 목록 다시 로드
+        await getUsers();
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/users/search?id=${encodeURIComponent(searchQuery)}`);
+        const result = await response.json();
+
+        if (result.success) {
+            if (result.data.users.length === 0) {
+                displaySearchResults([], searchQuery);
+            } else {
+                // 로그인한 사용자 제외
+                const userId = localStorage.getItem('userId');
+                const filteredUsers = result.data.users.filter(user => user.id !== userId);
+                displaySearchResults(filteredUsers, searchQuery);
+            }
+        } else {
+            alert(result.message || '검색 중 오류가 발생했습니다.');
+        }
+    } catch (error) {
+        console.error('ID 검색 오류:', error);
+        alert('검색 중 오류가 발생했습니다.');
+    }
+}
+
+// 검색 결과 표시
+function displaySearchResults(users, searchQuery) {
+    const container = document.getElementById('galleryGrid');
+    container.innerHTML = '';
+
+    if (users.length === 0) {
+        container.innerHTML = `
+            <div class="search-no-results">
+                <h3>검색 결과가 없습니다</h3>
+                <p>"${searchQuery}"와 일치하는 사용자를 찾을 수 없습니다.</p>
+                <button onclick="clearSearch()" class="clear-search-btn">전체 목록 보기</button>
+            </div>
+        `;
+        return;
+    }
+
+    // 검색 결과 헤더 추가
+    const searchHeader = document.createElement('div');
+    searchHeader.className = 'search-results-header';
+    searchHeader.innerHTML = `
+        <h3>검색 결과: "${searchQuery}" (${users.length}명)</h3>
+        <button onclick="clearSearch()" class="clear-search-btn">전체 목록 보기</button>
+    `;
+    container.appendChild(searchHeader);
+
+    const currentUserId = localStorage.getItem('userId');
+    const currentUserInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
+    for (const user of users) {
+        let userCard = document.createElement('div');
+        userCard.className = 'user-card';
+
+        // 사용자 이미지
+        let userImg = document.createElement('img');
+        userImg.className = 'user-card__image';
+        userImg.src = user.profileImage || '/images/default-profile.png';
+        userImg.alt = `${user.id} 프로필`;
+
+        // 사용자 정보 컨테이너
+        let userInfo = document.createElement('div');
+        userInfo.className = 'user-card__info';
+
+        // 아이디 (검색어 하이라이트)
+        let userIdElement = document.createElement('h3');
+        userIdElement.className = 'user-card__id';
+        userIdElement.innerHTML = highlightSearchTerm(user.id, searchQuery);
+
+        // 상세 정보 컨테이너
+        let userDetails = document.createElement('div');
+        userDetails.className = 'user-card__details';
+
+        // 기본 정보 (나이, 성별)
+        let basicInfo = document.createElement('p');
+        basicInfo.className = 'user-card__basic-info';
+        basicInfo.textContent = `${user.age}세 ${user.gender}`;
+
+        // 신체 정보 (키, 몸무게)
+        let bodyInfo = document.createElement('p');
+        bodyInfo.className = 'user-card__body-info';
+        bodyInfo.textContent = `${user.height}cm, ${user.weight}kg`;
+
+        // 직업
+        let jobInfo = document.createElement('span');
+        jobInfo.className = 'user-card__job';
+        jobInfo.textContent = user.job || '직업 미공개';
+
+        userDetails.append(basicInfo, bodyInfo, jobInfo);
+        userInfo.append(userIdElement, userDetails);
+
+        // 구독 버튼
+        let subscribeBtn = document.createElement('button');
+        subscribeBtn.className = 'user-card__subscribe-btn';
+
+        // 구독 상태 확인
+        const isSubscribed = currentUserInfo.subscribed &&
+            currentUserInfo.subscribed.includes(user.id);
+
+        if (isSubscribed) {
+            subscribeBtn.classList.add('user-card__subscribe-btn--subscribed');
+            subscribeBtn.textContent = '구독취소';
+        } else {
+            subscribeBtn.textContent = '구독하기';
+        }
+
+        subscribeBtn.onclick = (e) => {
+            e.stopPropagation();
+            toggleSubscribe(user.id, subscribeBtn);
+        };
+
+        // 카드 클릭 이벤트 (사용자 상세 페이지로)
+        userCard.addEventListener('click', function (e) {
+            if (e.target === subscribeBtn || e.target.closest('.clear-search-btn')) return;
+            getUser(user);
+        });
+
+        userCard.append(userImg, userInfo, subscribeBtn);
+        container.appendChild(userCard);
+    }
+}
+
+// 검색어 하이라이트 함수
+function highlightSearchTerm(text, searchTerm) {
+    if (!searchTerm) return text;
+
+    const regex = new RegExp(`(${searchTerm})`, 'gi');
+    return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+}
+
+// 검색 초기화
+function clearSearch() {
+    const searchInput = document.getElementById('idSearchInput');
+    if (searchInput) {
+        searchInput.value = '';
+    }
+    getUsers(); // 전체 사용자 목록 다시 로드
 }
 
 // 초기화 및 이벤트 리스너 설정
@@ -1244,12 +1498,26 @@ document.addEventListener('DOMContentLoaded', async function () {
         endDate.addEventListener('change', filterByDate);
     }
 
-    // 다이어리 카드 클릭 시 수정 페이지로 이동 (동적으로 생성되므로 이벤트 위임 사용)
-    document.addEventListener('click', function (e) {
-        if (e.target.closest('.diary-card')) {
-            // 이미 각 카드에 이벤트가 설정되어 있으므로 여기서는 처리하지 않음
-        }
-    });
+    // ID 검색 입력창 Enter 키 이벤트
+    const idSearchInput = document.getElementById('idSearchInput');
+    if (idSearchInput) {
+        idSearchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                searchById();
+            }
+        });
+
+        // 입력값이 변경될 때마다 실시간 검색 (선택사항)
+        idSearchInput.addEventListener('input', function (e) {
+            // 디바운싱을 위한 타이머
+            clearTimeout(window.searchTimeout);
+            window.searchTimeout = setTimeout(() => {
+                if (e.target.value.trim() === '') {
+                    clearSearch();
+                }
+            }, 300);
+        });
+    }
 
     // 갤러리 user-card 클릭 시 user-detail 페이지로 이동
     document.querySelectorAll('#gallery .user-card').forEach(card => {

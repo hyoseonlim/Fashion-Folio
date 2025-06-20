@@ -21,13 +21,13 @@
       "category": "all"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/92fefd0aef1148ecadf3cb1ab43c91d6.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384996512928096607",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/6d3af7314c0b4dd997d3ea29d0fae6f4.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385628337529402422",
       "category": "all"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/6d3af7314c0b4dd997d3ea29d0fae6f4.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385628337529402422",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/92fefd0aef1148ecadf3cb1ab43c91d6.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384996512928096607",
       "category": "all"
     },
     {
@@ -83,11 +83,6 @@
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/21/36c2e10e210c4bbc863c5619f30352c5.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385636496972441132",
-      "category": "men"
-    },
-    {
       "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/f204b6b5e7ce4785bf047e37fd23740b.jpg?w=390",
       "linkUrl": "https://www.musinsa.com/snap/1385380946878835876",
       "category": "men"
@@ -95,11 +90,6 @@
     {
       "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/d0fa14d1cc594b9cbccb074340447685.jpg?w=390",
       "linkUrl": "https://www.musinsa.com/snap/1385621240241591717",
-      "category": "men"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/7b4b779ae7c94334af07817b2bd2d4c6.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385412211871791950",
       "category": "men"
     },
     {
@@ -113,13 +103,23 @@
       "category": "men"
     },
     {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/e19e1cc128754436af00a8f970e9f17b.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385615707546332320",
+      "category": "men"
+    },
+    {
       "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/ed44df2c2d824610a0d6f49153486c45.jpg?w=390",
       "linkUrl": "https://www.musinsa.com/snap/1384987476902936546",
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/e19e1cc128754436af00a8f970e9f17b.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385615707546332320",
+      "imageUrl": "https://image.msscdn.net/thumbnails/images/style/list/2025061923340400000043549.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385281974297522228",
+      "category": "men"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/21/6c8a73fb282e48b894312c19ea598a38.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385642157104103908",
       "category": "men"
     }
   ],
@@ -145,13 +145,13 @@
       "category": "women"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/92fefd0aef1148ecadf3cb1ab43c91d6.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384996512928096607",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/6d3af7314c0b4dd997d3ea29d0fae6f4.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385628337529402422",
       "category": "women"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/6d3af7314c0b4dd997d3ea29d0fae6f4.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385628337529402422",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/92fefd0aef1148ecadf3cb1ab43c91d6.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384996512928096607",
       "category": "women"
     },
     {
@@ -185,5 +185,5 @@
       "category": "women"
     }
   ],
-  "lastUpdated": "2025-06-20T15:30:21.009Z"
+  "lastUpdated": "2025-06-20T15:49:21.713Z"
 }

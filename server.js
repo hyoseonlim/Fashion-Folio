@@ -68,7 +68,8 @@ app.post('/api/login', async (req, res) => {
                 height: user.height,
                 weight: user.weight,
                 job: user.job,
-                bodyType: user.bodyType
+                bodyType: user.bodyType,
+                subscribed: user.subscribed || []
             }
         });
     } catch (error) {
@@ -336,6 +337,101 @@ app.post('/api/my-trends', async (req, res) => {
     }
 });
 
+// 구독/구독취소 토글
+app.post('/api/user/subscribe', async (req, res) => {
+    try {
+        const currentUserId = req.headers['user-id'];
+        const { targetUserId } = req.body;
+
+        if (!currentUserId) {
+            return res.status(401).json({
+                success: false,
+                message: '사용자 인증이 필요합니다.'
+            });
+        }
+
+        if (!targetUserId) {
+            return res.status(400).json({
+                success: false,
+                message: '구독할 사용자 ID가 필요합니다.'
+            });
+        }
+
+        if (currentUserId === targetUserId) {
+            return res.status(400).json({
+                success: false,
+                message: '자기 자신을 구독할 수 없습니다.'
+            });
+        }
+
+        const usersData = readJsonFile('users.json');
+
+        if (!usersData) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 데이터를 읽을 수 없습니다.'
+            });
+        }
+
+        const currentUserIndex = usersData.users.findIndex(u => u.id === currentUserId);
+        const targetUserIndex = usersData.users.findIndex(u => u.id === targetUserId);
+
+        if (currentUserIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: '현재 사용자를 찾을 수 없습니다.'
+            });
+        }
+
+        if (targetUserIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: '구독할 사용자를 찾을 수 없습니다.'
+            });
+        }
+
+        const currentUser = usersData.users[currentUserIndex];
+
+        // subscribed 배열이 없으면 생성
+        if (!currentUser.subscribed) {
+            currentUser.subscribed = [];
+        }
+
+        // 구독 상태 토글
+        const isCurrentlySubscribed = currentUser.subscribed.includes(targetUserId);
+
+        if (isCurrentlySubscribed) {
+            // 구독 취소
+            currentUser.subscribed = currentUser.subscribed.filter(id => id !== targetUserId);
+        } else {
+            // 구독 추가
+            currentUser.subscribed.push(targetUserId);
+        }
+
+        // 파일에 저장
+        const writeSuccess = await writeJsonFile('users.json', usersData);
+
+        if (!writeSuccess) {
+            return res.status(500).json({
+                success: false,
+                message: '구독 정보 저장 중 오류가 발생했습니다.'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: isCurrentlySubscribed ? '구독을 취소했습니다.' : '구독했습니다.',
+            subscribed: currentUser.subscribed
+        });
+    } catch (error) {
+        console.error('구독 처리 오류:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 // 패션 추천
 app.post('/api/fashion-recommend', async (req, res) => {
     try {
@@ -492,6 +588,49 @@ function getAllUsers() {
         return null;
     }
 }
+
+// ID로 사용자 검색
+app.get('/api/users/search', (req, res) => {
+    try {
+        const { id } = req.query;
+
+        if (!id) {
+            return res.status(400).json({
+                success: false,
+                message: '검색할 ID를 입력해주세요.'
+            });
+        }
+
+        const usersData = getAllUsers();
+
+        if (!usersData) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 데이터를 읽을 수 없습니다.'
+            });
+        }
+
+        // ID에 검색어가 포함된 사용자들 찾기 (대소문자 구분 없음)
+        const searchResults = usersData.users.filter(user =>
+            user.id.toLowerCase().includes(id.toLowerCase())
+        );
+
+        res.json({
+            success: true,
+            data: {
+                users: searchResults,
+                searchQuery: id,
+                totalResults: searchResults.length
+            }
+        });
+    } catch (error) {
+        console.error('사용자 검색 오류:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 
 app.get('/api/users', (req, res) => {
     try {
