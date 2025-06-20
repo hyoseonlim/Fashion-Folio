@@ -312,6 +312,9 @@ function displayUsers(users) {
     for (const user of users) {
         let userTag = document.createElement('div');
         userTag.className = 'user-card';
+        userTag.addEventListener('click', function () {
+            getUser(user);
+        });
         let userImg = document.createElement('img');
         userImg.src = user.profileImage;
         let userIdP = document.createElement('p');
@@ -322,13 +325,76 @@ function displayUsers(users) {
         userTagsP.innerText = `${user.height}cm, ${user.weight}kg`;
         userTag.append(userImg, userIdP, userTagsP);
         document.getElementById('galleryGrid').appendChild(userTag);
-        // TODO: 바로가기
+        showPage('gallery');
     }
-    // <div class="user-card">
-    //     <img src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" alt="패션 이미지" />
-    //     <p class="user-id">user1</p>
-    //     <p class="user-tags">#미니멀 #클래식</p>
-    // </div>
+}
+
+async function getUser(user) {
+    // 좌측 유저 정보 처리
+    document.getElementById('detailUserName').innerText = user.id;
+    document.getElementById('detailUserBody').innerText = `${user.height}cm, ${user.weight}kg`;
+    document.getElementById('detailUserImg').src = user.profileImage;
+
+    // 우측 게시글 데이터
+    try {
+        const response = await fetch(`${API_BASE_URL}/posts`); // TODO: 유저별 포스트로
+        const result = await response.json();
+        if (result.success) {
+            displayUser(result.data.posts);
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (err) {
+        console.error('데이터 가져오기 실패', err);
+    }
+}
+
+function displayUser(posts) {
+    const container = document.getElementById('detailUserDiaries');
+
+    // 기존 내용 지우기
+    container.innerHTML = '';
+
+    if (!posts || posts.length === 0) {
+        container.innerHTML = '<p class="no-data">게시글이 없습니다.</p>';
+        return;
+    }
+
+    for (const post of posts) {
+        let postDiv = document.createElement('div');
+        postDiv.className = 'polaroid-card';
+        postDiv.addEventListener('click', function () {
+            displayPost(post);
+        });
+
+        let postImg = document.createElement('img');
+        postImg.src = post.imageUrl;
+
+        let postCaption = document.createElement('div');
+        postCaption.className = 'polaroid-caption';
+        let postDate = document.createElement('div');
+        postDate.className = 'date';
+        postDate.innerText = post.createdAt;
+        let postContents = document.createElement('div');
+        postContents.className = 'desc';
+        postContents.innerText = post.content.substr(0, 7) + "...";
+        postCaption.append(postDate, postContents);
+
+        postDiv.append(postImg, postCaption);
+        container.appendChild(postDiv);
+    }
+    showPage('user-detail');
+
+}
+
+function displayPost(post) {
+    document.getElementById('eachDetailImage').src = post.imageUrl;
+    document.getElementById('eachDetailContent').innerText = post.content;
+    document.getElementById('eachDetailDate').innerText = post.createdAt;
+    document.getElementById('eachDetailUsername').innerText = post.userId;
+    document.getElementById('eachDetailUserTags').innerText = post.styles;
+
+    showPage('each-detail');
 }
 
 // 페이지 전환 함수

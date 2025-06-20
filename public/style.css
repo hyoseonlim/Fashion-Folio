@@ -1057,20 +1057,14 @@ textarea:focus {
     margin-bottom: 10px;
 }
 
-.user-detail__tags {
-    color: #eee;
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-}
-
 .user-detail__body {
     font-size: 1.1rem;
     margin-bottom: 20px;
 }
 
 .user-detail__profile-img {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: auto;
     background: #eee;
     border: 2px solid #222;
     margin-bottom: 16px;

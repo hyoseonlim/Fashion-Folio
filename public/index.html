@@ -21,7 +21,7 @@
             <nav class="header__nav">
                 <div class="header__nav-item" onclick="showPage('trend')">TREND</div>
                 <div class="header__nav-item" onclick="showPage('discover')">STYLIST</div>
-                <div class="header__nav-item" onclick="showPage('gallery'); getUsers();">GALLERY</div>
+                <div class="header__nav-item" onclick="getUsers();">GALLERY</div>
                 <div class="header__nav-item" onclick="showMyDiary()" style="display: none;">MY DIARY</div>
             </nav>
 
@@ -359,7 +359,7 @@
                         <div class="user-detail__name" id="detailUserName"></div>
                         <div class="user-detail__tags" id="detailUserTags"></div>
                         <div class="user-detail__body" id="detailUserBody"></div>
-                        <div class="user-detail__profile-img"></div>
+                        <img class="user-detail__profile-img" id="detailUserImg"></img>
                         <div class="user-detail__likes">
                             <span class="user-detail__likes-count" id="detailUserLikes">0 Likes</span>
                             <button class="user-detail__like-btn" onclick="toggleUserLike()">
@@ -380,7 +380,7 @@
             <div id="each-detail" class="page">
                 <div class="section-header">
                     <h2 class="section-header__title">Style Detail</h2>
-                    <button onclick="goBackFromDetail()" class="section-header__back-btn">← 뒤로</button>
+                    <button onclick="showPage('user-detail')" class="section-header__back-btn">← 뒤로</button>
                 </div>
 
                 <div class="each-detail">
