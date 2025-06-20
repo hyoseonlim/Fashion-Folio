@@ -6,6 +6,7 @@
     ],
     "ignore": [
         "data/",
+        "public/",
         "node_modules/",
         "*.json"
     ],

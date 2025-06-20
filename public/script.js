@@ -55,7 +55,6 @@ async function handleLogin() {
 
         if (result.success) {
             // 세션 정보 저장
-            localStorage.setItem('sessionId', result.sessionId);
             localStorage.setItem('userId', result.user.id);
             localStorage.setItem('userInfo', JSON.stringify(result.user));
 
@@ -150,8 +149,8 @@ async function checkDuplicateId() {
 
 // 사용자 정보 수정
 async function saveUserInfo() {
-    const sessionId = localStorage.getItem('sessionId');
-    if (!sessionId) {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
         alert('로그인이 필요합니다.');
         return;
     }
@@ -186,7 +185,6 @@ async function saveUserInfo() {
 
 function logout() {
     // 로컬 스토리지 클리어
-    localStorage.removeItem('sessionId');
     localStorage.removeItem('userId');
     localStorage.removeItem('userInfo');
 
@@ -321,7 +319,7 @@ function displayUsers(users) {
         userIdP.innerText = user.id;
         let userTagsP = document.createElement('p');
         userTagsP.className = 'user-card__tags';
-        userTagsP.innerText = user.styles;
+        userTagsP.innerText = `${user.height}cm, ${user.weight}kg`;
         userTag.append(userImg, userIdP, userTagsP);
         document.getElementById('galleryGrid').appendChild(userTag);
         // TODO: 바로가기
@@ -410,7 +408,7 @@ function toggleFavoritesFilter() {
 }
 
 // 스타일 추천 요청 함수
-function getStyleRecommendation() {
+async function getStyleRecommendation() {
     const moodInput = document.getElementById('moodInput');
     const mood = moodInput.value.trim();
 
@@ -419,24 +417,43 @@ function getStyleRecommendation() {
         return;
     }
 
+    // 로그인 확인
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('스타일 추천을 받으려면 로그인이 필요합니다.');
+        showPage('login');
+        return;
+    }
+
     // 로딩 스피너 표시
     showLoading();
 
-    // 실제 서버 연결 전이므로 예시 데이터로 시뮬레이션
-    setTimeout(() => {
-        const exampleRecommendation = {
-            summary: '청량한 대학생 발표룩, 어깨 넓은 상체에 잘 어울리는 슬림핏 코디',
-            outfit: {
-                top: '블랙 컬러의 오버핏 티셔츠',
-                bottom: '네이비 컬러의 슬림핏 청바지',
-                shoes: '화이트 컬러의 스니커즈',
-                accessories: '심플한 블랙 컬러의 소가죽 스트랩 시계, 실버 컬러의 체인 목걸이'
-            }
-        };
+    try {
+        const response = await fetch(`${API_BASE_URL}/fashion-recommend`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'user-id': userId
+            },
+            body: JSON.stringify({
+                dailyInfo: mood
+            })
+        });
 
-        displayRecommendation(exampleRecommendation);
+        const result = await response.json();
+
+        if (result.success) {
+            displayRecommendation(result.recommendation.parsed);
+            hideLoading();
+        } else {
+            hideLoading();
+            alert(result.message || '추천을 받는 중 오류가 발생했습니다.');
+        }
+    } catch (error) {
+        console.error('추천 요청 오류:', error);
         hideLoading();
-    }, 2000); // 2초 후 결과 표시 (서버 응답 시뮬레이션)
+        alert('서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.');
+    }
 }
 
 // 로딩 스피너 표시
@@ -453,11 +470,24 @@ function hideLoading() {
 // 추천 결과 표시
 function displayRecommendation(recommendation) {
     // 데이터 채우기
-    document.getElementById('summaryText').textContent = recommendation.summary;
-    document.getElementById('topItem').textContent = recommendation.outfit.top;
-    document.getElementById('bottomItem').textContent = recommendation.outfit.bottom;
-    document.getElementById('shoesItem').textContent = recommendation.outfit.shoes;
-    document.getElementById('accessoriesItem').textContent = recommendation.outfit.accessories;
+    if (recommendation.summary) {
+        document.getElementById('summaryText').textContent = recommendation.summary;
+    }
+
+    if (recommendation.outfit) {
+        if (recommendation.outfit.top) {
+            document.getElementById('topItem').textContent = recommendation.outfit.top;
+        }
+        if (recommendation.outfit.bottom) {
+            document.getElementById('bottomItem').textContent = recommendation.outfit.bottom;
+        }
+        if (recommendation.outfit.shoes) {
+            document.getElementById('shoesItem').textContent = recommendation.outfit.shoes;
+        }
+        if (recommendation.outfit.accessories) {
+            document.getElementById('accessoriesItem').textContent = recommendation.outfit.accessories;
+        }
+    }
 
     // 결과 영역 표시
     document.getElementById('recommendationResult').classList.add('show');
@@ -734,10 +764,10 @@ function searchById() {
 // 초기화 및 이벤트 리스너 설정
 document.addEventListener('DOMContentLoaded', async function () {
     // 로컬 스토리지에서 세션 정보 확인
-    const sessionId = localStorage.getItem('sessionId');
+    const userId = localStorage.getItem('userId');
     const userInfo = localStorage.getItem('userInfo');
 
-    if (sessionId && userInfo) {
+    if (userId && userInfo) {
         try {
             // 사용자 정보가 있으면 UI 업데이트
             const user = JSON.parse(userInfo);

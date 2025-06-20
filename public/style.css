@@ -129,6 +129,8 @@ textarea:focus {
 
 .header__user-info {
     margin-bottom: 12px;
+    border: 1px solid white;
+    padding: 8px 0px;
 }
 
 .header__edit-btn {
@@ -143,6 +145,16 @@ textarea:focus {
 
 .header__edit-btn:hover {
     background-color: #f0f0f0;
+}
+
+.header__logout-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
 }
 
 .main-content {

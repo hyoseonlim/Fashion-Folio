@@ -1,17 +1,17 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path'); // 파일/폴더 경로 처리
-const fs = require('fs'); // 파일 시스템 읽기/쓰기
-const cron = require('node-cron'); // 스케줄링
+const path = require('path');
+const fs = require('fs');
+const cron = require('node-cron');
 const { scrapeMusinsa } = require('./server/scrapingService');
+const { getFashionRecommendation } = require('./server/aiService');
 
 const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.json()); // JSON 파싱을 위한 미들웨어
-app.use(express.static(path.join(__dirname, 'public'))); // 자동으로 public/index.html 서빙하므로 아래 코드 필요 없음
-// app.get('/', (req, res) => {res.sendFile(path.join(__dirname, 'public', 'index.html')); })
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // JSON 파일 읽기/쓰기 헬퍼
 const readJsonFile = (filename) => {
@@ -26,15 +26,13 @@ const writeJsonFile = async (filename, data) => {
     );
 };
 
-const sessions = new Map();
-
 // 로그인
 app.post('/api/login', async (req, res) => {
     try {
         const { id, password } = req.body;
         const usersData = await readJsonFile('users.json');
         const user = usersData.users.find(u => u.id === id);
-        // 사용자 확인
+
         if (!user || user.password !== password) {
             return res.status(401).json({
                 success: false,
@@ -42,19 +40,16 @@ app.post('/api/login', async (req, res) => {
             });
         }
 
-        // 세션 ID 생성
-        const sessionId = Math.random().toString(36).substring(2, 9);
-        sessions.set(sessionId, user.id);
         res.json({
             success: true,
-            sessionId,
             user: {
                 id: user.id,
                 age: user.age,
                 gender: user.gender,
                 height: user.height,
                 weight: user.weight,
-                job: user.job
+                job: user.job,
+                bodyType: user.bodyType
             }
         });
     } catch (error) {
@@ -70,7 +65,6 @@ app.post('/api/users', async (req, res) => {
     try {
         const { id, password, age, gender, height, weight, job, bodyType } = req.body;
 
-        // 필수 필드 확인
         if (!id || !password) {
             return res.status(400).json({
                 success: false,
@@ -80,7 +74,6 @@ app.post('/api/users', async (req, res) => {
 
         const usersData = await readJsonFile('users.json');
 
-        // 중복 확인
         if (usersData.users.find(u => u.id === id)) {
             return res.status(400).json({
                 success: false,
@@ -88,10 +81,9 @@ app.post('/api/users', async (req, res) => {
             });
         }
 
-        // 새 사용자 추가
         const newUser = {
             id,
-            password, // 암호화 생략
+            password,
             age: parseInt(age) || 0,
             gender: gender || '',
             height: parseInt(height) || 0,
@@ -138,18 +130,64 @@ app.get('/api/check-id/:id', async (req, res) => {
     }
 });
 
+// 패션 추천
+app.post('/api/fashion-recommend', async (req, res) => {
+    try {
+        const { dailyInfo } = req.body;
+        const userId = req.userId;
 
-// 인증 미들웨어
-const authenticate = (req, res, next) => {
-    const sessionId = req.headers['session-id'];
+        // 사용자 정보 가져오기
+        const usersData = await readJsonFile('users.json');
+        const user = usersData.users.find(u => u.id === userId);
 
-    if (!sessionId || !sessions.has(sessionId)) {
-        return res.status(401).json({ success: false, message: '로그인이 필요합니다.' });
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: '사용자를 찾을 수 없습니다.'
+            });
+        }
+
+        // 입력 검증
+        if (!dailyInfo || dailyInfo.trim() === '') {
+            return res.status(400).json({
+                success: false,
+                message: '오늘의 기분이나 일정을 입력해주세요.'
+            });
+        }
+
+        // AI 서비스 호출
+        const result = await getFashionRecommendation(user, dailyInfo);
+
+        if (result.success) {
+            res.json({
+                success: true,
+                userInfo: {
+                    height: `${user.height}cm`,
+                    weight: `${user.weight}kg`,
+                    bodyType: user.bodyType || '보통',
+                    dailyInfo
+                },
+                recommendation: result.recommendation
+            });
+        } else {
+            // 에러 타입에 따른 적절한 상태 코드 반환
+            const statusCode = result.error === 'INVALID_API_KEY' ? 401 :
+                result.error === 'RATE_LIMIT' ? 429 : 500;
+
+            res.status(statusCode).json({
+                success: false,
+                message: result.message
+            });
+        }
+
+    } catch (error) {
+        console.error('패션 추천 엔드포인트 오류:', error);
+        res.status(500).json({
+            success: false,
+            message: '서버 오류가 발생했습니다.'
+        });
     }
-
-    req.userId = sessions.get(sessionId);
-    next();
-};
+});
 
 function getAllTrends() {
     try {
@@ -161,11 +199,10 @@ function getAllTrends() {
     }
 }
 
-// 스크래핑 함수 (로깅 추가)
+// 스크래핑 함수
 async function runScraping() {
     try {
-        console.log(`[${new
-            Date().toLocaleString()}] 스크래핑 시작...`);
+        console.log(`[${new Date().toLocaleString()}] 스크래핑 시작...`);
         await scrapeMusinsa();
         console.log(`[${new Date().toLocaleString()}] 스크래핑 완료!`);
     } catch (error) {
@@ -206,22 +243,6 @@ app.get('/api/trends/:gender', (req, res) => {
         res.json({
             success: true,
             data: { trends: filteredTrends }
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
-    }
-});
-
-// TODO
-app.get('/api/styles', (req, res) => {
-    try {
-        const usersData = getAllUsers();
-        res.json({
-            success: true,
-            data: usersData
         });
     } catch (error) {
         res.status(500).json({
@@ -281,13 +302,13 @@ app.get('/api/posts', (req, res) => {
     }
 });
 
-// 스크래핑 실행 후 서버 시작
+// 서버 시작
 app.listen(PORT, async () => {
     console.log(`서버가 http://localhost:${PORT}에서 실행 중입니다.`);
 
-    await runScraping(); // 서버 시작 시 한 번 실행
+    await runScraping();
     module.exports = app;
-    cron.schedule('0 6 * * *', runScraping, { // 매일 6시 스크래핑 
+    cron.schedule('0 6 * * *', runScraping, {
         timezone: "Asia/Seoul"
     });
 });
