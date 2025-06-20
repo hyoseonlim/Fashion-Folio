@@ -1483,9 +1483,35 @@ textarea:focus {
 
 .mb-20 {
     margin-bottom: 20px;
-}image-panel {
+}
+
+image-panel {
     flex: 1;
     min-width: 0;
 }
 
-.each-detail__
+.section-header__back-btn {
+    padding: 8px 16px;
+    background-color: white;
+    color: black;
+    border: 2px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.section-header__back-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateX(-2px);
+}
+
+/* No data 스타일 */
+.no-data {
+    text-align: center;
+    color: #ccc;
+    font-size: 18px;
+    margin: 40px 0;
+    grid-column: 1 / -1; /* 그리드 전체 열을 차지 */
+}

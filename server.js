@@ -171,6 +171,78 @@ app.get('/api/check-id/:id', async (req, res) => {
     }
 });
 
+// 사용자 정보 업데이트
+app.put('/api/user/update', async (req, res) => {
+    try {
+        const userId = req.headers['user-id'];
+        const { gender, age, height, weight, job, bodyType } = req.body;
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: '사용자 인증이 필요합니다.'
+            });
+        }
+
+        const usersData = readJsonFile('users.json');
+
+        if (!usersData) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 데이터를 읽을 수 없습니다.'
+            });
+        }
+
+        const userIndex = usersData.users.findIndex(u => u.id === userId);
+
+        if (userIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: '사용자를 찾을 수 없습니다.'
+            });
+        }
+
+        // 사용자 정보 업데이트
+        const user = usersData.users[userIndex];
+        if (gender !== undefined) user.gender = gender;
+        if (age !== undefined) user.age = parseInt(age);
+        if (height !== undefined) user.height = parseInt(height);
+        if (weight !== undefined) user.weight = parseInt(weight);
+        if (job !== undefined) user.job = job;
+        if (bodyType !== undefined) user.bodyType = bodyType;
+
+        // 업데이트된 정보 저장
+        const writeSuccess = await writeJsonFile('users.json', usersData);
+
+        if (!writeSuccess) {
+            return res.status(500).json({
+                success: false,
+                message: '사용자 정보 저장 중 오류가 발생했습니다.'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: '사용자 정보가 성공적으로 업데이트되었습니다.',
+            user: {
+                id: user.id,
+                age: user.age,
+                gender: user.gender,
+                height: user.height,
+                weight: user.weight,
+                job: user.job,
+                bodyType: user.bodyType
+            }
+        });
+    } catch (error) {
+        console.error('사용자 정보 업데이트 오류:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 // 내 트렌드 가져오기
 app.get('/api/my-trends/:userId', async (req, res) => {
     try {

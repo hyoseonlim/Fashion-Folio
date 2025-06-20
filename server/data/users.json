@@ -1,303 +1,303 @@
 {
-    "users": [
-        {
-            "id": "woman_user1",
-            "password": "1234",
-            "age": 24,
-            "gender": "여성",
-            "height": 165,
-            "weight": 52,
-            "job": "대학생",
-            "bodyType": "마른 체형에 다리가 긴 편",
-            "joinDate": "2024-01-20",
-            "profileImage": "/images/woman_user1/woman_user1_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user2",
-                "woman_user3"
-            ]
-        },
-        {
-            "id": "man_user1",
-            "password": "1234",
-            "age": 25,
-            "gender": "남성",
-            "height": 178,
-            "weight": 72,
-            "job": "대학생",
-            "bodyType": "어깨가 넓고 상체가 짧음",
-            "joinDate": "2024-02-05",
-            "profileImage": "/images/man_user1/man_user1_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user2",
-                "man_user3"
-            ]
-        },
-        {
-            "id": "man_user3",
-            "password": "1234",
-            "age": 23,
-            "gender": "남성",
-            "height": 172,
-            "weight": 65,
-            "job": "프리랜서",
-            "bodyType": "마른 체형에 팔이 긴 편",
-            "joinDate": "2024-03-10",
-            "profileImage": "/images/man_user3/man_user3_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user4"
-            ]
-        },
-        {
-            "id": "woman_user3",
-            "password": "1234",
-            "age": 22,
-            "gender": "여성",
-            "height": 160,
-            "weight": 48,
-            "job": "아르바이트생",
-            "bodyType": "작고 마른 체형",
-            "joinDate": "2024-04-02",
-            "profileImage": "/images/woman_user3/woman_user3_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user3",
-                "woman_user4"
-            ]
-        },
-        {
-            "id": "woman_user5",
-            "password": "1234",
-            "age": 25,
-            "gender": "여성",
-            "height": 163,
-            "weight": 53,
-            "job": "디자이너",
-            "bodyType": "하체가 튼튼한 편",
-            "joinDate": "2024-05-08",
-            "profileImage": "/images/woman_user5/woman_user5_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user6"
-            ]
-        },
-        {
-            "id": "man_user6",
-            "password": "1234",
-            "age": 27,
-            "gender": "남성",
-            "height": 170,
-            "weight": 68,
-            "job": "디자이너",
-            "bodyType": "하체가 튼튼하고 상체가 마른 편",
-            "joinDate": "2024-06-15",
-            "profileImage": "/images/man_user6/man_user6_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user7",
-                "woman_user8"
-            ]
-        },
-        {
-            "id": "man_user2",
-            "password": "1234",
-            "age": 28,
-            "gender": "남성",
-            "height": 180,
-            "weight": 75,
-            "job": "개발자",
-            "bodyType": "근육질이고 다리가 긴 편",
-            "joinDate": "2024-01-10",
-            "profileImage": "/images/man_user2/man_user2_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user1",
-                "woman_user3"
-            ]
-        },
-        {
-            "id": "woman_user2",
-            "password": "1234",
-            "age": 26,
-            "gender": "여성",
-            "height": 168,
-            "weight": 55,
-            "job": "간호사",
-            "bodyType": "균형잡힌 체형",
-            "joinDate": "2024-02-20",
-            "profileImage": "/images/woman_user2/woman_user2_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user1"
-            ]
-        },
-        {
-            "id": "woman_user8",
-            "password": "1234",
-            "age": 29,
-            "gender": "여성",
-            "height": 172,
-            "weight": 60,
-            "job": "마케터",
-            "bodyType": "키가 크고 다리가 긴 모델 체형",
-            "joinDate": "2024-03-25",
-            "profileImage": "/images/woman_user8/woman_user8_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user8",
-                "woman_user9"
-            ]
-        },
-        {
-            "id": "man_user5",
-            "password": "1234",
-            "age": 26,
-            "gender": "남성",
-            "height": 182,
-            "weight": 78,
-            "job": "대학원생",
-            "bodyType": "균형잡힌 체형",
-            "joinDate": "2024-04-20",
-            "profileImage": "/images/man_user5/man_user5_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user6"
-            ]
-        },
-        {
-            "id": "man_user7",
-            "password": "1234",
-            "age": 29,
-            "gender": "남성",
-            "height": 177,
-            "weight": 73,
-            "job": "마케터",
-            "bodyType": "어깨가 넓고 허리가 가늘음",
-            "joinDate": "2024-05-20",
-            "profileImage": "/images/man_user7/man_user7_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user9"
-            ]
-        },
-        {
-            "id": "woman_user4",
-            "password": "1234",
-            "age": 28,
-            "gender": "여성",
-            "height": 170,
-            "weight": 58,
-            "job": "회사원",
-            "bodyType": "상체가 길고 어깨가 넓은 편",
-            "joinDate": "2024-06-10",
-            "profileImage": "/images/woman_user4/woman_user4_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user4",
-                "man_user5"
-            ]
-        },
-        {
-            "id": "man_user4",
-            "password": "1234",
-            "age": 30,
-            "gender": "남성",
-            "height": 175,
-            "weight": 80,
-            "job": "회사원",
-            "bodyType": "복부에 살이 있고 어깨가 좁음",
-            "joinDate": "2024-01-25",
-            "profileImage": "/images/man_user4/man_user4_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user5",
-                "woman_user5"
-            ]
-        },
-        {
-            "id": "woman_user7",
-            "password": "1234",
-            "age": 23,
-            "gender": "여성",
-            "height": 158,
-            "weight": 50,
-            "job": "바리스타",
-            "bodyType": "작고 통통한 체형",
-            "joinDate": "2024-02-28",
-            "profileImage": "/images/woman_user7/woman_user7_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user7"
-            ]
-        },
-        {
-            "id": "man_user8",
-            "password": "1234",
-            "age": 24,
-            "gender": "남성",
-            "height": 185,
-            "weight": 82,
-            "job": "모델",
-            "bodyType": "키가 크고 다리가 매우 긴 편",
-            "joinDate": "2024-03-30",
-            "profileImage": "/images/man_user8/man_user8_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user1",
-                "man_user1"
-            ]
-        },
-        {
-            "id": "woman_user6",
-            "password": "1234",
-            "age": 27,
-            "gender": "여성",
-            "height": 166,
-            "weight": 54,
-            "job": "교사",
-            "bodyType": "팔이 길고 허리가 가늘음",
-            "joinDate": "2024-05-01",
-            "profileImage": "/images/woman_user6/woman_user6_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user6",
-                "woman_user7"
-            ]
-        },
-        {
-            "id": "man_user9",
-            "password": "1234",
-            "age": 31,
-            "gender": "남성",
-            "height": 174,
-            "weight": 70,
-            "job": "변호사",
-            "bodyType": "전체적으로 단단한 체형",
-            "joinDate": "2024-05-30",
-            "profileImage": "/images/man_user9/man_user9_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "woman_user2"
-            ]
-        },
-        {
-            "id": "woman_user9",
-            "password": "1234",
-            "age": 26,
-            "gender": "여성",
-            "height": 164,
-            "weight": 56,
-            "job": "프리랜서",
-            "bodyType": "어깨가 좁고 골반이 넓은 편",
-            "joinDate": "2024-04-10",
-            "profileImage": "/images/woman_user9/woman_user9_7.png",
-            "likedTrends": [],
-            "subscribed": [
-                "man_user9",
-                "woman_user1"
-            ]
-        }
-    ]
+  "users": [
+    {
+      "id": "woman_user1",
+      "password": "1234",
+      "age": 24,
+      "gender": "여성",
+      "height": 165,
+      "weight": 54,
+      "job": "대학생",
+      "bodyType": "마른 체형에 다리가 긴 편",
+      "joinDate": "2024-01-20",
+      "profileImage": "/images/woman_user1/woman_user1_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user2",
+        "woman_user3"
+      ]
+    },
+    {
+      "id": "man_user1",
+      "password": "1234",
+      "age": 25,
+      "gender": "남성",
+      "height": 178,
+      "weight": 72,
+      "job": "대학생",
+      "bodyType": "어깨가 넓고 상체가 짧음",
+      "joinDate": "2024-02-05",
+      "profileImage": "/images/man_user1/man_user1_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user2",
+        "man_user3"
+      ]
+    },
+    {
+      "id": "man_user3",
+      "password": "1234",
+      "age": 23,
+      "gender": "남성",
+      "height": 172,
+      "weight": 65,
+      "job": "프리랜서",
+      "bodyType": "마른 체형에 팔이 긴 편",
+      "joinDate": "2024-03-10",
+      "profileImage": "/images/man_user3/man_user3_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user4"
+      ]
+    },
+    {
+      "id": "woman_user3",
+      "password": "1234",
+      "age": 22,
+      "gender": "여성",
+      "height": 160,
+      "weight": 48,
+      "job": "아르바이트생",
+      "bodyType": "작고 마른 체형",
+      "joinDate": "2024-04-02",
+      "profileImage": "/images/woman_user3/woman_user3_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user3",
+        "woman_user4"
+      ]
+    },
+    {
+      "id": "woman_user5",
+      "password": "1234",
+      "age": 25,
+      "gender": "여성",
+      "height": 163,
+      "weight": 53,
+      "job": "디자이너",
+      "bodyType": "하체가 튼튼한 편",
+      "joinDate": "2024-05-08",
+      "profileImage": "/images/woman_user5/woman_user5_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user6"
+      ]
+    },
+    {
+      "id": "man_user6",
+      "password": "1234",
+      "age": 27,
+      "gender": "남성",
+      "height": 170,
+      "weight": 68,
+      "job": "디자이너",
+      "bodyType": "하체가 튼튼하고 상체가 마른 편",
+      "joinDate": "2024-06-15",
+      "profileImage": "/images/man_user6/man_user6_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user7",
+        "woman_user8"
+      ]
+    },
+    {
+      "id": "man_user2",
+      "password": "1234",
+      "age": 28,
+      "gender": "남성",
+      "height": 180,
+      "weight": 75,
+      "job": "개발자",
+      "bodyType": "근육질이고 다리가 긴 편",
+      "joinDate": "2024-01-10",
+      "profileImage": "/images/man_user2/man_user2_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user1",
+        "woman_user3"
+      ]
+    },
+    {
+      "id": "woman_user2",
+      "password": "1234",
+      "age": 26,
+      "gender": "여성",
+      "height": 168,
+      "weight": 55,
+      "job": "간호사",
+      "bodyType": "균형잡힌 체형",
+      "joinDate": "2024-02-20",
+      "profileImage": "/images/woman_user2/woman_user2_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user1"
+      ]
+    },
+    {
+      "id": "woman_user8",
+      "password": "1234",
+      "age": 29,
+      "gender": "여성",
+      "height": 172,
+      "weight": 60,
+      "job": "마케터",
+      "bodyType": "키가 크고 다리가 긴 모델 체형",
+      "joinDate": "2024-03-25",
+      "profileImage": "/images/woman_user8/woman_user8_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user8",
+        "woman_user9"
+      ]
+    },
+    {
+      "id": "man_user5",
+      "password": "1234",
+      "age": 26,
+      "gender": "남성",
+      "height": 182,
+      "weight": 78,
+      "job": "대학원생",
+      "bodyType": "균형잡힌 체형",
+      "joinDate": "2024-04-20",
+      "profileImage": "/images/man_user5/man_user5_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user6"
+      ]
+    },
+    {
+      "id": "man_user7",
+      "password": "1234",
+      "age": 29,
+      "gender": "남성",
+      "height": 177,
+      "weight": 73,
+      "job": "마케터",
+      "bodyType": "어깨가 넓고 허리가 가늘음",
+      "joinDate": "2024-05-20",
+      "profileImage": "/images/man_user7/man_user7_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user9"
+      ]
+    },
+    {
+      "id": "woman_user4",
+      "password": "1234",
+      "age": 28,
+      "gender": "여성",
+      "height": 170,
+      "weight": 58,
+      "job": "회사원",
+      "bodyType": "상체가 길고 어깨가 넓은 편",
+      "joinDate": "2024-06-10",
+      "profileImage": "/images/woman_user4/woman_user4_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user4",
+        "man_user5"
+      ]
+    },
+    {
+      "id": "man_user4",
+      "password": "1234",
+      "age": 30,
+      "gender": "남성",
+      "height": 175,
+      "weight": 80,
+      "job": "회사원",
+      "bodyType": "복부에 살이 있고 어깨가 좁음",
+      "joinDate": "2024-01-25",
+      "profileImage": "/images/man_user4/man_user4_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user5",
+        "woman_user5"
+      ]
+    },
+    {
+      "id": "woman_user7",
+      "password": "1234",
+      "age": 23,
+      "gender": "여성",
+      "height": 158,
+      "weight": 50,
+      "job": "바리스타",
+      "bodyType": "작고 통통한 체형",
+      "joinDate": "2024-02-28",
+      "profileImage": "/images/woman_user7/woman_user7_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user7"
+      ]
+    },
+    {
+      "id": "man_user8",
+      "password": "1234",
+      "age": 24,
+      "gender": "남성",
+      "height": 185,
+      "weight": 82,
+      "job": "모델",
+      "bodyType": "키가 크고 다리가 매우 긴 편",
+      "joinDate": "2024-03-30",
+      "profileImage": "/images/man_user8/man_user8_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user1",
+        "man_user1"
+      ]
+    },
+    {
+      "id": "woman_user6",
+      "password": "1234",
+      "age": 27,
+      "gender": "여성",
+      "height": 166,
+      "weight": 54,
+      "job": "교사",
+      "bodyType": "팔이 길고 허리가 가늘음",
+      "joinDate": "2024-05-01",
+      "profileImage": "/images/woman_user6/woman_user6_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user6",
+        "woman_user7"
+      ]
+    },
+    {
+      "id": "man_user9",
+      "password": "1234",
+      "age": 31,
+      "gender": "남성",
+      "height": 174,
+      "weight": 70,
+      "job": "변호사",
+      "bodyType": "전체적으로 단단한 체형",
+      "joinDate": "2024-05-30",
+      "profileImage": "/images/man_user9/man_user9_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "woman_user2"
+      ]
+    },
+    {
+      "id": "woman_user9",
+      "password": "1234",
+      "age": 26,
+      "gender": "여성",
+      "height": 164,
+      "weight": 56,
+      "job": "프리랜서",
+      "bodyType": "어깨가 좁고 골반이 넓은 편",
+      "joinDate": "2024-04-10",
+      "profileImage": "/images/woman_user9/woman_user9_7.png",
+      "likedTrends": [],
+      "subscribed": [
+        "man_user9",
+        "woman_user1"
+      ]
+    }
+  ]
 }

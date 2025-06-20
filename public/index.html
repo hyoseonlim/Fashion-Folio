@@ -406,6 +406,7 @@
             </div>
 
             <!-- Diary Page -->
+            <!-- Diary Page -->
             <div id="diary" class="page">
                 <div class="diary-header">
                     <h2 class="section-header__title">My Style Diary</h2>
@@ -420,13 +421,14 @@
                         </select>
                         <input type="date" id="start-date" class="diary-header__date-input" onchange="filterByDate()" />
                         <input type="date" id="end-date" class="diary-header__date-input" onchange="filterByDate()" />
-                        <button class="diary-header__filter-btn" onclick="filterByDate()">설정</button>
+                        <button class="diary-header__filter-btn" onclick="filterByDate()">적용</button>
                     </div>
 
                     <button class="diary-header__add-btn" onclick="showPage('add')">+ Add</button>
                 </div>
 
                 <div class="items-grid diary-grid" id="myDiaryGrid">
+                    <!-- 다이어리 카드들이 여기에 동적으로 추가됩니다 -->
                 </div>
             </div>
 
@@ -434,6 +436,7 @@
             <div id="edit" class="page">
                 <div class="section-header">
                     <h2 class="section-header__title">Edit Style Diary</h2>
+                    <button onclick="showPage('diary')" class="section-header__back-btn">← 뒤로</button>
                 </div>
 
                 <div class="style-diary">
@@ -465,6 +468,7 @@
             <div id="add" class="page">
                 <div class="section-header">
                     <h2 class="section-header__title">Add Style Diary</h2>
+                    <button onclick="showPage('diary')" class="section-header__back-btn">← 뒤로</button>
                 </div>
 
                 <div class="style-diary">

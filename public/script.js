@@ -166,24 +166,51 @@ async function saveUserInfo() {
     const weight = document.getElementById('weightInput').value;
     const job = document.getElementById('jobInput').value;
 
+    // 유효성 검사
+    if (!gender || !age || !height || !weight) {
+        alert('모든 필수 정보를 입력해주세요.');
+        return;
+    }
+
     try {
-        const response = await apiCall('/user/update', {
-            method: 'POST',
-            body: JSON.stringify({ gender, age, height, weight, job })
+        const response = await fetch(`${API_BASE_URL}/user/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'user-id': userId
+            },
+            body: JSON.stringify({
+                gender: gender,
+                age: parseInt(age),
+                height: parseInt(height),
+                weight: parseInt(weight),
+                job: job
+            })
         });
 
-        if (response.success) {
+        const result = await response.json();
+
+        if (result.success) {
             // localStorage 업데이트
             const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-            Object.assign(userInfo, { gender, age, height, weight, job });
+            Object.assign(userInfo, {
+                gender: gender,
+                age: parseInt(age),
+                height: parseInt(height),
+                weight: parseInt(weight),
+                job: job
+            });
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
             // UI 업데이트
             updateUserUI(userInfo);
             closeEditModal();
             alert('정보가 수정되었습니다.');
+        } else {
+            alert(result.message || '정보 수정에 실패했습니다.');
         }
     } catch (error) {
+        console.error('사용자 정보 수정 오류:', error);
         alert('정보 수정 중 오류가 발생했습니다.');
     }
 }
@@ -709,7 +736,7 @@ function applyPresetRange() {
     filterByDate();
 }
 
-function showMyDiary() {
+async function showMyDiary() {
     const userId = localStorage.getItem('userId');
     if (!userId) {
         alert('로그인이 필요합니다.');
@@ -725,7 +752,177 @@ function showMyDiary() {
 
     // 다이어리 페이지로 이동
     showPage('diary');
-    loadMyDiaries(); // 내 다이어리 목록 로드
+    await loadMyDiaries(); // 내 다이어리 목록 로드
+}
+
+// 내 다이어리 목록 로드
+async function loadMyDiaries() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/posts/user/${userId}`);
+        const result = await response.json();
+
+        if (result.success) {
+            displayMyDiaries(result.data.posts);
+        } else {
+            console.error('내 다이어리 로드 실패:', result.message);
+        }
+    } catch (error) {
+        console.error('내 다이어리 로드 오류:', error);
+    }
+}
+
+// 내 다이어리 표시
+function displayMyDiaries(posts) {
+    const container = document.getElementById('myDiaryGrid');
+    container.innerHTML = '';
+
+    if (!posts || posts.length === 0) {
+        container.innerHTML = '<p class="no-data">작성한 다이어리가 없습니다.</p>';
+        return;
+    }
+
+    // 날짜순으로 정렬 (최신순)
+    const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    for (const post of sortedPosts) {
+        let diaryCard = document.createElement('div');
+        diaryCard.className = 'diary-card';
+        diaryCard.setAttribute('data-date', post.date);
+
+        diaryCard.addEventListener('click', function () {
+            editDiary(post);
+        });
+
+        let diaryImg = document.createElement('img');
+        diaryImg.className = 'diary-card__image';
+        diaryImg.src = post.imageUrl;
+        diaryImg.alt = '다이어리 이미지';
+
+        let diaryDate = document.createElement('div');
+        diaryDate.className = 'diary-card__date';
+        diaryDate.innerText = formatDate(post.date);
+
+        let diaryContent = document.createElement('div');
+        diaryContent.className = 'diary-card__content';
+        diaryContent.innerText = post.content.length > 30 ?
+            post.content.substring(0, 30) + '...' : post.content;
+
+        diaryCard.append(diaryImg, diaryDate, diaryContent);
+        container.appendChild(diaryCard);
+    }
+}
+
+// 날짜 포맷팅 함수
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+}
+
+// 다이어리 편집
+function editDiary(post) {
+    // 편집 페이지로 이동하면서 데이터 설정
+    showPage('edit');
+
+    // 현재 편집 중인 포스트 ID 저장
+    window.currentEditingPostId = post.id;
+
+    // 폼에 데이터 채우기
+    document.getElementById('edit-date').value = post.date;
+    document.getElementById('edit-text').value = post.content;
+
+    // 미리보기 이미지 표시
+    const previewImg = document.getElementById('edit-preview');
+    if (previewImg) {
+        previewImg.src = post.imageUrl;
+        previewImg.style.display = 'block';
+    }
+}
+
+// 다이어리 수정 저장
+async function updateDiary() {
+    const postId = window.currentEditingPostId;
+    if (!postId) {
+        alert('수정할 다이어리를 찾을 수 없습니다.');
+        return;
+    }
+
+    const date = document.getElementById('edit-date').value;
+    const content = document.getElementById('edit-text').value;
+    const photoFile = document.getElementById('edit-photo').files[0];
+
+    if (!date || !content) {
+        alert('날짜와 내용을 입력해주세요.');
+        return;
+    }
+
+    try {
+        // TODO: 서버에 수정 요청 보내기
+        // 현재는 클라이언트에서만 처리
+        alert('다이어리가 수정되었습니다.');
+        showPage('diary');
+        await loadMyDiaries();
+    } catch (error) {
+        console.error('다이어리 수정 오류:', error);
+        alert('다이어리 수정 중 오류가 발생했습니다.');
+    }
+}
+
+// 다이어리 추가 저장
+async function saveDiary() {
+    const date = document.getElementById('add-date').value;
+    const content = document.getElementById('add-text').value;
+    const photoFile = document.getElementById('add-photo').files[0];
+
+    if (!date || !content || !photoFile) {
+        alert('모든 필드를 입력해주세요.');
+        return;
+    }
+
+    try {
+        // TODO: 서버에 추가 요청 보내기
+        // 현재는 클라이언트에서만 처리
+        alert('새 다이어리가 저장되었습니다.');
+
+        // 폼 초기화
+        document.getElementById('add-date').value = '';
+        document.getElementById('add-text').value = '';
+        document.getElementById('add-photo').value = '';
+
+        showPage('diary');
+        await loadMyDiaries();
+    } catch (error) {
+        console.error('다이어리 저장 오류:', error);
+        alert('다이어리 저장 중 오류가 발생했습니다.');
+    }
+}
+
+// 다이어리 삭제 확인
+function confirmDelete() {
+    const postId = window.currentEditingPostId;
+    if (!postId) {
+        alert('삭제할 다이어리를 찾을 수 없습니다.');
+        closeDeleteModal();
+        return;
+    }
+
+    try {
+        // TODO: 서버에 삭제 요청 보내기
+        // 현재는 클라이언트에서만 처리
+        alert('다이어리가 삭제되었습니다.');
+        closeDeleteModal();
+        showPage('diary');
+        loadMyDiaries();
+    } catch (error) {
+        console.error('다이어리 삭제 오류:', error);
+        alert('다이어리 삭제 중 오류가 발생했습니다.');
+        closeDeleteModal();
+    }
 }
 
 function filterByDate() {
@@ -756,11 +953,6 @@ function openDeleteModal() {
 
 function closeDeleteModal() {
     document.getElementById('deleteModal').style.display = 'none';
-}
-
-function confirmDelete() {
-    alert("삭제 완료되었습니다.");
-    closeDeleteModal();
 }
 
 // 갤러리 필터 모달 관련
@@ -1036,11 +1228,27 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     });
 
-    // 다이어리 카드 클릭 시 수정 페이지로 이동
-    document.querySelectorAll('.diary-card').forEach(card => {
-        card.addEventListener('click', () => {
-            showPage('edit');
-        });
+    // 다이어리 관련 이벤트 리스너
+    const presetRange = document.getElementById('preset-range');
+    if (presetRange) {
+        presetRange.addEventListener('change', applyPresetRange);
+    }
+
+    const startDate = document.getElementById('start-date');
+    if (startDate) {
+        startDate.addEventListener('change', filterByDate);
+    }
+
+    const endDate = document.getElementById('end-date');
+    if (endDate) {
+        endDate.addEventListener('change', filterByDate);
+    }
+
+    // 다이어리 카드 클릭 시 수정 페이지로 이동 (동적으로 생성되므로 이벤트 위임 사용)
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.diary-card')) {
+            // 이미 각 카드에 이벤트가 설정되어 있으므로 여기서는 처리하지 않음
+        }
     });
 
     // 갤러리 user-card 클릭 시 user-detail 페이지로 이동
