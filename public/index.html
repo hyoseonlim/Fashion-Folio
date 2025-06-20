@@ -94,14 +94,6 @@
                 <div class="section-header">
                     <div class="section-header__left">
                         <h2 class="section-header__title">Today's Trend Collection</h2>
-                        <select class="section-header__category-select" onchange="filterByCategory(this.value)">
-                            <option value="all">전체</option>
-                            <option value="데일리">데일리</option>
-                            <option value="캠퍼스">캠퍼스</option>
-                            <option value="출근">출근</option>
-                            <option value="데이트">데이트</option>
-                            <option value="여행">여행</option>
-                        </select>
                     </div>
                     <label class="section-header__favorites-filter">
                         <input type="checkbox" id="favoritesCheckbox" onchange="toggleFavoritesFilter()"
@@ -272,7 +264,6 @@
                 <div class="filter-wrapper">
                     <div class="filter-bar">
                         <button onclick="openFilterModal('gender')" class="filter-bar__btn">성별 ▾</button>
-                        <button onclick="openFilterModal('style')" class="filter-bar__btn">스타일 ▾</button>
                         <button onclick="openFilterModal('body')" class="filter-bar__btn">키/몸무게 ▾</button>
 
                         <div class="filter-bar__selected" id="selectedFilters"></div>
@@ -287,7 +278,6 @@
                             <div class="modal__tabs">
                                 <span onclick="switchTab('gender')" id="tab-gender"
                                     class="modal__tab modal__tab--active">성별</span>
-                                <span onclick="switchTab('style')" id="tab-style" class="modal__tab">스타일</span>
                                 <span onclick="switchTab('body')" id="tab-body" class="modal__tab">키/몸무게</span>
                             </div>
                             <button onclick="closeFilterModal()" class="modal__close">✕</button>
@@ -305,20 +295,6 @@
                                         class="modal__tab-input"> 남성</label>
                                 <label class="modal__tab-label"><input type="radio" name="gender" value="여성"
                                         class="modal__tab-input"> 여성</label>
-                            </div>
-
-                            <!-- 스타일 -->
-                            <div class="modal__tab-content modal__tab-content--hidden" id="content-style">
-                                <label class="modal__tab-label"><input type="checkbox" value="캐주얼"
-                                        class="modal__tab-input"> 캐주얼</label>
-                                <label class="modal__tab-label"><input type="checkbox" value="스트릿"
-                                        class="modal__tab-input"> 스트릿</label>
-                                <label class="modal__tab-label"><input type="checkbox" value="스포티"
-                                        class="modal__tab-input"> 스포티</label>
-                                <label class="modal__tab-label"><input type="checkbox" value="클래식"
-                                        class="modal__tab-input"> 클래식</label>
-                                <label class="modal__tab-label"><input type="checkbox" value="워크웨어"
-                                        class="modal__tab-input"> 워크웨어</label>
                             </div>
 
                             <!-- 키/몸무게 -->

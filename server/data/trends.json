@@ -1,8 +1,85 @@
 {
-  "trends": [
+  "all": [
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/d0113e364c734ba7aa9be408c2341f4c.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385050615643855789",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/5fecf01f5c8840ab88efe159f54a76a2.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385276764019526142",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/6d2ca2b42cb44b0b96e272eb8e195be5.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385291538592444716",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/92fefd0aef1148ecadf3cb1ab43c91d6.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384996512928096607",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/41141888bf294db7a10bc5228359dad8.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384910868218928076",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/e47407afe8234994bf597f544042d465.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385273472920092495",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/a43b648c7fab41e6b4dda45bac75b037.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384889919139808732",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/fdb0c76db46c4a65b7177dc15554c643.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385382447951237009",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/04739012b1784793938dab62bee54e77.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385291161014142654",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/02fb29b24fda49999fa16fc92544b1e5.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385383711486244173",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/123d610ab806426d82f3cda02082b009.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384682715075941688",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/17/1f49ddf3601c4d4f8fdbc4c598959f03.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384541194779257865",
+      "category": "all"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/1d0ef531e28d4b809856551aa4f7637a.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384912242095883683",
+      "category": "all"
+    }
+  ],
+  "men": [
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/04739012b1784793938dab62bee54e77.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385291161014142654",
+      "category": "men"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/02fb29b24fda49999fa16fc92544b1e5.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385383711486244173",
+      "category": "men"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/35fef23ae6314a3ebd65129a325f7a29.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385382136398333830",
+      "category": "men"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/f204b6b5e7ce4785bf047e37fd23740b.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385380946878835876",
       "category": "men"
     },
     {
@@ -11,78 +88,50 @@
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/e62ae15e59074d6abc87e829828cb91f.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385091894466504662",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/0cd5ad9ff4e842f1a554d7bdcd05be48.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385376290314264029",
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/ee63682f67e24fa9831e3037f112318f.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385003195437861757",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/3759a3d938ed4cb1917a4d1fdf993a28.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385387423828696228",
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/2cbbf9504a7541569ba78fff11034705.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384617976811591951",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/56cb4b57f7b34731a0b2cdd244c7fcff.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385304576000559176",
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/79c5ee1c9e8945f4b2d7cdaa984ba739.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385141278399564772",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/e4e0dc40c59f49bca6d6082ad1ab2fbc.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385435466498501663",
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/587f65aa5c5e45de91e8bb58d74822e9.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385185703150779781",
+      "imageUrl": "https://image.msscdn.net/thumbnails/images/style/list/2025061923312900000073497.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385279689508975424",
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/99d43dfc7e5e423dbae03cc6b9811c8c.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384943870584249220",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/9571985cdf8b49269450c797f3256a86.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385290860043429051",
       "category": "men"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/dcfd866f4a324e78a6d9ee43e50b7d12.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384911053611302205",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/873dc183eea648cdac3b91d32c6b5cdb.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385375054104779295",
       "category": "men"
-    },
+    }
+  ],
+  "women": [
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/52f7b09eb53848eb95d514af3b449c12.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384614926247372191",
-      "category": "men"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/0ed52093b91049c4947332a05c44b80b.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385224754220774008",
-      "category": "men"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/images/style/list/2025061900405800000040583.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384930407426236668",
-      "category": "men"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/4f7909ad43304e65b12999901286f463.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385235108970315359",
-      "category": "men"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/cd9ff2475ad04c4db8847d0820ef5718.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385225617268751304",
-      "category": "men"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/a9afac67fb734b9ab02fb4209ecf6322.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385233580085083382",
-      "category": "men"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/a43b648c7fab41e6b4dda45bac75b037.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384889919139808732",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/5fecf01f5c8840ab88efe159f54a76a2.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385276764019526142",
       "category": "women"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/41141888bf294db7a10bc5228359dad8.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384910868218928076",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/6d2ca2b42cb44b0b96e272eb8e195be5.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385291538592444716",
       "category": "women"
     },
     {
@@ -91,8 +140,23 @@
       "category": "women"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/17/1f49ddf3601c4d4f8fdbc4c598959f03.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384541194779257865",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/41141888bf294db7a10bc5228359dad8.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384910868218928076",
+      "category": "women"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/e47407afe8234994bf597f544042d465.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385273472920092495",
+      "category": "women"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/a43b648c7fab41e6b4dda45bac75b037.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384889919139808732",
+      "category": "women"
+    },
+    {
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/fdb0c76db46c4a65b7177dc15554c643.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385382447951237009",
       "category": "women"
     },
     {
@@ -101,13 +165,8 @@
       "category": "women"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/17/a521c2ecfb41445191f6a7bc6c467a97.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384545060864659355",
-      "category": "women"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/a1b41d81c10f4bad9080696c4b80ba6f.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384548648427530493",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/17/1f49ddf3601c4d4f8fdbc4c598959f03.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384541194779257865",
       "category": "women"
     },
     {
@@ -116,40 +175,15 @@
       "category": "women"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/bc60c9d4ddcd43ff9fccb8f5862e4531.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384977657321220749",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/995e955f4bd44e809ef49283171b4029.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385386435086906535",
       "category": "women"
     },
     {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/16/c96a4125149a4ded9e57a386b5e61267.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384183923624197222",
-      "category": "women"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/8b46cda3fcd245e9a4b9b7419ddae7e0.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384996100815149333",
-      "category": "women"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/16/db39af600b7543b7b3e2001ac22c4320.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384183747789406159",
-      "category": "women"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/18/edb00d5ea7414916940b38ea1b4fcfde.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1384558207129820445",
-      "category": "women"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/e6ffedb352714a2baf7004e1c33ae3d9.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385214260995614572",
-      "category": "women"
-    },
-    {
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/19/c2fe865fef3642dcb1d96ce4e19e2754.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385012375751097654",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/17/a521c2ecfb41445191f6a7bc6c467a97.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1384545060864659355",
       "category": "women"
     }
   ],
-  "lastUpdated": "2025-06-19T12:34:22.871Z"
+  "lastUpdated": "2025-06-20T08:55:01.024Z"
 }

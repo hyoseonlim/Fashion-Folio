@@ -54,24 +54,16 @@ async function handleLogin() {
 
 
         if (result.success) {
-
             // 세션 정보 저장
             localStorage.setItem('sessionId', result.sessionId);
             localStorage.setItem('userId', result.user.id);
             localStorage.setItem('userInfo', JSON.stringify(result.user));
 
-            // 입력 필드 초기화
-            document.getElementById('loginID').value = '';
-            document.getElementById('loginPW').value = '';
-
-            console.log('✔ 저장 확인');
-            console.log('세션 ID 확인:', localStorage.getItem('sessionId'));
-            console.log('사용자 ID 확인:', localStorage.getItem('userId'));
-            console.log('사용자 정보 확인:', JSON.parse(localStorage.getItem('userInfo')));
-
             // UI 업데이트
             updateUserUI(result.user);
             showPage('trend');
+
+            // 성별에 맞는 트렌드로 새로고침
             getTrends();
         } else {
             alert(result.message);
@@ -192,7 +184,6 @@ async function saveUserInfo() {
     }
 }
 
-// 로그아웃 함수
 function logout() {
     // 로컬 스토리지 클리어
     localStorage.removeItem('sessionId');
@@ -218,9 +209,9 @@ function logout() {
         dropdown.classList.remove('header__user-dropdown--active');
     }
 
-    // 메인 페이지로 이동
+    // 메인 페이지로 이동하고 전체 트렌드 보기
     showPage('trend');
-    getTrends();
+    getTrends(); // ✨ 전체 트렌드로 새로고침
 }
 
 // 전역 변수
@@ -235,8 +226,24 @@ let appliedFilters = {};
 
 async function getTrends() {
     try {
-        const response = await fetch(`${API_BASE_URL}/trends`);
+        // 로그인 상태 확인
+        const userInfo = localStorage.getItem('userInfo');
+        let apiUrl = `${API_BASE_URL}/trends`;
+
+        if (userInfo) {
+            // 로그인된 경우 사용자 성별에 따라 필터링
+            const user = JSON.parse(userInfo);
+            const genderParam = user.gender === '남성' ? 'men' :
+                user.gender === '여성' ? 'women' : 'all';
+            apiUrl += `/${genderParam}`;
+        } else {
+            // 로그인하지 않은 경우 모든 데이터
+            apiUrl += '/all';
+        }
+
+        const response = await fetch(apiUrl);
         const result = await response.json();
+
         if (result.success) {
             displayTrends(result.data.trends);
         } else {
@@ -248,22 +255,44 @@ async function getTrends() {
 }
 
 function displayTrends(trends) {
+    const container = document.getElementById('trends');
+
+    // 기존 내용 지우기
+    container.innerHTML = '';
+
+    if (!trends || trends.length === 0) {
+        container.innerHTML = '<p class="no-data">표시할 트렌드가 없습니다.</p>';
+        return;
+    }
+
     for (const trend of trends) {
         let trendTag = document.createElement('div');
         trendTag.className = 'item-card';
+        trendTag.onclick = () => window.open(trend.linkUrl, '_blank'); // 클릭시 새창으로 링크 열기
+
         let trendImg = document.createElement('img');
         trendImg.className = 'item-card__image';
         trendImg.src = trend.imageUrl;
+        trendImg.alt = `${trend.category} 스타일`;
+
         let heartIcon = document.createElement('div');
         heartIcon.className = 'item-card__heart';
+        heartIcon.onclick = (e) => {
+            e.stopPropagation(); // 부모 클릭 이벤트 방지
+            toggleHeart(heartIcon);
+        };
+
         trendTag.append(trendImg, heartIcon);
-        document.getElementById('trends').appendChild(trendTag);
-        // TODO: 위시리스트 추가 기능, 바로가기 기능 (trend.linkUrl을 href로)
+        container.appendChild(trendTag);
     }
-    // <div class="item-card" onclick="toggleHeart(this)">
-    //     <img src="https://image.msscdn.net/thumbnails/snap/images/2025/05/22/f1b0f1cbf013423683a0fd59c816ad52.jpg?w=1000" />
-    //     <div class="heart-icon"></div>
-    // </div>
+}
+
+// 하트 토글 기능 추가
+function toggleHeart(heartElement) {
+    heartElement.classList.toggle('item-card__heart--liked');
+
+    // 여기서 localStorage나 서버에 좋아요 상태 저장
+    // 추후 구현 예정
 }
 
 async function getUsers() {
@@ -281,6 +310,7 @@ async function getUsers() {
 }
 
 function displayUsers(users) {
+    document.getElementById('galleryGrid').innerHTML = '';
     for (const user of users) {
         let userTag = document.createElement('div');
         userTag.className = 'user-card';
@@ -669,11 +699,6 @@ function removeTag(id) {
         appliedFilters.gender = null;
         currentFilters.gender = null;
         document.querySelector('input[name="gender"][value="전체"]').checked = true;
-    } else if (id.startsWith('style-')) {
-        const val = id.replace('style-', '');
-        appliedFilters.styles = appliedFilters.styles.filter(s => s !== val);
-        currentFilters.styles = currentFilters.styles.filter(s => s !== val);
-        document.querySelector(`#content-style input[value="${val}"]`).checked = false;
     } else if (id === 'height') {
         appliedFilters.height = null;
         currentFilters.height = null;
@@ -691,7 +716,7 @@ function removeTag(id) {
 }
 
 function resetAllFilters() {
-    currentFilters = { gender: null, styles: [], height: null, weight: null };
+    currentFilters = { gender: null, height: null, weight: null };
     appliedFilters = {};
     updateModalTagUI();
     updateMainTagUI();

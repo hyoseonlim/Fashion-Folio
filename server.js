@@ -188,6 +188,33 @@ app.get('/api/trends', (req, res) => {
     }
 });
 
+app.get('/api/trends/:gender', (req, res) => {
+    try {
+        const { gender } = req.params;
+        const trendsData = getAllTrends();
+
+        let filteredTrends = [];
+
+        if (gender === 'men' && trendsData.men) {
+            filteredTrends = trendsData.men;
+        } else if (gender === 'women' && trendsData.women) {
+            filteredTrends = trendsData.women;
+        } else if (gender === 'all' && trendsData.all) {
+            filteredTrends = trendsData.all;
+        }
+
+        res.json({
+            success: true,
+            data: { trends: filteredTrends }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 // TODO
 app.get('/api/styles', (req, res) => {
     try {

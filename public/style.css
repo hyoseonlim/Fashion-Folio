@@ -177,14 +177,6 @@ textarea:focus {
     font-weight: 500;
 }
 
-.section-header__category-select {
-    padding: 10px 15px;
-    background-color: rgba(249, 249, 249, 0.8);
-    border: 2px solid #333;
-    cursor: pointer;
-    font-size: 16px;
-}
-
 .section-header__favorites-filter {
     display: flex;
     align-items: center;
