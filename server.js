@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const multer = require('multer');
 const cron = require('node-cron');
 const { scrapeMusinsa } = require('./server/scrapingService');
 const { getFashionRecommendation } = require('./server/aiService');
@@ -12,6 +13,43 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// 파일 업로드 설정
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const userId = req.headers['user-id'];
+        const uploadDir = path.join(__dirname, 'public', 'images', userId);
+
+        // 디렉토리가 없으면 생성
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+        const userId = req.headers['user-id'];
+        const timestamp = Date.now();
+        const ext = path.extname(file.originalname);
+        cb(null, `${userId}_diary_${timestamp}${ext}`);
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 5 * 1024 * 1024 // 5MB 제한
+    },
+    fileFilter: function (req, file, cb) {
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('JPG, PNG, GIF 형식의 이미지만 업로드 가능합니다.'));
+        }
+    }
+});
+
 
 // JSON 파일 읽기/쓰기 헬퍼
 const readJsonFile = (filename) => {
@@ -682,6 +720,213 @@ app.get('/api/posts', (req, res) => {
             data: postsData
         });
     } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// 다이어리 추가
+app.post('/api/posts', upload.single('photo'), async (req, res) => {
+    try {
+        const userId = req.headers['user-id'];
+        const { date, content } = req.body;
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: '사용자 인증이 필요합니다.'
+            });
+        }
+
+        if (!date || !content || !req.file) {
+            return res.status(400).json({
+                success: false,
+                message: '모든 필드를 입력해주세요.'
+            });
+        }
+
+        const postsData = getAllPosts();
+
+        if (!postsData) {
+            return res.status(500).json({
+                success: false,
+                message: '게시글 데이터를 읽을 수 없습니다.'
+            });
+        }
+
+        // 새 게시글 생성
+        const newPost = {
+            id: `diary_${userId}_${Date.now()}`,
+            userId: userId,
+            date: date,
+            imageUrl: `/images/${userId}/${req.file.filename}`,
+            content: content,
+            createdAt: new Date().toISOString(),
+            styles: []
+        };
+
+        postsData.posts.push(newPost);
+
+        const writeSuccess = await writeJsonFile('posts.json', postsData);
+
+        if (!writeSuccess) {
+            return res.status(500).json({
+                success: false,
+                message: '다이어리 저장 중 오류가 발생했습니다.'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: '다이어리가 성공적으로 저장되었습니다.',
+            post: newPost
+        });
+    } catch (error) {
+        console.error('다이어리 추가 오류:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// 다이어리 수정
+app.put('/api/posts/:postId', upload.single('photo'), async (req, res) => {
+    try {
+        const userId = req.headers['user-id'];
+        const { postId } = req.params;
+        const { date, content } = req.body;
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: '사용자 인증이 필요합니다.'
+            });
+        }
+
+        if (!date || !content) {
+            return res.status(400).json({
+                success: false,
+                message: '날짜와 내용을 입력해주세요.'
+            });
+        }
+
+        const postsData = getAllPosts();
+
+        if (!postsData) {
+            return res.status(500).json({
+                success: false,
+                message: '게시글 데이터를 읽을 수 없습니다.'
+            });
+        }
+
+        const postIndex = postsData.posts.findIndex(p => p.id === postId && p.userId === userId);
+
+        if (postIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: '수정할 다이어리를 찾을 수 없습니다.'
+            });
+        }
+
+        const post = postsData.posts[postIndex];
+
+        // 새 이미지가 업로드된 경우 기존 이미지 삭제
+        if (req.file) {
+            const oldImagePath = path.join(__dirname, 'public', post.imageUrl);
+            if (fs.existsSync(oldImagePath)) {
+                fs.unlinkSync(oldImagePath);
+            }
+            post.imageUrl = `/images/${userId}/${req.file.filename}`;
+        }
+
+        // 게시글 정보 업데이트
+        post.date = date;
+        post.content = content;
+        post.updatedAt = new Date().toISOString();
+
+        const writeSuccess = await writeJsonFile('posts.json', postsData);
+
+        if (!writeSuccess) {
+            return res.status(500).json({
+                success: false,
+                message: '다이어리 수정 중 오류가 발생했습니다.'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: '다이어리가 성공적으로 수정되었습니다.',
+            post: post
+        });
+    } catch (error) {
+        console.error('다이어리 수정 오류:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// 다이어리 삭제
+app.delete('/api/posts/:postId', async (req, res) => {
+    try {
+        const userId = req.headers['user-id'];
+        const { postId } = req.params;
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: '사용자 인증이 필요합니다.'
+            });
+        }
+
+        const postsData = getAllPosts();
+
+        if (!postsData) {
+            return res.status(500).json({
+                success: false,
+                message: '게시글 데이터를 읽을 수 없습니다.'
+            });
+        }
+
+        const postIndex = postsData.posts.findIndex(p => p.id === postId && p.userId === userId);
+
+        if (postIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: '삭제할 다이어리를 찾을 수 없습니다.'
+            });
+        }
+
+        const post = postsData.posts[postIndex];
+
+        // 이미지 파일 삭제
+        const imagePath = path.join(__dirname, 'public', post.imageUrl);
+        if (fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
+        }
+
+        // 게시글 삭제
+        postsData.posts.splice(postIndex, 1);
+
+        const writeSuccess = await writeJsonFile('posts.json', postsData);
+
+        if (!writeSuccess) {
+            return res.status(500).json({
+                success: false,
+                message: '다이어리 삭제 중 오류가 발생했습니다.'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: '다이어리가 성공적으로 삭제되었습니다.'
+        });
+    } catch (error) {
+        console.error('다이어리 삭제 오류:', error);
         res.status(500).json({
             success: false,
             error: error.message

@@ -1,1128 +1,1129 @@
 {
-    "posts": [
-        {
-            "id": "diary_m1_1",
-            "userId": "man_user1",
-            "date": "2024-12-01",
-            "imageUrl": "/images/man_user1/man_user1_1.png",
-            "content": "기말고사 준비하는 날. 편안한 후드티에 데님으로 캐주얼하게. 어깨가 넓어서 오버핏이 잘 어울린다.",
-            "createdAt": "2024-12-01T09:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m1_2",
-            "userId": "man_user1",
-            "date": "2024-12-03",
-            "imageUrl": "/images/man_user1/man_user1_2.png",
-            "content": "도서관 가는 날. 니트와 면바지로 편안하지만 깔끔하게. 상체가 짧아서 상의는 짧은 기장으로.",
-            "createdAt": "2024-12-03T10:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m1_3",
-            "userId": "man_user1",
-            "date": "2024-12-05",
-            "imageUrl": "/images/man_user1/man_user1_3.png",
-            "content": "친구들과 카페에서. 맨투맨에 청바지로 무난하게. 캐주얼한 스타일이 가장 편하다.",
-            "createdAt": "2024-12-05T14:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m1_4",
-            "userId": "man_user1",
-            "date": "2024-12-07",
-            "imageUrl": "/images/man_user1/man_user1_4.png",
-            "content": "주말 브런치. 셔츠에 치노팬츠로 단정하면서도 캐주얼하게. 어깨 라인이 예쁘게 떨어진다.",
-            "createdAt": "2024-12-07T11:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m1_5",
-            "userId": "man_user1",
-            "date": "2024-12-09",
-            "imageUrl": "/images/man_user1/man_user1_5.png",
-            "content": "운동 가는 날. 트레이닝복 셋업으로 스포티하게. 넓은 어깨가 운동복에서 더 돋보인다.",
-            "createdAt": "2024-12-09T18:00:00Z",
-            "styles": [
-                "sporty"
-            ]
-        },
-        {
-            "id": "diary_m1_6",
-            "userId": "man_user1",
-            "date": "2024-12-11",
-            "imageUrl": "/images/man_user1/man_user1_6.png",
-            "content": "헬스장 다녀온 후. 반팔티에 쇼츠로 시원하게. 상체가 짧아서 하이웨이스트가 잘 맞는다.",
-            "createdAt": "2024-12-11T20:00:00Z",
-            "styles": [
-                "sporty"
-            ]
-        },
-        {
-            "id": "diary_m1_7",
-            "userId": "man_user1",
-            "date": "2024-12-13",
-            "imageUrl": "/images/man_user1/man_user1_7.png",
-            "content": "동아리 모임. 후드집업에 조거팬츠로 편안하게. 평소 즐겨입는 캐주얼 스타일.",
-            "createdAt": "2024-12-13T19:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m1_8",
-            "userId": "man_user1",
-            "date": "2024-12-15",
-            "imageUrl": "/images/man_user1/man_user1_8.png",
-            "content": "학과 종강파티. 니트에 슬랙스로 깔끔하게. 어깨가 넓어서 니트 핏이 좋다.",
-            "createdAt": "2024-12-15T18:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m1_9",
-            "userId": "man_user1",
-            "date": "2024-12-17",
-            "imageUrl": "/images/man_user1/man_user1_9.png",
-            "content": "집에서 쉬는 날. 맨투맨에 트레이닝 팬츠로 최대한 편하게. 캐주얼이 최고다.",
-            "createdAt": "2024-12-17T12:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m1_10",
-            "userId": "man_user1",
-            "date": "2024-12-19",
-            "imageUrl": "/images/man_user1/man_user1_10.png",
-            "content": "가족 모임. 셔츠에 슬랙스로 단정하게. 클래식한 스타일도 가끔은 필요하다.",
-            "createdAt": "2024-12-19T17:00:00Z",
-            "styles": [
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_m2_1",
-            "userId": "man_user2",
-            "date": "2024-12-02",
-            "imageUrl": "/images/man_user2/man_user2_1.png",
-            "content": "출근길. 오버사이즈 후드에 와이드 카고팬츠. 스트릿 스타일로 개성있게.",
-            "createdAt": "2024-12-02T08:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m2_2",
-            "userId": "man_user2",
-            "date": "2024-12-04",
-            "imageUrl": "/images/man_user2/man_user2_2.png",
-            "content": "회사에서. 그래픽 티셔츠에 배기팬츠. 개발자라서 자유로운 복장이 가능하다.",
-            "createdAt": "2024-12-04T10:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m2_3",
-            "userId": "man_user2",
-            "date": "2024-12-06",
-            "imageUrl": "/images/man_user2/man_user2_3.png",
-            "content": "주말 쇼핑. 빈티지 셔츠에 와이드 데님. 근육질 체형에 루즈핏이 잘 어울린다.",
-            "createdAt": "2024-12-06T15:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m2_4",
-            "userId": "man_user2",
-            "date": "2024-12-08",
-            "imageUrl": "/images/man_user2/man_user2_4.png",
-            "content": "친구들과 거리 촬영. 테크웨어 재킷에 조거팬츠. 스트릿 감성 가득.",
-            "createdAt": "2024-12-08T13:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m2_5",
-            "userId": "man_user2",
-            "date": "2024-12-10",
-            "imageUrl": "/images/man_user2/man_user2_5.png",
-            "content": "야근하는 날. 오버사이즈 스웨트셔츠에 트랙팬츠. 편안한 스트릿웨어.",
-            "createdAt": "2024-12-10T22:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m2_6",
-            "userId": "man_user2",
-            "date": "2024-12-12",
-            "imageUrl": "/images/man_user2/man_user2_6.png",
-            "content": "회사 워크샵. 후드 레이어드에 카고팬츠. 긴 다리가 돋보이는 핏.",
-            "createdAt": "2024-12-12T09:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m2_7",
-            "userId": "man_user2",
-            "date": "2024-12-14",
-            "imageUrl": "/images/man_user2/man_user2_7.png",
-            "content": "주말 카페. 빈티지 밴드티에 와이드진. 스트릿 스타일의 정석.",
-            "createdAt": "2024-12-14T14:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m2_8",
-            "userId": "man_user2",
-            "date": "2024-12-16",
-            "imageUrl": "/images/man_user2/man_user2_8.png",
-            "content": "편집샵 방문. 유니크한 패턴 셔츠에 배기팬츠. 개성있는 스트릿룩.",
-            "createdAt": "2024-12-16T16:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m2_9",
-            "userId": "man_user2",
-            "date": "2024-12-18",
-            "imageUrl": "/images/man_user2/man_user2_9.png",
-            "content": "운동 후. 메쉬 탱크탑에 쇼츠. 근육질 몸매가 드러나는 스포티룩.",
-            "createdAt": "2024-12-18T19:00:00Z",
-            "styles": [
-                "sporty"
-            ]
-        },
-        {
-            "id": "diary_m2_10",
-            "userId": "man_user2",
-            "date": "2024-12-20",
-            "imageUrl": "/images/man_user2/man_user2_10.png",
-            "content": "연말 모임. 레더자켓에 스키니진. 강한 스트릿 무드.",
-            "createdAt": "2024-12-20T20:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m3_1",
-            "userId": "man_user3",
-            "date": "2024-12-01",
-            "imageUrl": "/images/man_user3/man_user3_1.png",
-            "content": "작업실에서. 심플한 티셔츠에 데님. 마른 체형에 슬림핏이 잘 어울린다.",
-            "createdAt": "2024-12-01T11:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m3_2",
-            "userId": "man_user3",
-            "date": "2024-12-03",
-            "imageUrl": "/images/man_user3/man_user3_2.png",
-            "content": "클라이언트 미팅. 니트에 치노팬츠로 깔끔하게. 긴 팔이 매력포인트.",
-            "createdAt": "2024-12-03T15:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m3_3",
-            "userId": "man_user3",
-            "date": "2024-12-05",
-            "imageUrl": "/images/man_user3/man_user3_3.png",
-            "content": "카페에서 작업. 후드티에 조거팬츠로 편안하게. 캐주얼이 가장 나답다.",
-            "createdAt": "2024-12-05T13:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m3_4",
-            "userId": "man_user3",
-            "date": "2024-12-07",
-            "imageUrl": "/images/man_user3/man_user3_4.png",
-            "content": "주말 브런치. 셔츠에 면바지로 단정하게. 마른 체형이라 레이어드가 필수.",
-            "createdAt": "2024-12-07T10:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m3_5",
-            "userId": "man_user3",
-            "date": "2024-12-09",
-            "imageUrl": "/images/man_user3/man_user3_5.png",
-            "content": "친구들과 모임. 오버사이즈 맨투맨에 와이드진. 스트릿 감성 살짝.",
-            "createdAt": "2024-12-09T19:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m3_6",
-            "userId": "man_user3",
-            "date": "2024-12-11",
-            "imageUrl": "/images/man_user3/man_user3_6.png",
-            "content": "집에서 작업. 편한 티셔츠에 반바지. 프리랜서의 특권은 편한 복장.",
-            "createdAt": "2024-12-11T14:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m3_7",
-            "userId": "man_user3",
-            "date": "2024-12-13",
-            "imageUrl": "/images/man_user3/man_user3_7.png",
-            "content": "동네 산책. 가디건에 슬랙스. 긴 팔 덕분에 가디건이 잘 어울린다.",
-            "createdAt": "2024-12-13T16:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m3_8",
-            "userId": "man_user3",
-            "date": "2024-12-15",
-            "imageUrl": "/images/man_user3/man_user3_8.png",
-            "content": "작업 마감일. 후드집업에 트레이닝팬츠. 편안함이 최우선.",
-            "createdAt": "2024-12-15T23:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m3_9",
-            "userId": "man_user3",
-            "date": "2024-12-17",
-            "imageUrl": "/images/man_user3/man_user3_9.png",
-            "content": "러닝하는 날. 윈드브레이커에 러닝팬츠. 마른 체형이라 바람막이는 필수.",
-            "createdAt": "2024-12-17T07:00:00Z",
-            "styles": [
-                "sporty"
-            ]
-        },
-        {
-            "id": "diary_m3_10",
-            "userId": "man_user3",
-            "date": "2024-12-19",
-            "imageUrl": "/images/man_user3/man_user3_10.png",
-            "content": "연말 파티. 레더자켓에 스키니진. 가끔은 스트릿하게.",
-            "createdAt": "2024-12-19T21:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_m4_1",
-            "userId": "man_user4",
-            "date": "2024-12-02",
-            "imageUrl": "/images/man_user4/man_user4_1.png",
-            "content": "출근 준비. 네이비 수트에 화이트 셔츠. 복부를 가리는 재킷 핏이 중요하다.",
-            "createdAt": "2024-12-02T07:00:00Z",
-            "styles": [
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_m4_2",
-            "userId": "man_user4",
-            "date": "2024-12-04",
-            "imageUrl": "/images/man_user4/man_user4_2.png",
-            "content": "중요한 프레젠테이션. 차콜 수트에 블루 타이. 클래식한 비즈니스룩.",
-            "createdAt": "2024-12-04T09:00:00Z",
-            "styles": [
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_m4_3",
-            "userId": "man_user4",
-            "date": "2024-12-06",
-            "imageUrl": "/images/man_user4/man_user4_3.png",
-            "content": "캐주얼 프라이데이. 니트에 치노팬츠. 편안하면서도 단정한 느낌.",
-            "createdAt": "2024-12-06T10:00:00Z",
-            "styles": [
-                "casual",
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_m4_4",
-            "userId": "man_user4",
-            "date": "2024-12-08",
-            "imageUrl": "/images/man_user4/man_user4_4.png",
-            "content": "주말 골프. 폴로셔츠에 면바지. 좁은 어깨를 커버하는 핏 선택.",
-            "createdAt": "2024-12-08T08:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m4_5",
-            "userId": "man_user4",
-            "date": "2024-12-10",
-            "imageUrl": "/images/man_user4/man_user4_5.png",
-            "content": "팀 회식. 셔츠에 슬랙스로 세미캐주얼. 복부가 덜 드러나는 스타일.",
-            "createdAt": "2024-12-10T19:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m4_6",
-            "userId": "man_user4",
-            "date": "2024-12-12",
-            "imageUrl": "/images/man_user4/man_user4_6.png",
-            "content": "재택근무. 니트 가디건에 면바지. 화상회의도 있어서 상의는 단정하게.",
-            "createdAt": "2024-12-12T11:00:00Z",
-            "styles": [
-                "casual",
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_m4_7",
-            "userId": "man_user4",
-            "date": "2024-12-14",
-            "imageUrl": "/images/man_user4/man_user4_7.png",
-            "content": "가족 외식. 캐주얼 재킷에 진. 편안하지만 깔끔한 아빠 스타일.",
-            "createdAt": "2024-12-14T18:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m4_8",
-            "userId": "man_user4",
-            "date": "2024-12-16",
-            "imageUrl": "/images/man_user4/man_user4_8.png",
-            "content": "동네 마트. 후드티에 조거팬츠. 주말엔 최대한 편하게.",
-            "createdAt": "2024-12-16T10:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m4_9",
-            "userId": "man_user4",
-            "date": "2024-12-18",
-            "imageUrl": "/images/man_user4/man_user4_9.png",
-            "content": "연말 모임. 터틀넥에 슬랙스. 목이 긴 터틀넥으로 좁은 어깨 보완.",
-            "createdAt": "2024-12-18T20:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m4_10",
-            "userId": "man_user4",
-            "date": "2024-12-20",
-            "imageUrl": "/images/man_user4/man_user4_10.png",
-            "content": "주말 카페. 패딩에 후드티. 스트릿과 캐주얼의 믹스매치.",
-            "createdAt": "2024-12-20T15:00:00Z",
-            "styles": [
-                "street",
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m5_1",
-            "userId": "man_user5",
-            "date": "2024-12-01",
-            "imageUrl": "/images/man_user5/man_user5_1.png",
-            "content": "연구실 출근. 맨투맨에 청바지. 균형잡힌 체형이라 뭘 입어도 무난하다.",
-            "createdAt": "2024-12-01T09:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m5_2",
-            "userId": "man_user5",
-            "date": "2024-12-03",
-            "imageUrl": "/images/man_user5/man_user5_2.png",
-            "content": "학회 발표. 재킷에 치노팬츠. 스트릿과 클래식의 조화.",
-            "createdAt": "2024-12-03T10:00:00Z",
-            "styles": [
-                "street",
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_m5_3",
-            "userId": "man_user5",
-            "date": "2024-12-05",
-            "imageUrl": "/images/man_user5/man_user5_3.png",
-            "content": "도서관에서. 후드티에 면바지. 편안한 캐주얼룩.",
-            "createdAt": "2024-12-05T14:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m5_4",
-            "userId": "man_user5",
-            "date": "2024-12-07",
-            "imageUrl": "/images/man_user5/man_user5_4.png",
-            "content": "카페 공부. 니트에 슬랙스. 깔끔하면서도 편안한 스타일.",
-            "createdAt": "2024-12-07T11:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m5_5",
-            "userId": "man_user5",
-            "date": "2024-12-09",
-            "imageUrl": "/images/man_user5/man_user5_5.png",
-            "content": "실험실에서. 티셔츠에 반바지. 실험복 아래는 편하게.",
-            "createdAt": "2024-12-09T16:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m5_6",
-            "userId": "man_user5",
-            "date": "2024-12-11",
-            "imageUrl": "/images/man_user5/man_user5_6.png",
-            "content": "운동 후 샤워. 트레이닝복 셋업. 캐주얼하면서도 스포티한 느낌.",
-            "createdAt": "2024-12-11T19:00:00Z",
-            "styles": [
-                "casual",
-                "sporty"
-            ]
-        },
-        {
-            "id": "diary_m5_7",
-            "userId": "man_user5",
-            "date": "2024-12-13",
-            "imageUrl": "/images/man_user5/man_user5_7.png",
-            "content": "교수님과 미팅. 셔츠에 슬랙스. 단정한 대학원생 스타일.",
-            "createdAt": "2024-12-13T15:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m5_8",
-            "userId": "man_user5",
-            "date": "2024-12-15",
-            "imageUrl": "/images/man_user5/man_user5_8.png",
-            "content": "주말 브런치. 가디건에 진. 편안한 주말 캐주얼.",
-            "createdAt": "2024-12-15T12:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m5_9",
-            "userId": "man_user5",
-            "date": "2024-12-17",
-            "imageUrl": "/images/man_user5/man_user5_9.png",
-            "content": "밤샘 실험. 후드집업에 조거팬츠. 장시간 실험엔 편한 게 최고.",
-            "createdAt": "2024-12-17T22:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_m5_10",
-            "userId": "man_user5",
-            "date": "2024-12-19",
-            "imageUrl": "/images/man_user5/man_user5_10.png",
-            "content": "연구실 송년회. 니트에 면바지. 무난하고 깔끔한 스타일.",
-            "createdAt": "2024-12-19T18:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w1_1",
-            "userId": "woman_user1",
-            "date": "2024-12-01",
-            "imageUrl": "/images/woman_user1/woman_user1_1.png",
-            "content": "수업 가는 날. 니트에 진. 마른 체형이라 타이트한 핏도 잘 어울린다.",
-            "createdAt": "2024-12-01T08:30:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w1_2",
-            "userId": "woman_user1",
-            "date": "2024-12-03",
-            "imageUrl": "/images/woman_user1/woman_user1_2.png",
-            "content": "도서관 공부. 후드티에 레깅스. 편안한 캐주얼 스타일.",
-            "createdAt": "2024-12-03T10:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w1_3",
-            "userId": "woman_user1",
-            "date": "2024-12-05",
-            "imageUrl": "/images/woman_user1/woman_user1_3.png",
-            "content": "친구들과 카페. 블라우스에 스커트. 여성스러운 캐주얼룩.",
-            "createdAt": "2024-12-05T15:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w1_4",
-            "userId": "woman_user1",
-            "date": "2024-12-07",
-            "imageUrl": "/images/woman_user1/woman_user1_4.png",
-            "content": "아르바이트. 셔츠에 슬랙스. 단정한 워크웨어 스타일.",
-            "createdAt": "2024-12-07T09:00:00Z",
-            "styles": [
-                "casual",
-                "workwear"
-            ]
-        },
-        {
-            "id": "diary_w1_5",
-            "userId": "woman_user1",
-            "date": "2024-12-09",
-            "imageUrl": "/images/woman_user1/woman_user1_5.png",
-            "content": "동아리 모임. 맨투맨에 와이드진. 편안한 일상룩.",
-            "createdAt": "2024-12-09T18:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w1_6",
-            "userId": "woman_user1",
-            "date": "2024-12-11",
-            "imageUrl": "/images/woman_user1/woman_user1_6.png",
-            "content": "쇼핑 데이. 크롭탑에 하이웨이스트진. 긴 다리가 돋보이는 스트릿룩.",
-            "createdAt": "2024-12-11T14:00:00Z",
-            "styles": [
-                "casual",
-                "street"
-            ]
-        },
-        {
-            "id": "diary_w1_7",
-            "userId": "woman_user1",
-            "date": "2024-12-13",
-            "imageUrl": "/images/woman_user1/woman_user1_7.png",
-            "content": "거리 스냅. 오버사이즈 후드에 카고팬츠. 힙한 스트릿 스타일.",
-            "createdAt": "2024-12-13T16:00:00Z",
-            "styles": [
-                "street"
-            ]
-        },
-        {
-            "id": "diary_w1_8",
-            "userId": "woman_user1",
-            "date": "2024-12-15",
-            "imageUrl": "/images/woman_user1/woman_user1_8.png",
-            "content": "주말 브런치. 니트 가디건에 원피스. 캐주얼한 스트릿 감성.",
-            "createdAt": "2024-12-15T11:00:00Z",
-            "styles": [
-                "casual",
-                "street"
-            ]
-        },
-        {
-            "id": "diary_w1_9",
-            "userId": "woman_user1",
-            "date": "2024-12-17",
-            "imageUrl": "/images/woman_user1/woman_user1_9.png",
-            "content": "운동 가는 길. 레깅스에 윈드브레이커. 스포티한 스트릿룩.",
-            "createdAt": "2024-12-17T07:00:00Z",
-            "styles": [
-                "sporty",
-                "street"
-            ]
-        },
-        {
-            "id": "diary_w1_10",
-            "userId": "woman_user1",
-            "date": "2024-12-19",
-            "imageUrl": "/images/woman_user1/woman_user1_10.png",
-            "content": "기말고사 끝. 재킷에 스커트. 단정한 워크웨어 스타일로 마무리.",
-            "createdAt": "2024-12-19T17:00:00Z",
-            "styles": [
-                "casual",
-                "workwear"
-            ]
-        },
-        {
-            "id": "diary_w2_1",
-            "userId": "woman_user2",
-            "date": "2024-12-02",
-            "imageUrl": "/images/woman_user2/woman_user2_1.png",
-            "content": "병원 출근. 니트에 슬랙스. 균형잡힌 체형이라 깔끔한 캐주얼이 잘 어울린다.",
-            "createdAt": "2024-12-02T07:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w2_2",
-            "userId": "woman_user2",
-            "date": "2024-12-04",
-            "imageUrl": "/images/woman_user2/woman_user2_2.png",
-            "content": "퇴근 후 친구 만남. 후드티에 와이드진. 캐주얼한 스트릿 감성.",
-            "createdAt": "2024-12-04T19:00:00Z",
-            "styles": [
-                "casual",
-                "street"
-            ]
-        },
-        {
-            "id": "diary_w2_3",
-            "userId": "woman_user2",
-            "date": "2024-12-06",
-            "imageUrl": "/images/woman_user2/woman_user2_3.png",
-            "content": "주말 브런치. 블라우스에 스커트. 여성스러운 캐주얼룩.",
-            "createdAt": "2024-12-06T11:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w2_4",
-            "userId": "woman_user2",
-            "date": "2024-12-08",
-            "imageUrl": "/images/woman_user2/woman_user2_4.png",
-            "content": "운동하는 날. 레깅스에 크롭탑. 건강한 스포티 캐주얼.",
-            "createdAt": "2024-12-08T09:00:00Z",
-            "styles": [
-                "casual",
-                "sporty"
-            ]
-        },
-        {
-            "id": "diary_w2_5",
-            "userId": "woman_user2",
-            "date": "2024-12-10",
-            "imageUrl": "/images/woman_user2/woman_user2_5.png",
-            "content": "병원 야간 근무. 편한 스크럽 아래 티셔츠. 실용적인 캐주얼.",
-            "createdAt": "2024-12-10T20:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w2_6",
-            "userId": "woman_user2",
-            "date": "2024-12-12",
-            "imageUrl": "/images/woman_user2/woman_user2_6.png",
-            "content": "쇼핑 데이. 오버사이즈 셔츠에 스키니진. 트렌디한 캐주얼 스트릿.",
-            "createdAt": "2024-12-12T15:00:00Z",
-            "styles": [
-                "casual",
-                "street"
-            ]
-        },
-        {
-            "id": "diary_w2_7",
-            "userId": "woman_user2",
-            "date": "2024-12-14",
-            "imageUrl": "/images/woman_user2/woman_user2_7.png",
-            "content": "카페에서. 니트 원피스에 부츠. 편안한 캐주얼 스트릿 스타일.",
-            "createdAt": "2024-12-14T14:00:00Z",
-            "styles": [
-                "casual",
-                "street"
-            ]
-        },
-        {
-            "id": "diary_w2_8",
-            "userId": "woman_user2",
-            "date": "2024-12-16",
-            "imageUrl": "/images/woman_user2/woman_user2_8.png",
-            "content": "동료들과 저녁. 가디건에 원피스. 단정한 캐주얼룩.",
-            "createdAt": "2024-12-16T18:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w2_9",
-            "userId": "woman_user2",
-            "date": "2024-12-18",
-            "imageUrl": "/images/woman_user2/woman_user2_9.png",
-            "content": "주말 거리 나들이. 패딩에 후드티. 힙한 스트릿 캐주얼.",
-            "createdAt": "2024-12-18T13:00:00Z",
-            "styles": [
-                "street",
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w2_10",
-            "userId": "woman_user2",
-            "date": "2024-12-20",
-            "imageUrl": "/images/woman_user2/woman_user2_10.png",
-            "content": "연말 모임. 니트에 플리츠 스커트. 여성스러운 일상 캐주얼.",
-            "createdAt": "2024-12-20T19:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w3_1",
-            "userId": "woman_user3",
-            "date": "2024-12-01",
-            "imageUrl": "/images/woman_user3/woman_user3_1.png",
-            "content": "알바 가는 날. 플라워 원피스에 가디건. 작은 체형에 어울리는 로맨틱 스타일.",
-            "createdAt": "2024-12-01T08:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w3_2",
-            "userId": "woman_user3",
-            "date": "2024-12-03",
-            "imageUrl": "/images/woman_user3/woman_user3_2.png",
-            "content": "카페 알바. 셔츠에 스커트. 단정한 워크웨어 클래식.",
-            "createdAt": "2024-12-03T09:00:00Z",
-            "styles": [
-                "workwear",
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_w3_3",
-            "userId": "woman_user3",
-            "date": "2024-12-05",
-            "imageUrl": "/images/woman_user3/woman_user3_3.png",
-            "content": "데이트 날. 레이스 블라우스에 스커트. 여성스러운 로맨틱룩.",
-            "createdAt": "2024-12-05T18:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w3_4",
-            "userId": "woman_user3",
-            "date": "2024-12-07",
-            "imageUrl": "/images/woman_user3/woman_user3_4.png",
-            "content": "친구 생일파티. 프릴 원피스. 화사한 로맨틱 스타일.",
-            "createdAt": "2024-12-07T19:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w3_5",
-            "userId": "woman_user3",
-            "date": "2024-12-09",
-            "imageUrl": "/images/woman_user3/woman_user3_5.png",
-            "content": "주말 브런치. 니트에 플리츠 스커트. 사랑스러운 로맨틱 캐주얼.",
-            "createdAt": "2024-12-09T11:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w3_6",
-            "userId": "woman_user3",
-            "date": "2024-12-11",
-            "imageUrl": "/images/woman_user3/woman_user3_6.png",
-            "content": "쇼핑 데이. 블라우스에 와이드 팬츠. 캐주얼한 로맨틱 스타일.",
-            "createdAt": "2024-12-11T14:00:00Z",
-            "styles": [
-                "casual",
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w3_7",
-            "userId": "woman_user3",
-            "date": "2024-12-13",
-            "imageUrl": "/images/woman_user3/woman_user3_7.png",
-            "content": "카페에서 공부. 리본 카디건에 스커트. 귀여운 로맨틱룩.",
-            "createdAt": "2024-12-13T15:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w3_8",
-            "userId": "woman_user3",
-            "date": "2024-12-15",
-            "imageUrl": "/images/woman_user3/woman_user3_8.png",
-            "content": "알바 면접. 재킷에 원피스. 단정한 워크웨어 클래식.",
-            "createdAt": "2024-12-15T10:00:00Z",
-            "styles": [
-                "workwear",
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_w3_9",
-            "userId": "woman_user3",
-            "date": "2024-12-17",
-            "imageUrl": "/images/woman_user3/woman_user3_9.png",
-            "content": "크리스마스 파티. 벨벳 원피스. 특별한 날의 로맨틱 스타일.",
-            "createdAt": "2024-12-17T20:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w3_10",
-            "userId": "woman_user3",
-            "date": "2024-12-19",
-            "imageUrl": "/images/woman_user3/woman_user3_10.png",
-            "content": "집에서 쉬는 날. 니트에 레깅스. 편안한 캐주얼 홈웨어.",
-            "createdAt": "2024-12-19T12:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w4_1",
-            "userId": "woman_user4",
-            "date": "2024-12-02",
-            "imageUrl": "/images/woman_user4/woman_user4_1.png",
-            "content": "출근길. 셔츠에 슬랙스. 상체가 긴 체형에 맞는 캐주얼 오피스룩.",
-            "createdAt": "2024-12-02T08:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w4_2",
-            "userId": "woman_user4",
-            "date": "2024-12-04",
-            "imageUrl": "/images/woman_user4/woman_user4_2.png",
-            "content": "주말 카페. 니트에 와이드진. 편안한 캐주얼 스타일.",
-            "createdAt": "2024-12-04T11:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w4_3",
-            "userId": "woman_user4",
-            "date": "2024-12-06",
-            "imageUrl": "/images/woman_user4/woman_user4_3.png",
-            "content": "데이트. 플라워 원피스에 가디건. 여성스러운 로맨틱룩.",
-            "createdAt": "2024-12-06T19:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w4_4",
-            "userId": "woman_user4",
-            "date": "2024-12-08",
-            "imageUrl": "/images/woman_user4/woman_user4_4.png",
-            "content": "친구 결혼식. 세미정장 원피스. 우아한 로맨틱 스타일.",
-            "createdAt": "2024-12-08T14:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w4_5",
-            "userId": "woman_user4",
-            "date": "2024-12-10",
-            "imageUrl": "/images/woman_user4/woman_user4_5.png",
-            "content": "중요한 미팅. 블레이저에 스커트. 프로페셔널한 워크웨어 클래식.",
-            "createdAt": "2024-12-10T10:00:00Z",
-            "styles": [
-                "workwear",
-                "classic"
-            ]
-        },
-        {
-            "id": "diary_w4_6",
-            "userId": "woman_user4",
-            "date": "2024-12-12",
-            "imageUrl": "/images/woman_user4/woman_user4_6.png",
-            "content": "회사 송년회. 니트 원피스. 단아한 로맨틱 스타일.",
-            "createdAt": "2024-12-12T18:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w4_7",
-            "userId": "woman_user4",
-            "date": "2024-12-14",
-            "imageUrl": "/images/woman_user4/woman_user4_7.png",
-            "content": "주말 브런치. 블라우스에 데님. 편안한 캐주얼룩.",
-            "createdAt": "2024-12-14T12:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w4_8",
-            "userId": "woman_user4",
-            "date": "2024-12-16",
-            "imageUrl": "/images/woman_user4/woman_user4_8.png",
-            "content": "쇼핑 데이. 니트에 플리츠 스커트. 캐주얼 로맨틱 믹스.",
-            "createdAt": "2024-12-16T15:00:00Z",
-            "styles": [
-                "casual",
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w4_9",
-            "userId": "woman_user4",
-            "date": "2024-12-18",
-            "imageUrl": "/images/woman_user4/woman_user4_9.png",
-            "content": "재택근무. 오버사이즈 셔츠에 레깅스. 편안한 홈 캐주얼.",
-            "createdAt": "2024-12-18T09:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w4_10",
-            "userId": "woman_user4",
-            "date": "2024-12-20",
-            "imageUrl": "/images/woman_user4/woman_user4_10.png",
-            "content": "연말 파티. 벨벳 재킷에 스커트. 화려한 파티 캐주얼.",
-            "createdAt": "2024-12-20T20:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w5_1",
-            "userId": "woman_user5",
-            "date": "2024-12-01",
-            "imageUrl": "/images/woman_user5/woman_user5_1.png",
-            "content": "작업실에서. 플라워 블라우스에 스커트. 하체가 튼튼해서 스커트가 잘 어울린다.",
-            "createdAt": "2024-12-01T10:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w5_2",
-            "userId": "woman_user5",
-            "date": "2024-12-03",
-            "imageUrl": "/images/woman_user5/woman_user5_2.png",
-            "content": "클라이언트 미팅. 니트에 와이드 팬츠. 로맨틱 캐주얼 믹스.",
-            "createdAt": "2024-12-03T14:00:00Z",
-            "styles": [
-                "romantic",
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w5_3",
-            "userId": "woman_user5",
-            "date": "2024-12-05",
-            "imageUrl": "/images/woman_user5/woman_user5_3.png",
-            "content": "카페 작업. 후드티에 레깅스. 편안한 캐주얼 스타일.",
-            "createdAt": "2024-12-05T11:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w5_4",
-            "userId": "woman_user5",
-            "date": "2024-12-07",
-            "imageUrl": "/images/woman_user5/woman_user5_4.png",
-            "content": "주말 데이트. 원피스에 가디건. 사랑스러운 캐주얼룩.",
-            "createdAt": "2024-12-07T18:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w5_5",
-            "userId": "woman_user5",
-            "date": "2024-12-09",
-            "imageUrl": "/images/woman_user5/woman_user5_5.png",
-            "content": "작업 마감일. 오버사이즈 셔츠에 조거팬츠. 실용적인 워크웨어.",
-            "createdAt": "2024-12-09T22:00:00Z",
-            "styles": [
-                "casual",
-                "workwear"
-            ]
-        },
-        {
-            "id": "diary_w5_6",
-            "userId": "woman_user5",
-            "date": "2024-12-11",
-            "imageUrl": "/images/woman_user5/woman_user5_6.png",
-            "content": "친구 만남. 블라우스에 스커트. 캐주얼 로맨틱 스타일.",
-            "createdAt": "2024-12-11T19:00:00Z",
-            "styles": [
-                "casual",
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w5_7",
-            "userId": "woman_user5",
-            "date": "2024-12-13",
-            "imageUrl": "/images/woman_user5/woman_user5_7.png",
-            "content": "전시회 방문. 니트 원피스. 단아한 로맨틱룩.",
-            "createdAt": "2024-12-13T15:00:00Z",
-            "styles": [
-                "romantic"
-            ]
-        },
-        {
-            "id": "diary_w5_8",
-            "userId": "woman_user5",
-            "date": "2024-12-15",
-            "imageUrl": "/images/woman_user5/woman_user5_8.png",
-            "content": "주말 브런치. 맨투맨에 데님. 편안한 주말 캐주얼.",
-            "createdAt": "2024-12-15T11:00:00Z",
-            "styles": [
-                "casual"
-            ]
-        },
-        {
-            "id": "diary_w5_9",
-            "userId": "woman_user5",
-            "date": "2024-12-17",
-            "imageUrl": "/images/woman_user5/woman_user5_9.png",
-            "content": "작업실 정리. 앞치마에 티셔츠. 실용적인 워크웨어.",
-            "createdAt": "2024-12-17T16:00:00Z",
-            "styles": [
-                "workwear"
-            ]
-        },
-        {
-            "id": "diary_w5_10",
-            "userId": "woman_user5",
-            "date": "2024-12-19",
-            "imageUrl": "/images/woman_user5/woman_user5_10.png",
-            "content": "연말 파티. 재킷에 스커트. 세련된 워크웨어 클래식.",
-            "createdAt": "2024-12-19T20:00:00Z",
-            "styles": [
-                "workwear",
-                "classic"
-            ]
-        }
-    ]
+  "posts": [
+    {
+      "id": "diary_m1_1",
+      "userId": "man_user1",
+      "date": "2024-12-01",
+      "imageUrl": "/images/man_user1/man_user1_1.png",
+      "content": "기말고사 준비하는 날. 편안한 후드티에 데님으로 캐주얼하게. 어깨가 넓어서 오버핏이 잘 어울린다.",
+      "createdAt": "2024-12-01T09:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m1_2",
+      "userId": "man_user1",
+      "date": "2024-12-03",
+      "imageUrl": "/images/man_user1/man_user1_2.png",
+      "content": "도서관 가는 날. 니트와 면바지로 편안하지만 깔끔하게. 상체가 짧아서 상의는 짧은 기장으로.",
+      "createdAt": "2024-12-03T10:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m1_3",
+      "userId": "man_user1",
+      "date": "2024-12-05",
+      "imageUrl": "/images/man_user1/man_user1_3.png",
+      "content": "친구들과 카페에서. 맨투맨에 청바지로 무난하게. 캐주얼한 스타일이 가장 편하다.",
+      "createdAt": "2024-12-05T14:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m1_4",
+      "userId": "man_user1",
+      "date": "2024-12-07",
+      "imageUrl": "/images/man_user1/man_user1_4.png",
+      "content": "주말 브런치. 셔츠에 치노팬츠로 단정하면서도 캐주얼하게. 어깨 라인이 예쁘게 떨어진다.",
+      "createdAt": "2024-12-07T11:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m1_5",
+      "userId": "man_user1",
+      "date": "2024-12-09",
+      "imageUrl": "/images/man_user1/man_user1_5.png",
+      "content": "운동 가는 날. 트레이닝복 셋업으로 스포티하게. 넓은 어깨가 운동복에서 더 돋보인다.",
+      "createdAt": "2024-12-09T18:00:00Z",
+      "styles": [
+        "sporty"
+      ]
+    },
+    {
+      "id": "diary_m1_6",
+      "userId": "man_user1",
+      "date": "2024-12-11",
+      "imageUrl": "/images/man_user1/man_user1_6.png",
+      "content": "헬스장 다녀온 후. 반팔티에 쇼츠로 시원하게. 상체가 짧아서 하이웨이스트가 잘 맞는다.",
+      "createdAt": "2024-12-11T20:00:00Z",
+      "styles": [
+        "sporty"
+      ]
+    },
+    {
+      "id": "diary_m1_7",
+      "userId": "man_user1",
+      "date": "2024-12-13",
+      "imageUrl": "/images/man_user1/man_user1_7.png",
+      "content": "동아리 모임. 후드집업에 조거팬츠로 편안하게. 평소 즐겨입는 캐주얼 스타일.",
+      "createdAt": "2024-12-13T19:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m1_8",
+      "userId": "man_user1",
+      "date": "2024-12-15",
+      "imageUrl": "/images/man_user1/man_user1_8.png",
+      "content": "학과 종강파티. 니트에 슬랙스로 깔끔하게. 어깨가 넓어서 니트 핏이 좋다.",
+      "createdAt": "2024-12-15T18:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m1_9",
+      "userId": "man_user1",
+      "date": "2024-12-17",
+      "imageUrl": "/images/man_user1/man_user1_9.png",
+      "content": "집에서 쉬는 날. 맨투맨에 트레이닝 팬츠로 최대한 편하게. 캐주얼이 최고다.",
+      "createdAt": "2024-12-17T12:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m1_10",
+      "userId": "man_user1",
+      "date": "2024-12-19",
+      "imageUrl": "/images/man_user1/man_user1_10.png",
+      "content": "가족 모임. 셔츠에 슬랙스로 단정하게. 클래식한 스타일도 가끔은 필요하다.",
+      "createdAt": "2024-12-19T17:00:00Z",
+      "styles": [
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_m2_1",
+      "userId": "man_user2",
+      "date": "2024-12-02",
+      "imageUrl": "/images/man_user2/man_user2_1.png",
+      "content": "출근길. 오버사이즈 후드에 와이드 카고팬츠. 스트릿 스타일로 개성있게.",
+      "createdAt": "2024-12-02T08:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m2_2",
+      "userId": "man_user2",
+      "date": "2024-12-04",
+      "imageUrl": "/images/man_user2/man_user2_2.png",
+      "content": "회사에서. 그래픽 티셔츠에 배기팬츠. 개발자라서 자유로운 복장이 가능하다.",
+      "createdAt": "2024-12-04T10:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m2_3",
+      "userId": "man_user2",
+      "date": "2024-12-06",
+      "imageUrl": "/images/man_user2/man_user2_3.png",
+      "content": "주말 쇼핑. 빈티지 셔츠에 와이드 데님. 근육질 체형에 루즈핏이 잘 어울린다.",
+      "createdAt": "2024-12-06T15:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m2_4",
+      "userId": "man_user2",
+      "date": "2024-12-08",
+      "imageUrl": "/images/man_user2/man_user2_4.png",
+      "content": "친구들과 거리 촬영. 테크웨어 재킷에 조거팬츠. 스트릿 감성 가득.",
+      "createdAt": "2024-12-08T13:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m2_5",
+      "userId": "man_user2",
+      "date": "2024-12-10",
+      "imageUrl": "/images/man_user2/man_user2_5.png",
+      "content": "야근하는 날. 오버사이즈 스웨트셔츠에 트랙팬츠. 편안한 스트릿웨어.",
+      "createdAt": "2024-12-10T22:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m2_6",
+      "userId": "man_user2",
+      "date": "2024-12-12",
+      "imageUrl": "/images/man_user2/man_user2_6.png",
+      "content": "회사 워크샵. 후드 레이어드에 카고팬츠. 긴 다리가 돋보이는 핏.",
+      "createdAt": "2024-12-12T09:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m2_7",
+      "userId": "man_user2",
+      "date": "2024-12-14",
+      "imageUrl": "/images/man_user2/man_user2_7.png",
+      "content": "주말 카페. 빈티지 밴드티에 와이드진. 스트릿 스타일의 정석.",
+      "createdAt": "2024-12-14T14:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m2_8",
+      "userId": "man_user2",
+      "date": "2024-12-16",
+      "imageUrl": "/images/man_user2/man_user2_8.png",
+      "content": "편집샵 방문. 유니크한 패턴 셔츠에 배기팬츠. 개성있는 스트릿룩.",
+      "createdAt": "2024-12-16T16:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m2_9",
+      "userId": "man_user2",
+      "date": "2024-12-18",
+      "imageUrl": "/images/man_user2/man_user2_9.png",
+      "content": "운동 후. 메쉬 탱크탑에 쇼츠. 근육질 몸매가 드러나는 스포티룩.",
+      "createdAt": "2024-12-18T19:00:00Z",
+      "styles": [
+        "sporty"
+      ]
+    },
+    {
+      "id": "diary_m2_10",
+      "userId": "man_user2",
+      "date": "2024-12-20",
+      "imageUrl": "/images/man_user2/man_user2_10.png",
+      "content": "연말 모임. 레더자켓에 스키니진. 강한 스트릿 무드.",
+      "createdAt": "2024-12-20T20:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m3_1",
+      "userId": "man_user3",
+      "date": "2024-12-01",
+      "imageUrl": "/images/man_user3/man_user3_1.png",
+      "content": "작업실에서. 심플한 티셔츠에 데님. 마른 체형에 슬림핏이 잘 어울린다.",
+      "createdAt": "2024-12-01T11:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m3_2",
+      "userId": "man_user3",
+      "date": "2024-12-03",
+      "imageUrl": "/images/man_user3/man_user3_2.png",
+      "content": "클라이언트 미팅. 니트에 치노팬츠로 깔끔하게. 긴 팔이 매력포인트.",
+      "createdAt": "2024-12-03T15:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m3_3",
+      "userId": "man_user3",
+      "date": "2024-12-05",
+      "imageUrl": "/images/man_user3/man_user3_3.png",
+      "content": "카페에서 작업. 후드티에 조거팬츠로 편안하게. 캐주얼이 가장 나답다.",
+      "createdAt": "2024-12-05T13:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m3_4",
+      "userId": "man_user3",
+      "date": "2024-12-07",
+      "imageUrl": "/images/man_user3/man_user3_4.png",
+      "content": "주말 브런치. 셔츠에 면바지로 단정하게. 마른 체형이라 레이어드가 필수.",
+      "createdAt": "2024-12-07T10:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m3_5",
+      "userId": "man_user3",
+      "date": "2024-12-09",
+      "imageUrl": "/images/man_user3/man_user3_5.png",
+      "content": "친구들과 모임. 오버사이즈 맨투맨에 와이드진. 스트릿 감성 살짝.",
+      "createdAt": "2024-12-09T19:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m3_6",
+      "userId": "man_user3",
+      "date": "2024-12-11",
+      "imageUrl": "/images/man_user3/man_user3_6.png",
+      "content": "집에서 작업. 편한 티셔츠에 반바지. 프리랜서의 특권은 편한 복장.",
+      "createdAt": "2024-12-11T14:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m3_7",
+      "userId": "man_user3",
+      "date": "2024-12-13",
+      "imageUrl": "/images/man_user3/man_user3_7.png",
+      "content": "동네 산책. 가디건에 슬랙스. 긴 팔 덕분에 가디건이 잘 어울린다.",
+      "createdAt": "2024-12-13T16:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m3_8",
+      "userId": "man_user3",
+      "date": "2024-12-15",
+      "imageUrl": "/images/man_user3/man_user3_8.png",
+      "content": "작업 마감일. 후드집업에 트레이닝팬츠. 편안함이 최우선.",
+      "createdAt": "2024-12-15T23:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m3_9",
+      "userId": "man_user3",
+      "date": "2024-12-17",
+      "imageUrl": "/images/man_user3/man_user3_9.png",
+      "content": "러닝하는 날. 윈드브레이커에 러닝팬츠. 마른 체형이라 바람막이는 필수.",
+      "createdAt": "2024-12-17T07:00:00Z",
+      "styles": [
+        "sporty"
+      ]
+    },
+    {
+      "id": "diary_m3_10",
+      "userId": "man_user3",
+      "date": "2024-12-19",
+      "imageUrl": "/images/man_user3/man_user3_10.png",
+      "content": "연말 파티. 레더자켓에 스키니진. 가끔은 스트릿하게.",
+      "createdAt": "2024-12-19T21:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_m4_1",
+      "userId": "man_user4",
+      "date": "2024-12-02",
+      "imageUrl": "/images/man_user4/man_user4_1.png",
+      "content": "출근 준비. 네이비 수트에 화이트 셔츠. 복부를 가리는 재킷 핏이 중요하다.",
+      "createdAt": "2024-12-02T07:00:00Z",
+      "styles": [
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_m4_2",
+      "userId": "man_user4",
+      "date": "2024-12-04",
+      "imageUrl": "/images/man_user4/man_user4_2.png",
+      "content": "중요한 프레젠테이션. 차콜 수트에 블루 타이. 클래식한 비즈니스룩.",
+      "createdAt": "2024-12-04T09:00:00Z",
+      "styles": [
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_m4_3",
+      "userId": "man_user4",
+      "date": "2024-12-06",
+      "imageUrl": "/images/man_user4/man_user4_3.png",
+      "content": "캐주얼 프라이데이. 니트에 치노팬츠. 편안하면서도 단정한 느낌.",
+      "createdAt": "2024-12-06T10:00:00Z",
+      "styles": [
+        "casual",
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_m4_4",
+      "userId": "man_user4",
+      "date": "2024-12-08",
+      "imageUrl": "/images/man_user4/man_user4_4.png",
+      "content": "주말 골프. 폴로셔츠에 면바지. 좁은 어깨를 커버하는 핏 선택.",
+      "createdAt": "2024-12-08T08:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m4_5",
+      "userId": "man_user4",
+      "date": "2024-12-10",
+      "imageUrl": "/images/man_user4/man_user4_5.png",
+      "content": "팀 회식. 셔츠에 슬랙스로 세미캐주얼. 복부가 덜 드러나는 스타일.",
+      "createdAt": "2024-12-10T19:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m4_6",
+      "userId": "man_user4",
+      "date": "2024-12-12",
+      "imageUrl": "/images/man_user4/man_user4_6.png",
+      "content": "재택근무. 니트 가디건에 면바지. 화상회의도 있어서 상의는 단정하게.",
+      "createdAt": "2024-12-12T11:00:00Z",
+      "styles": [
+        "casual",
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_m4_7",
+      "userId": "man_user4",
+      "date": "2024-12-14",
+      "imageUrl": "/images/man_user4/man_user4_7.png",
+      "content": "가족 외식. 캐주얼 재킷에 진. 편안하지만 깔끔한 아빠 스타일.",
+      "createdAt": "2024-12-14T18:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m4_8",
+      "userId": "man_user4",
+      "date": "2024-12-16",
+      "imageUrl": "/images/man_user4/man_user4_8.png",
+      "content": "동네 마트. 후드티에 조거팬츠. 주말엔 최대한 편하게.",
+      "createdAt": "2024-12-16T10:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m4_9",
+      "userId": "man_user4",
+      "date": "2024-12-18",
+      "imageUrl": "/images/man_user4/man_user4_9.png",
+      "content": "연말 모임. 터틀넥에 슬랙스. 목이 긴 터틀넥으로 좁은 어깨 보완.",
+      "createdAt": "2024-12-18T20:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m4_10",
+      "userId": "man_user4",
+      "date": "2024-12-20",
+      "imageUrl": "/images/man_user4/man_user4_10.png",
+      "content": "주말 카페. 패딩에 후드티. 스트릿과 캐주얼의 믹스매치.",
+      "createdAt": "2024-12-20T15:00:00Z",
+      "styles": [
+        "street",
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m5_1",
+      "userId": "man_user5",
+      "date": "2024-12-01",
+      "imageUrl": "/images/man_user5/man_user5_1.png",
+      "content": "연구실 출근. 맨투맨에 청바지. 균형잡힌 체형이라 뭘 입어도 무난하다.",
+      "createdAt": "2024-12-01T09:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m5_2",
+      "userId": "man_user5",
+      "date": "2024-12-03",
+      "imageUrl": "/images/man_user5/man_user5_2.png",
+      "content": "학회 발표. 재킷에 치노팬츠. 스트릿과 클래식의 조화.",
+      "createdAt": "2024-12-03T10:00:00Z",
+      "styles": [
+        "street",
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_m5_3",
+      "userId": "man_user5",
+      "date": "2024-12-05",
+      "imageUrl": "/images/man_user5/man_user5_3.png",
+      "content": "도서관에서. 후드티에 면바지. 편안한 캐주얼룩.",
+      "createdAt": "2024-12-05T14:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m5_4",
+      "userId": "man_user5",
+      "date": "2024-12-07",
+      "imageUrl": "/images/man_user5/man_user5_4.png",
+      "content": "카페 공부. 니트에 슬랙스. 깔끔하면서도 편안한 스타일.",
+      "createdAt": "2024-12-07T11:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m5_5",
+      "userId": "man_user5",
+      "date": "2024-12-09",
+      "imageUrl": "/images/man_user5/man_user5_5.png",
+      "content": "실험실에서. 티셔츠에 반바지. 실험복 아래는 편하게.",
+      "createdAt": "2024-12-09T16:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m5_6",
+      "userId": "man_user5",
+      "date": "2024-12-11",
+      "imageUrl": "/images/man_user5/man_user5_6.png",
+      "content": "운동 후 샤워. 트레이닝복 셋업. 캐주얼하면서도 스포티한 느낌.",
+      "createdAt": "2024-12-11T19:00:00Z",
+      "styles": [
+        "casual",
+        "sporty"
+      ]
+    },
+    {
+      "id": "diary_m5_7",
+      "userId": "man_user5",
+      "date": "2024-12-13",
+      "imageUrl": "/images/man_user5/man_user5_7.png",
+      "content": "교수님과 미팅. 셔츠에 슬랙스. 단정한 대학원생 스타일.",
+      "createdAt": "2024-12-13T15:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m5_8",
+      "userId": "man_user5",
+      "date": "2024-12-15",
+      "imageUrl": "/images/man_user5/man_user5_8.png",
+      "content": "주말 브런치. 가디건에 진. 편안한 주말 캐주얼.",
+      "createdAt": "2024-12-15T12:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m5_9",
+      "userId": "man_user5",
+      "date": "2024-12-17",
+      "imageUrl": "/images/man_user5/man_user5_9.png",
+      "content": "밤샘 실험. 후드집업에 조거팬츠. 장시간 실험엔 편한 게 최고.",
+      "createdAt": "2024-12-17T22:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_m5_10",
+      "userId": "man_user5",
+      "date": "2024-12-19",
+      "imageUrl": "/images/man_user5/man_user5_10.png",
+      "content": "연구실 송년회. 니트에 면바지. 무난하고 깔끔한 스타일.",
+      "createdAt": "2024-12-19T18:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w1_1",
+      "userId": "woman_user1",
+      "date": "2024-12-01",
+      "imageUrl": "/images/woman_user1/woman_user1_1.png",
+      "content": "수업 가는 날. 니트에 진. 마른 체형이라 타이트한 핏도 잘 어울린다.",
+      "createdAt": "2024-12-01T08:30:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w1_2",
+      "userId": "woman_user1",
+      "date": "2024-12-03",
+      "imageUrl": "/images/woman_user1/woman_user1_2.png",
+      "content": "도서관 공부. 후드티에 레깅스. 편안한 캐주얼 스타일.",
+      "createdAt": "2024-12-03T10:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w1_3",
+      "userId": "woman_user1",
+      "date": "2024-12-05",
+      "imageUrl": "/images/woman_user1/woman_user1_3.png",
+      "content": "친구들과 카페. 블라우스에 스커트. 여성스러운 캐주얼룩.",
+      "createdAt": "2024-12-05T15:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w1_4",
+      "userId": "woman_user1",
+      "date": "2024-12-07",
+      "imageUrl": "/images/woman_user1/woman_user1_4.png",
+      "content": "아르바이트. 셔츠에 슬랙스. 단정한 워크웨어 스타일.",
+      "createdAt": "2024-12-07T09:00:00Z",
+      "styles": [
+        "casual",
+        "workwear"
+      ]
+    },
+    {
+      "id": "diary_w1_5",
+      "userId": "woman_user1",
+      "date": "2024-12-09",
+      "imageUrl": "/images/woman_user1/woman_user1_5.png",
+      "content": "동아리 모임. 맨투맨에 와이드진. 편안한 일상룩.",
+      "createdAt": "2024-12-09T18:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w1_6",
+      "userId": "woman_user1",
+      "date": "2024-12-11",
+      "imageUrl": "/images/woman_user1/woman_user1_6.png",
+      "content": "쇼핑 데이. 크롭탑에 하이웨이스트진. 긴 다리가 돋보이는 스트릿룩.",
+      "createdAt": "2024-12-11T14:00:00Z",
+      "styles": [
+        "casual",
+        "street"
+      ]
+    },
+    {
+      "id": "diary_w1_7",
+      "userId": "woman_user1",
+      "date": "2024-12-13",
+      "imageUrl": "/images/woman_user1/woman_user1_7.png",
+      "content": "거리 스냅. 오버사이즈 후드에 카고팬츠. 힙한 스트릿 스타일.",
+      "createdAt": "2024-12-13T16:00:00Z",
+      "styles": [
+        "street"
+      ]
+    },
+    {
+      "id": "diary_w1_8",
+      "userId": "woman_user1",
+      "date": "2024-12-15",
+      "imageUrl": "/images/woman_user1/woman_user1_8.png",
+      "content": "주말 브런치. 니트 가디건에 원피스. 캐주얼한 스트릿 감성.",
+      "createdAt": "2024-12-15T11:00:00Z",
+      "styles": [
+        "casual",
+        "street"
+      ]
+    },
+    {
+      "id": "diary_w1_9",
+      "userId": "woman_user1",
+      "date": "2024-12-17",
+      "imageUrl": "/images/woman_user1/woman_user1_9.png",
+      "content": "운동 가는 길. 레깅스에 윈드브레이커. 스포티한 스트릿룩.",
+      "createdAt": "2024-12-17T07:00:00Z",
+      "styles": [
+        "sporty",
+        "street"
+      ]
+    },
+    {
+      "id": "diary_w1_10",
+      "userId": "woman_user1",
+      "date": "2024-12-19",
+      "imageUrl": "/images/woman_user1/woman_user1_10.png",
+      "content": "기말고사 끝. 재킷에 스커트. 단정한 워크웨어 스타일로 마무리!!",
+      "createdAt": "2024-12-19T17:00:00Z",
+      "styles": [
+        "casual",
+        "workwear"
+      ],
+      "updatedAt": "2025-06-21T08:35:29.516Z"
+    },
+    {
+      "id": "diary_w2_1",
+      "userId": "woman_user2",
+      "date": "2024-12-02",
+      "imageUrl": "/images/woman_user2/woman_user2_1.png",
+      "content": "병원 출근. 니트에 슬랙스. 균형잡힌 체형이라 깔끔한 캐주얼이 잘 어울린다.",
+      "createdAt": "2024-12-02T07:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w2_2",
+      "userId": "woman_user2",
+      "date": "2024-12-04",
+      "imageUrl": "/images/woman_user2/woman_user2_2.png",
+      "content": "퇴근 후 친구 만남. 후드티에 와이드진. 캐주얼한 스트릿 감성.",
+      "createdAt": "2024-12-04T19:00:00Z",
+      "styles": [
+        "casual",
+        "street"
+      ]
+    },
+    {
+      "id": "diary_w2_3",
+      "userId": "woman_user2",
+      "date": "2024-12-06",
+      "imageUrl": "/images/woman_user2/woman_user2_3.png",
+      "content": "주말 브런치. 블라우스에 스커트. 여성스러운 캐주얼룩.",
+      "createdAt": "2024-12-06T11:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w2_4",
+      "userId": "woman_user2",
+      "date": "2024-12-08",
+      "imageUrl": "/images/woman_user2/woman_user2_4.png",
+      "content": "운동하는 날. 레깅스에 크롭탑. 건강한 스포티 캐주얼.",
+      "createdAt": "2024-12-08T09:00:00Z",
+      "styles": [
+        "casual",
+        "sporty"
+      ]
+    },
+    {
+      "id": "diary_w2_5",
+      "userId": "woman_user2",
+      "date": "2024-12-10",
+      "imageUrl": "/images/woman_user2/woman_user2_5.png",
+      "content": "병원 야간 근무. 편한 스크럽 아래 티셔츠. 실용적인 캐주얼.",
+      "createdAt": "2024-12-10T20:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w2_6",
+      "userId": "woman_user2",
+      "date": "2024-12-12",
+      "imageUrl": "/images/woman_user2/woman_user2_6.png",
+      "content": "쇼핑 데이. 오버사이즈 셔츠에 스키니진. 트렌디한 캐주얼 스트릿.",
+      "createdAt": "2024-12-12T15:00:00Z",
+      "styles": [
+        "casual",
+        "street"
+      ]
+    },
+    {
+      "id": "diary_w2_7",
+      "userId": "woman_user2",
+      "date": "2024-12-14",
+      "imageUrl": "/images/woman_user2/woman_user2_7.png",
+      "content": "카페에서. 니트 원피스에 부츠. 편안한 캐주얼 스트릿 스타일.",
+      "createdAt": "2024-12-14T14:00:00Z",
+      "styles": [
+        "casual",
+        "street"
+      ]
+    },
+    {
+      "id": "diary_w2_8",
+      "userId": "woman_user2",
+      "date": "2024-12-16",
+      "imageUrl": "/images/woman_user2/woman_user2_8.png",
+      "content": "동료들과 저녁. 가디건에 원피스. 단정한 캐주얼룩.",
+      "createdAt": "2024-12-16T18:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w2_9",
+      "userId": "woman_user2",
+      "date": "2024-12-18",
+      "imageUrl": "/images/woman_user2/woman_user2_9.png",
+      "content": "주말 거리 나들이. 패딩에 후드티. 힙한 스트릿 캐주얼.",
+      "createdAt": "2024-12-18T13:00:00Z",
+      "styles": [
+        "street",
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w2_10",
+      "userId": "woman_user2",
+      "date": "2024-12-20",
+      "imageUrl": "/images/woman_user2/woman_user2_10.png",
+      "content": "연말 모임. 니트에 플리츠 스커트. 여성스러운 일상 캐주얼.",
+      "createdAt": "2024-12-20T19:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w3_1",
+      "userId": "woman_user3",
+      "date": "2024-12-01",
+      "imageUrl": "/images/woman_user3/woman_user3_1.png",
+      "content": "알바 가는 날. 플라워 원피스에 가디건. 작은 체형에 어울리는 로맨틱 스타일.",
+      "createdAt": "2024-12-01T08:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w3_2",
+      "userId": "woman_user3",
+      "date": "2024-12-03",
+      "imageUrl": "/images/woman_user3/woman_user3_2.png",
+      "content": "카페 알바. 셔츠에 스커트. 단정한 워크웨어 클래식.",
+      "createdAt": "2024-12-03T09:00:00Z",
+      "styles": [
+        "workwear",
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_w3_3",
+      "userId": "woman_user3",
+      "date": "2024-12-05",
+      "imageUrl": "/images/woman_user3/woman_user3_3.png",
+      "content": "데이트 날. 레이스 블라우스에 스커트. 여성스러운 로맨틱룩.",
+      "createdAt": "2024-12-05T18:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w3_4",
+      "userId": "woman_user3",
+      "date": "2024-12-07",
+      "imageUrl": "/images/woman_user3/woman_user3_4.png",
+      "content": "친구 생일파티. 프릴 원피스. 화사한 로맨틱 스타일.",
+      "createdAt": "2024-12-07T19:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w3_5",
+      "userId": "woman_user3",
+      "date": "2024-12-09",
+      "imageUrl": "/images/woman_user3/woman_user3_5.png",
+      "content": "주말 브런치. 니트에 플리츠 스커트. 사랑스러운 로맨틱 캐주얼.",
+      "createdAt": "2024-12-09T11:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w3_6",
+      "userId": "woman_user3",
+      "date": "2024-12-11",
+      "imageUrl": "/images/woman_user3/woman_user3_6.png",
+      "content": "쇼핑 데이. 블라우스에 와이드 팬츠. 캐주얼한 로맨틱 스타일.",
+      "createdAt": "2024-12-11T14:00:00Z",
+      "styles": [
+        "casual",
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w3_7",
+      "userId": "woman_user3",
+      "date": "2024-12-13",
+      "imageUrl": "/images/woman_user3/woman_user3_7.png",
+      "content": "카페에서 공부. 리본 카디건에 스커트. 귀여운 로맨틱룩.",
+      "createdAt": "2024-12-13T15:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w3_8",
+      "userId": "woman_user3",
+      "date": "2024-12-15",
+      "imageUrl": "/images/woman_user3/woman_user3_8.png",
+      "content": "알바 면접. 재킷에 원피스. 단정한 워크웨어 클래식.",
+      "createdAt": "2024-12-15T10:00:00Z",
+      "styles": [
+        "workwear",
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_w3_9",
+      "userId": "woman_user3",
+      "date": "2024-12-17",
+      "imageUrl": "/images/woman_user3/woman_user3_9.png",
+      "content": "크리스마스 파티. 벨벳 원피스. 특별한 날의 로맨틱 스타일.",
+      "createdAt": "2024-12-17T20:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w3_10",
+      "userId": "woman_user3",
+      "date": "2024-12-19",
+      "imageUrl": "/images/woman_user3/woman_user3_10.png",
+      "content": "집에서 쉬는 날. 니트에 레깅스. 편안한 캐주얼 홈웨어.",
+      "createdAt": "2024-12-19T12:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w4_1",
+      "userId": "woman_user4",
+      "date": "2024-12-02",
+      "imageUrl": "/images/woman_user4/woman_user4_1.png",
+      "content": "출근길. 셔츠에 슬랙스. 상체가 긴 체형에 맞는 캐주얼 오피스룩.",
+      "createdAt": "2024-12-02T08:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w4_2",
+      "userId": "woman_user4",
+      "date": "2024-12-04",
+      "imageUrl": "/images/woman_user4/woman_user4_2.png",
+      "content": "주말 카페. 니트에 와이드진. 편안한 캐주얼 스타일.",
+      "createdAt": "2024-12-04T11:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w4_3",
+      "userId": "woman_user4",
+      "date": "2024-12-06",
+      "imageUrl": "/images/woman_user4/woman_user4_3.png",
+      "content": "데이트. 플라워 원피스에 가디건. 여성스러운 로맨틱룩.",
+      "createdAt": "2024-12-06T19:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w4_4",
+      "userId": "woman_user4",
+      "date": "2024-12-08",
+      "imageUrl": "/images/woman_user4/woman_user4_4.png",
+      "content": "친구 결혼식. 세미정장 원피스. 우아한 로맨틱 스타일.",
+      "createdAt": "2024-12-08T14:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w4_5",
+      "userId": "woman_user4",
+      "date": "2024-12-10",
+      "imageUrl": "/images/woman_user4/woman_user4_5.png",
+      "content": "중요한 미팅. 블레이저에 스커트. 프로페셔널한 워크웨어 클래식.",
+      "createdAt": "2024-12-10T10:00:00Z",
+      "styles": [
+        "workwear",
+        "classic"
+      ]
+    },
+    {
+      "id": "diary_w4_6",
+      "userId": "woman_user4",
+      "date": "2024-12-12",
+      "imageUrl": "/images/woman_user4/woman_user4_6.png",
+      "content": "회사 송년회. 니트 원피스. 단아한 로맨틱 스타일.",
+      "createdAt": "2024-12-12T18:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w4_7",
+      "userId": "woman_user4",
+      "date": "2024-12-14",
+      "imageUrl": "/images/woman_user4/woman_user4_7.png",
+      "content": "주말 브런치. 블라우스에 데님. 편안한 캐주얼룩.",
+      "createdAt": "2024-12-14T12:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w4_8",
+      "userId": "woman_user4",
+      "date": "2024-12-16",
+      "imageUrl": "/images/woman_user4/woman_user4_8.png",
+      "content": "쇼핑 데이. 니트에 플리츠 스커트. 캐주얼 로맨틱 믹스.",
+      "createdAt": "2024-12-16T15:00:00Z",
+      "styles": [
+        "casual",
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w4_9",
+      "userId": "woman_user4",
+      "date": "2024-12-18",
+      "imageUrl": "/images/woman_user4/woman_user4_9.png",
+      "content": "재택근무. 오버사이즈 셔츠에 레깅스. 편안한 홈 캐주얼.",
+      "createdAt": "2024-12-18T09:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w4_10",
+      "userId": "woman_user4",
+      "date": "2024-12-20",
+      "imageUrl": "/images/woman_user4/woman_user4_10.png",
+      "content": "연말 파티. 벨벳 재킷에 스커트. 화려한 파티 캐주얼.",
+      "createdAt": "2024-12-20T20:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w5_1",
+      "userId": "woman_user5",
+      "date": "2024-12-01",
+      "imageUrl": "/images/woman_user5/woman_user5_1.png",
+      "content": "작업실에서. 플라워 블라우스에 스커트. 하체가 튼튼해서 스커트가 잘 어울린다.",
+      "createdAt": "2024-12-01T10:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w5_2",
+      "userId": "woman_user5",
+      "date": "2024-12-03",
+      "imageUrl": "/images/woman_user5/woman_user5_2.png",
+      "content": "클라이언트 미팅. 니트에 와이드 팬츠. 로맨틱 캐주얼 믹스.",
+      "createdAt": "2024-12-03T14:00:00Z",
+      "styles": [
+        "romantic",
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w5_3",
+      "userId": "woman_user5",
+      "date": "2024-12-05",
+      "imageUrl": "/images/woman_user5/woman_user5_3.png",
+      "content": "카페 작업. 후드티에 레깅스. 편안한 캐주얼 스타일.",
+      "createdAt": "2024-12-05T11:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w5_4",
+      "userId": "woman_user5",
+      "date": "2024-12-07",
+      "imageUrl": "/images/woman_user5/woman_user5_4.png",
+      "content": "주말 데이트. 원피스에 가디건. 사랑스러운 캐주얼룩.",
+      "createdAt": "2024-12-07T18:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w5_5",
+      "userId": "woman_user5",
+      "date": "2024-12-09",
+      "imageUrl": "/images/woman_user5/woman_user5_5.png",
+      "content": "작업 마감일. 오버사이즈 셔츠에 조거팬츠. 실용적인 워크웨어.",
+      "createdAt": "2024-12-09T22:00:00Z",
+      "styles": [
+        "casual",
+        "workwear"
+      ]
+    },
+    {
+      "id": "diary_w5_6",
+      "userId": "woman_user5",
+      "date": "2024-12-11",
+      "imageUrl": "/images/woman_user5/woman_user5_6.png",
+      "content": "친구 만남. 블라우스에 스커트. 캐주얼 로맨틱 스타일.",
+      "createdAt": "2024-12-11T19:00:00Z",
+      "styles": [
+        "casual",
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w5_7",
+      "userId": "woman_user5",
+      "date": "2024-12-13",
+      "imageUrl": "/images/woman_user5/woman_user5_7.png",
+      "content": "전시회 방문. 니트 원피스. 단아한 로맨틱룩.",
+      "createdAt": "2024-12-13T15:00:00Z",
+      "styles": [
+        "romantic"
+      ]
+    },
+    {
+      "id": "diary_w5_8",
+      "userId": "woman_user5",
+      "date": "2024-12-15",
+      "imageUrl": "/images/woman_user5/woman_user5_8.png",
+      "content": "주말 브런치. 맨투맨에 데님. 편안한 주말 캐주얼.",
+      "createdAt": "2024-12-15T11:00:00Z",
+      "styles": [
+        "casual"
+      ]
+    },
+    {
+      "id": "diary_w5_9",
+      "userId": "woman_user5",
+      "date": "2024-12-17",
+      "imageUrl": "/images/woman_user5/woman_user5_9.png",
+      "content": "작업실 정리. 앞치마에 티셔츠. 실용적인 워크웨어.",
+      "createdAt": "2024-12-17T16:00:00Z",
+      "styles": [
+        "workwear"
+      ]
+    },
+    {
+      "id": "diary_w5_10",
+      "userId": "woman_user5",
+      "date": "2024-12-19",
+      "imageUrl": "/images/woman_user5/woman_user5_10.png",
+      "content": "연말 파티. 재킷에 스커트. 세련된 워크웨어 클래식.",
+      "createdAt": "2024-12-19T20:00:00Z",
+      "styles": [
+        "workwear",
+        "classic"
+      ]
+    }
+  ]
 }

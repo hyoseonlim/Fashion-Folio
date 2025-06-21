@@ -71,6 +71,9 @@ async function handleLogin() {
 
             // 성별에 맞는 트렌드로 새로고침
             getTrends();
+
+            document.getElementById('loginID').value = '';
+            document.getElementById('loginPW').value = '';
         } else {
             alert(result.message);
         }
@@ -641,7 +644,7 @@ function displayPost(post, userData) {
 // 페이지 전환 함수 (로그인 체크 포함)
 function showPage(pageId) {
     // 로그인이 필요한 페이지들 체크
-    if (['discover', 'gallery', 'diary'].includes(pageId)) {
+    if (['discover', 'gallery', 'diary', 'add', 'edit'].includes(pageId)) {
         if (!checkLoginRequired()) return;
     }
 
@@ -655,6 +658,27 @@ function showPage(pageId) {
 
     // 선택된 페이지 표시
     document.getElementById(pageId).classList.add('page--active');
+
+    // Add 페이지일 때 오늘 날짜 설정
+    if (pageId === 'add') {
+        const today = new Date().toISOString().split('T')[0];
+        const addDateInput = document.getElementById('add-date');
+        if (addDateInput) {
+            addDateInput.value = today;
+        }
+
+        // 폼 초기화
+        const addTextInput = document.getElementById('add-text');
+        const addPhotoInput = document.getElementById('add-photo');
+        if (addTextInput) addTextInput.value = '';
+        if (addPhotoInput) addPhotoInput.value = '';
+
+        // 미리보기 이미지 숨기기
+        const addPreview = document.getElementById('add-preview');
+        if (addPreview) {
+            addPreview.style.display = 'none';
+        }
+    }
 
     // 해당 네비게이션 아이템 활성화
     if (pageId !== 'edit' && pageId !== 'add') {
@@ -954,9 +978,92 @@ function editDiary(post) {
     }
 }
 
+// 다이어리 추가 저장
+async function saveDiary() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('로그인이 필요합니다.');
+        showPage('login');
+        return;
+    }
+
+    const date = document.getElementById('add-date').value;
+    const content = document.getElementById('add-text').value;
+    const photoFile = document.getElementById('add-photo').files[0];
+
+    if (!date || !content || !photoFile) {
+        alert('모든 필드를 입력해주세요.');
+        return;
+    }
+
+    // 로딩 상태 표시 (선택사항)
+    const saveButton = document.querySelector('#add button[onclick="saveDiary()"]');
+    const originalText = saveButton ? saveButton.textContent : '';
+    if (saveButton) {
+        saveButton.disabled = true;
+        saveButton.textContent = '저장 중...';
+    }
+
+    try {
+        // FormData 객체 생성
+        const formData = new FormData();
+        formData.append('date', date);
+        formData.append('content', content);
+        formData.append('photo', photoFile);
+
+        const response = await fetch(`${API_BASE_URL}/posts`, {
+            method: 'POST',
+            headers: {
+                'user-id': userId
+            },
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('새 다이어리가 저장되었습니다.');
+
+            // 폼 초기화
+            document.getElementById('add-date').value = '';
+            document.getElementById('add-text').value = '';
+            document.getElementById('add-photo').value = '';
+
+            // 미리보기 이미지 숨기기
+            const addPreview = document.getElementById('add-preview');
+            if (addPreview) {
+                addPreview.style.display = 'none';
+            }
+
+            // 다이어리 페이지로 이동하고 목록 새로고침
+            showPage('diary');
+            await loadMyDiaries();
+        } else {
+            alert(result.message || '다이어리 저장에 실패했습니다.');
+        }
+    } catch (error) {
+        console.error('다이어리 저장 오류:', error);
+        alert('다이어리 저장 중 오류가 발생했습니다.');
+    } finally {
+        // 로딩 상태 해제
+        if (saveButton) {
+            saveButton.disabled = false;
+            saveButton.textContent = originalText;
+        }
+    }
+}
+
 // 다이어리 수정 저장
 async function updateDiary() {
+    const userId = localStorage.getItem('userId');
     const postId = window.currentEditingPostId;
+
+    if (!userId) {
+        alert('로그인이 필요합니다.');
+        showPage('login');
+        return;
+    }
+
     if (!postId) {
         alert('수정할 다이어리를 찾을 수 없습니다.');
         return;
@@ -971,50 +1078,71 @@ async function updateDiary() {
         return;
     }
 
+    // 로딩 상태 표시 (선택사항)
+    const updateButton = document.querySelector('#edit button[onclick="updateDiary()"]');
+    const originalText = updateButton ? updateButton.textContent : '';
+    if (updateButton) {
+        updateButton.disabled = true;
+        updateButton.textContent = '수정 중...';
+    }
+
     try {
-        // TODO: 서버에 수정 요청 보내기
-        // 현재는 클라이언트에서만 처리
-        alert('다이어리가 수정되었습니다.');
-        showPage('diary');
-        await loadMyDiaries();
+        // FormData 객체 생성
+        const formData = new FormData();
+        formData.append('date', date);
+        formData.append('content', content);
+
+        // 새 이미지가 선택된 경우에만 추가
+        if (photoFile) {
+            formData.append('photo', photoFile);
+        }
+
+        const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
+            method: 'PUT',
+            headers: {
+                'user-id': userId
+            },
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('다이어리가 수정되었습니다.');
+
+            // 현재 편집 중인 포스트 ID 초기화
+            window.currentEditingPostId = null;
+
+            // 다이어리 페이지로 이동하고 목록 새로고침
+            showPage('diary');
+            await loadMyDiaries();
+        } else {
+            alert(result.message || '다이어리 수정에 실패했습니다.');
+        }
     } catch (error) {
         console.error('다이어리 수정 오류:', error);
         alert('다이어리 수정 중 오류가 발생했습니다.');
+    } finally {
+        // 로딩 상태 해제
+        if (updateButton) {
+            updateButton.disabled = false;
+            updateButton.textContent = originalText;
+        }
     }
 }
 
-// 다이어리 추가 저장
-async function saveDiary() {
-    const date = document.getElementById('add-date').value;
-    const content = document.getElementById('add-text').value;
-    const photoFile = document.getElementById('add-photo').files[0];
+// 다이어리 삭제 확인 (수정된 버전)
+async function confirmDelete() {
+    const userId = localStorage.getItem('userId');
+    const postId = window.currentEditingPostId;
 
-    if (!date || !content || !photoFile) {
-        alert('모든 필드를 입력해주세요.');
+    if (!userId) {
+        alert('로그인이 필요합니다.');
+        closeDeleteModal();
+        showPage('login');
         return;
     }
 
-    try {
-        // TODO: 서버에 추가 요청 보내기
-        // 현재는 클라이언트에서만 처리
-        alert('새 다이어리가 저장되었습니다.');
-
-        // 폼 초기화
-        document.getElementById('add-date').value = '';
-        document.getElementById('add-text').value = '';
-        document.getElementById('add-photo').value = '';
-
-        showPage('diary');
-        await loadMyDiaries();
-    } catch (error) {
-        console.error('다이어리 저장 오류:', error);
-        alert('다이어리 저장 중 오류가 발생했습니다.');
-    }
-}
-
-// 다이어리 삭제 확인
-function confirmDelete() {
-    const postId = window.currentEditingPostId;
     if (!postId) {
         alert('삭제할 다이어리를 찾을 수 없습니다.');
         closeDeleteModal();
@@ -1022,17 +1150,85 @@ function confirmDelete() {
     }
 
     try {
-        // TODO: 서버에 삭제 요청 보내기
-        // 현재는 클라이언트에서만 처리
-        alert('다이어리가 삭제되었습니다.');
-        closeDeleteModal();
-        showPage('diary');
-        loadMyDiaries();
+        const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
+            method: 'DELETE',
+            headers: {
+                'user-id': userId
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('다이어리가 삭제되었습니다.');
+            closeDeleteModal();
+
+            // 현재 편집 중인 포스트 ID 초기화
+            window.currentEditingPostId = null;
+
+            // 다이어리 페이지로 이동하고 목록 새로고침
+            showPage('diary');
+            await loadMyDiaries();
+        } else {
+            alert(result.message || '다이어리 삭제에 실패했습니다.');
+            closeDeleteModal();
+        }
     } catch (error) {
         console.error('다이어리 삭제 오류:', error);
         alert('다이어리 삭제 중 오류가 발생했습니다.');
         closeDeleteModal();
     }
+}
+
+// 이미지 미리보기 함수들 (추가 기능)
+function previewAddImage() {
+    const input = document.getElementById('add-photo');
+    const preview = document.getElementById('add-preview');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function previewEditImage() {
+    const input = document.getElementById('edit-photo');
+    const preview = document.getElementById('edit-preview');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// 파일 업로드 검증 함수
+function validateImageFile(file) {
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+
+    if (!allowedTypes.includes(file.type)) {
+        alert('JPG, PNG, GIF 형식의 이미지만 업로드 가능합니다.');
+        return false;
+    }
+
+    if (file.size > maxSize) {
+        alert('파일 크기는 5MB 이하만 가능합니다.');
+        return false;
+    }
+
+    return true;
 }
 
 function filterByDate() {
@@ -1533,7 +1729,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     });
 
-    // 외부 클릭시 드롭다운 닫기
     document.addEventListener('click', function (event) {
         // 로그인 Enter 키
         document.getElementById('loginPW')?.addEventListener('keypress', function (e) {
