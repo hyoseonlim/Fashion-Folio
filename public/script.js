@@ -406,7 +406,7 @@ async function getUsers() {
             const userId = localStorage.getItem('userId');
             const filteredUsers = result.data.users.filter(user => user.id !== userId);
 
-            // 인기도 계산 (다른 사용자들이 구독한 횟수) - 추가된 부분
+            // 인기도 계산 (다른 사용자들이 구독한 횟수)
             const usersWithPopularity = filteredUsers.map(user => {
                 const subscriberCount = result.data.users.filter(u =>
                     u.subscribed && u.subscribed.includes(user.id)

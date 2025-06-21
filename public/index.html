@@ -20,9 +20,9 @@
 
             <nav class="header__nav">
                 <div class="header__nav-item" onclick="showPage('trend')">TREND</div>
-                <div class="header__nav-item" onclick="showPage('discover')">STYLIST</div>
-                <div class="header__nav-item" onclick="getUsers();">GALLERY</div>
-                <div class="header__nav-item" onclick="showMyDiary()" style="display: none;">MY DIARY</div>
+                <div class="header__nav-item" onclick="showPage('discover')">AI STYLIST</div>
+                <div class="header__nav-item" onclick="getUsers();">All FFs</div>
+                <div class="header__nav-item" onclick="showMyDiary()" style="display: none;">MY FF</div>
             </nav>
 
             <div class="header__user-section">
@@ -208,7 +208,7 @@
             <!-- Discover Page -->
             <div id="discover" class="page">
                 <div class="section-header">
-                    <h2 class="section-header__title">Your Personal Stylist</h2>
+                    <h2 class="section-header__title">AI Personal Stylist</h2>
                 </div>
 
                 <div class="search-section">
@@ -264,7 +264,7 @@
             <!-- Gallery Page -->
             <div id="gallery" class="page">
                 <div class="section-header">
-                    <h2 class="section-header__title">Our Style Collection</h2>
+                    <h2 class="section-header__title">Other's Fashion Folio</h2>
                 </div>
 
                 <!-- 필터 영역 -->
@@ -424,7 +424,7 @@
             <!-- Diary Page -->
             <div id="diary" class="page">
                 <div class="diary-header">
-                    <h2 class="section-header__title">My Style Diary</h2>
+                    <h2 class="section-header__title">My Fashion Folio</h2>
 
                     <div class="diary-header__date-filter">
                         <select id="preset-range" onchange="applyPresetRange()" class="diary-header__preset-select">

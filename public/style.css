@@ -1088,12 +1088,12 @@ textarea:focus {
     background-color: rgba(255, 255, 255, 0.54);
     border: 1px solid #ddd;
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
     color: black;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     width: 100%;
-    min-height: 120px;
+    min-height: 90px;
 }
 
 .user-card:hover {
