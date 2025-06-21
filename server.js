@@ -121,7 +121,7 @@ app.post('/api/login', async (req, res) => {
 // 회원가입
 app.post('/api/users', async (req, res) => {
     try {
-        const { id, password, age, gender, height, weight, job, bodyType } = req.body;
+        const { id, password, age, gender, height, weight, job, bodyType, profileColor } = req.body;
 
         if (!id || !password) {
             return res.status(400).json({
@@ -155,6 +155,7 @@ app.post('/api/users', async (req, res) => {
             weight: parseInt(weight) || 0,
             job: job || '',
             bodyType: bodyType || '',
+            profileColor: profileColor || '#ff69b4',
             joinDate: new Date().toISOString().split('T')[0],
             likedTrends: [],
             likedUsers: []
@@ -214,7 +215,7 @@ app.get('/api/check-id/:id', async (req, res) => {
 app.put('/api/user/update', async (req, res) => {
     try {
         const userId = req.headers['user-id'];
-        const { gender, age, height, weight, job, bodyType } = req.body;
+        const { profileColor, gender, age, height, weight, job, bodyType } = req.body;
 
         if (!userId) {
             return res.status(401).json({
@@ -249,6 +250,7 @@ app.put('/api/user/update', async (req, res) => {
         if (weight !== undefined) user.weight = parseInt(weight);
         if (job !== undefined) user.job = job;
         if (bodyType !== undefined) user.bodyType = bodyType;
+        if (profileColor !== undefined) user.profileColor = profileColor;
 
         // 업데이트된 정보 저장
         const writeSuccess = await writeJsonFile('users.json', usersData);

@@ -323,6 +323,15 @@ textarea:focus {
     background-color: #f9f9f9;
 }
 
+.auth-page__input--color {
+    width: 60px;
+    height: 40px;
+    border: 1px solid #999;
+    border-radius: 6px;
+    padding: 2px;
+    background-color: transparent;
+}
+
 .auth-page__submit {
     padding: 10px 24px;
     font-size: 15px;
@@ -845,6 +854,14 @@ textarea:focus {
     margin-bottom: 10px;
 }
 
+.modal__input--color {
+    width: 60px;
+    height: 40px;
+    border: 1px solid #ffffff55;
+    border-radius: 6px;
+    padding: 2px;
+}
+
 .modal__input-label {
     width: 60px;
     font-size: 14px;
@@ -1084,14 +1101,24 @@ textarea:focus {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.user-card__image {
+.user-card__icon {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    object-fit: cover;
     border: 2px solid #eee;
     margin-right: 24px;
     flex-shrink: 0;
+    position: relative;
+    background-color: #ff69b4;
+}
+
+.user-card__icon::before {
+    content: '🤍';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
 }
 
 .user-card__info {
@@ -1197,12 +1224,23 @@ textarea:focus {
     margin-bottom: 20px;
 }
 
-.user-detail__profile-img {
+.user-detail__profile-icon {
     width: 300px;
-    height: auto;
-    background: #eee;
+    height: 300px;
+    border-radius: 50%;
     border: 2px solid #222;
     margin-bottom: 16px;
+    position: relative;
+    background-color: #ff69b4;
+}
+
+.user-detail__profile-icon::before {
+    content: '🤍';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
 }
 
 .user-detail__likes {
@@ -1339,12 +1377,22 @@ textarea:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.each-detail__user-img {
+.each-detail__user-icon {
     width: 80px;
     height: 80px;
-    background: #eee;
+    border-radius: 50%;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    position: relative;
+    background-color: #ff69b4;
+}
+
+.each-detail__user-icon::before {
+    content: '🤍';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
 }
 
 .each-detail__user-meta {

@@ -18,6 +18,11 @@ function updateUserUI(user) {
     if (loginBtn) loginBtn.style.display = 'none';
     if (userIcon) userIcon.style.display = 'block';
 
+    if (userIcon) {
+        userIcon.style.display = 'block';
+        userIcon.style.backgroundColor = user.profileColor || '#ff69b4';
+    }
+
     // 유저 정보 표시
     const userInfoDiv = document.getElementById('userInfo');
     if (userInfoDiv) {
@@ -32,6 +37,7 @@ function updateUserUI(user) {
         document.getElementById('heightInput').value = user.height || '';
         document.getElementById('weightInput').value = user.weight || '';
         document.getElementById('jobInput').value = user.job || '';
+        document.getElementById('profileColorInput').value = user.profileColor || '#ff69b4';
     }
 
     // MY DIARY 메뉴 표시
@@ -93,6 +99,7 @@ async function handleRegister() {
     const height = document.getElementById('registerHeight').value;
     const weight = document.getElementById('registerWeight').value;
     const bodyType = document.getElementById('registerBodyType').value;
+    const profileColor = document.getElementById('registerProfileColor').value;
 
     // 유효성 검사
     if (!id || !password) {
@@ -115,7 +122,7 @@ async function handleRegister() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id, password, age, gender, height, weight, job, bodyType
+                id, password, age, gender, height, weight, job, bodyType, profileColor
             })
         });
 
@@ -168,6 +175,7 @@ async function saveUserInfo() {
     const height = document.getElementById('heightInput').value;
     const weight = document.getElementById('weightInput').value;
     const job = document.getElementById('jobInput').value;
+    const profileColor = document.getElementById('profileColorInput').value;
 
     // 유효성 검사
     if (!gender || !age || !height || !weight) {
@@ -187,7 +195,8 @@ async function saveUserInfo() {
                 age: parseInt(age),
                 height: parseInt(height),
                 weight: parseInt(weight),
-                job: job
+                job: job,
+                profileColor: profileColor,
             })
         });
 
@@ -201,7 +210,8 @@ async function saveUserInfo() {
                 age: parseInt(age),
                 height: parseInt(height),
                 weight: parseInt(weight),
-                job: job
+                job: job,
+                profileColor: profileColor
             });
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
@@ -423,11 +433,10 @@ function displayUsers(users) {
         let userCard = document.createElement('div');
         userCard.className = 'user-card';
 
-        // 사용자 이미지
-        let userImg = document.createElement('img');
-        userImg.className = 'user-card__image';
-        userImg.src = user.profileImage || '/images/default-profile.png';
-        userImg.alt = `${user.id} 프로필`;
+        // 사용자 아이콘
+        let userIcon = document.createElement('div');
+        userIcon.className = 'user-card__icon';
+        userIcon.style.backgroundColor = user.profileColor || '#ff69b4';
 
         // 사용자 정보 컨테이너
         let userInfo = document.createElement('div');
@@ -486,7 +495,7 @@ function displayUsers(users) {
             getUser(user);
         });
 
-        userCard.append(userImg, userInfo, subscribeBtn);
+        userCard.append(userIcon, userInfo, subscribeBtn);
         container.appendChild(userCard);
     }
     showPage('gallery');
@@ -575,7 +584,7 @@ async function getUser(user) {
     // 좌측 유저 정보 처리
     document.getElementById('detailUserName').innerText = user.id;
     document.getElementById('detailUserBody').innerText = `${user.height}cm, ${user.weight}kg`;
-    document.getElementById('detailUserImg').src = user.profileImage;
+    document.getElementById('detailUserIcon').style.backgroundColor = user.profileColor || '#ff69b4';
 
     // 해당 유저의 게시글만 가져오기
     try {
@@ -631,7 +640,7 @@ function displayUser(posts, userData) {
 }
 
 function displayPost(post, userData) {
-    document.getElementById('eachDetailImage').src = post.imageUrl;
+    document.getElementById('eachDetailUserIcon').style.backgroundColor = userData.profileColor || '#ff69b4';
     document.getElementById('eachDetailContent').innerText = post.content;
     document.getElementById('eachDetailDate').innerText = post.date;
     document.getElementById('eachDetailUsername').innerText = userData.id;
@@ -1493,11 +1502,10 @@ function displaySearchResults(users, searchQuery) {
         let userCard = document.createElement('div');
         userCard.className = 'user-card';
 
-        // 사용자 이미지
-        let userImg = document.createElement('img');
-        userImg.className = 'user-card__image';
-        userImg.src = user.profileImage || '/images/default-profile.png';
-        userImg.alt = `${user.id} 프로필`;
+        // 사용자 아이콘
+        let userIcon = document.createElement('div');
+        userIcon.className = 'user-card__icon';
+        userIcon.style.backgroundColor = user.profileColor || '#ff69b4';
 
         // 사용자 정보 컨테이너
         let userInfo = document.createElement('div');
@@ -1556,7 +1564,7 @@ function displaySearchResults(users, searchQuery) {
             getUser(user);
         });
 
-        userCard.append(userImg, userInfo, subscribeBtn);
+        userCard.append(userIcon, userInfo, subscribeBtn);
         container.appendChild(userCard);
     }
 }

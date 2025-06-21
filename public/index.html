@@ -44,6 +44,12 @@
                         <h5 class="modal__title">정보 수정</h5>
 
                         <div class="modal__input-row">
+                            <span class="modal__input-label">프로필 색상</span>
+                            <input id="profileColorInput" type="color" class="modal__input modal__input--color"
+                                value="#ff69b4" />
+                        </div>
+
+                        <div class="modal__input-row">
                             <span class="modal__input-label">성별</span>
                             <select id="genderInput" class="modal__input">
                                 <option value="남성">남성</option>
@@ -142,6 +148,12 @@
                     <div class="auth-page__row">
                         <label for="registerPwConfirm" class="auth-page__label">비밀번호 확인</label>
                         <input type="password" id="registerPwConfirm" class="auth-page__input" />
+                    </div>
+
+                    <div class="auth-page__row">
+                        <label for="registerProfileColor" class="auth-page__label">프로필 색상</label>
+                        <input type="color" id="registerProfileColor" class="auth-page__input auth-page__input--color"
+                            value="#ff69b4" />
                     </div>
 
                     <div class="auth-page__row">
@@ -359,7 +371,7 @@
                         <div class="user-detail__name" id="detailUserName"></div>
                         <div class="user-detail__tags" id="detailUserTags"></div>
                         <div class="user-detail__body" id="detailUserBody"></div>
-                        <img class="user-detail__profile-img" id="detailUserImg"></img>
+                        <div class="user-detail__profile-icon" id="detailUserIcon"></div>
                         <div class="user-detail__likes">
                             <span class="user-detail__likes-count" id="detailUserLikes">0 Likes</span>
                             <button class="user-detail__like-btn" onclick="toggleUserLike()">
@@ -394,7 +406,7 @@
                         <div class="each-detail__date" id="eachDetailDate"></div>
                         <div class="each-detail__content" id="eachDetailContent"></div>
                         <div class="each-detail__userbox" onclick="goToUserDetail()">
-                            <div class="each-detail__user-img"></div>
+                            <div class="each-detail__user-icon" id="eachDetailUserIcon"></div>
                             <div class="each-detail__user-meta">
                                 <div class="each-detail__username" id="eachDetailUsername"></div>
                                 <div class="each-detail__tags" id="eachDetailUserTags"></div>
