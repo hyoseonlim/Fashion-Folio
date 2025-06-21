@@ -20,7 +20,7 @@ function updateUserUI(user) {
 
     if (userIcon) {
         userIcon.style.display = 'block';
-        userIcon.style.backgroundColor = user.profileColor || '#ff69b4';
+        userIcon.style.backgroundColor = user.profileColor || 'black';
     }
 
     // 유저 정보 표시
@@ -405,7 +405,16 @@ async function getUsers() {
             // 로그인한 사용자 제외
             const userId = localStorage.getItem('userId');
             const filteredUsers = result.data.users.filter(user => user.id !== userId);
-            displayUsers(filteredUsers);
+
+            // 인기도 계산 (다른 사용자들이 구독한 횟수) - 추가된 부분
+            const usersWithPopularity = filteredUsers.map(user => {
+                const subscriberCount = result.data.users.filter(u =>
+                    u.subscribed && u.subscribed.includes(user.id)
+                ).length;
+                return { ...user, subscriberCount };
+            });
+
+            displayUsers(usersWithPopularity); // 변경된 부분
         } else {
             throw new Error(result.message);
         }
@@ -420,14 +429,30 @@ function displayUsers(users) {
 
     // 필터링 적용
     let filteredUsers = filterUsers(users);
+    const currentUserInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
+    const sortType = document.querySelector('input[name="sort"]:checked').value;
+    if (sortType === 'join') {
+        // 가입일순 정렬 (최신순)
+        filteredUsers.sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate));
+    } else if (sortType === 'popular') {
+        // 인기순 정렬 (구독자 많은 순)
+        filteredUsers.sort((a, b) => (b.subscriberCount || 0) - (a.subscriberCount || 0));
+    }
+
+    // 구독한 유저만 보기 필터 - 추가된 부분
+    const showFavoriteOnly = document.getElementById('favoriteOnlyCheckbox').checked;
+    if (showFavoriteOnly) {
+        const currentUserInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+        filteredUsers = filteredUsers.filter(user =>
+            currentUserInfo.subscribed && currentUserInfo.subscribed.includes(user.id)
+        );
+    }
 
     if (filteredUsers.length === 0) {
         container.innerHTML = '<div class="no-data">조건에 맞는 사용자가 없습니다.</div>';
         return;
     }
-
-    const currentUserId = localStorage.getItem('userId');
-    const currentUserInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
     for (const user of filteredUsers) {
         let userCard = document.createElement('div');
@@ -585,13 +610,29 @@ async function getUser(user) {
     document.getElementById('detailUserName').innerText = user.id;
     document.getElementById('detailUserBody').innerText = `${user.height}cm, ${user.weight}kg`;
     document.getElementById('detailUserIcon').style.backgroundColor = user.profileColor || '#ff69b4';
+    document.getElementById('detailUserFollowers').innerText = user.subscriberCount || 0;
+
+    // 구독 버튼 상태 설정
+    const currentUserInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+    const subscribeBtn = document.getElementById('detailSubscribeBtn');
+    const isSubscribed = currentUserInfo.subscribed && currentUserInfo.subscribed.includes(user.id);
+
+    if (isSubscribed) {
+        subscribeBtn.classList.add('user-detail__subscribe-btn--subscribed');
+        subscribeBtn.textContent = '구독취소';
+    } else {
+        subscribeBtn.classList.remove('user-detail__subscribe-btn--subscribed');
+        subscribeBtn.textContent = '구독하기';
+    }
+
+    // 현재 상세보기 중인 유저 정보 저장
+    window.currentDetailUser = user;
 
     // 해당 유저의 게시글만 가져오기
     try {
         const response = await fetch(`${API_BASE_URL}/posts`);
         const result = await response.json();
         if (result.success) {
-            // 해당 유저의 게시글만 필터링
             const userPosts = result.data.posts.filter(post => post.userId === user.id);
             displayUser(userPosts, user);
         } else {
@@ -599,6 +640,7 @@ async function getUser(user) {
         }
     } catch (err) {
         console.error('데이터 가져오기 실패', err);
+        displayUser([], user); // 변경된 부분 - 에러 시에도 빈 배열로 호출
     }
 }
 
@@ -610,6 +652,7 @@ function displayUser(posts, userData) {
 
     if (!posts || posts.length === 0) {
         container.innerHTML = '<p class="no-data">게시글이 없습니다.</p>';
+        showPage('user-detail');
         return;
     }
 
@@ -642,12 +685,44 @@ function displayUser(posts, userData) {
 function displayPost(post, userData) {
     document.getElementById('eachDetailUserIcon').style.backgroundColor = userData.profileColor || '#ff69b4';
     document.getElementById('eachDetailContent').innerText = post.content;
+    document.getElementById('eachDetailImage').src = post.imageUrl;
     document.getElementById('eachDetailDate').innerText = post.date;
     document.getElementById('eachDetailUsername').innerText = userData.id;
     document.getElementById('eachDetailUserTags').innerText = `${userData.age}세 ${userData.gender}`;
     document.getElementById('eachDetailUserBody').innerText = `${userData.height}cm, ${userData.weight}kg`;
 
     showPage('each-detail');
+}
+
+// 상세 페이지에서 구독 토글
+async function toggleDetailSubscribe() {
+    if (!window.currentDetailUser) return;
+
+    const subscribeBtn = document.getElementById('detailSubscribeBtn');
+    await toggleSubscribe(window.currentDetailUser.id, subscribeBtn);
+
+    // 팔로워 수 업데이트
+    const isSubscribed = subscribeBtn.classList.contains('user-detail__subscribe-btn--subscribed');
+    const followersEl = document.getElementById('detailUserFollowers');
+    let followersCount = parseInt(followersEl.innerText) || 0;
+
+    if (isSubscribed) {
+        followersCount++;
+    } else {
+        followersCount = Math.max(0, followersCount - 1);
+    }
+
+    followersEl.innerText = followersCount;
+}
+
+// 갤러리 정렬 함수
+function sortGallery(sortType) {
+    getUsers(); // 정렬 옵션이 변경되면 사용자 목록을 다시 로드
+}
+
+// 구독한 유저만 보기 토글
+function toggleFavoriteUsers() {
+    getUsers(); // 필터 옵션이 변경되면 사용자 목록을 다시 로드
 }
 
 // 페이지 전환 함수 (로그인 체크 포함)

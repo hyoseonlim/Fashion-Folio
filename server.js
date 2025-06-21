@@ -107,6 +107,7 @@ app.post('/api/login', async (req, res) => {
                 weight: user.weight,
                 job: user.job,
                 bodyType: user.bodyType,
+                profileColor: user.profileColor,
                 subscribed: user.subscribed || []
             }
         });

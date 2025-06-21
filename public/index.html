@@ -349,7 +349,7 @@
                     <label class="gallery-options__favorites">
                         <input type="checkbox" id="favoriteOnlyCheckbox" class="gallery-options__favorites-input"
                             onchange="toggleFavoriteUsers()" />
-                        찜한 유저만
+                        구독한 유저만
                     </label>
                 </div>
 
@@ -372,10 +372,14 @@
                         <div class="user-detail__tags" id="detailUserTags"></div>
                         <div class="user-detail__body" id="detailUserBody"></div>
                         <div class="user-detail__profile-icon" id="detailUserIcon"></div>
-                        <div class="user-detail__likes">
-                            <span class="user-detail__likes-count" id="detailUserLikes">0 Likes</span>
-                            <button class="user-detail__like-btn" onclick="toggleUserLike()">
-                                <span class="user-detail__heart-icon" id="detailUserHeart"></span>
+                        <div class="user-detail__follow-section">
+                            <div class="user-detail__followers">
+                                <span class="user-detail__followers-count" id="detailUserFollowers">0</span>
+                                <span class="user-detail__followers-label">팔로워</span>
+                            </div>
+                            <button class="user-detail__subscribe-btn" id="detailSubscribeBtn"
+                                onclick="toggleDetailSubscribe()">
+                                구독하기
                             </button>
                         </div>
                     </div>
