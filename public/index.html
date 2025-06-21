@@ -422,7 +422,6 @@
             </div>
 
             <!-- Diary Page -->
-            <!-- Diary Page -->
             <div id="diary" class="page">
                 <div class="diary-header">
                     <h2 class="section-header__title">My Style Diary</h2>
@@ -440,10 +439,24 @@
                         <button class="diary-header__filter-btn" onclick="filterByDate()">적용</button>
                     </div>
 
-                    <button class="diary-header__add-btn" onclick="showPage('add')">+ Add</button>
+                    <div class="diary-header__actions">
+                        <button class="diary-header__delete-all-btn" onclick="openDeleteAllModal()">전체 삭제</button>
+                        <button class="diary-header__add-btn" onclick="showPage('add')">+ Add</button>
+                    </div>
                 </div>
 
                 <div class="items-grid diary-grid" id="myDiaryGrid">
+                </div>
+            </div>
+
+            <!-- 전체 삭제 확인 모달 -->
+            <div id="deleteAllModal" class="modal modal--delete" style="display: none;">
+                <div class="modal__content">
+                    <p class="modal__text">정말 모든 다이어리를 삭제하시겠습니까?<br>이 작업은 되돌릴 수 없습니다.</p>
+                    <div class="modal__actions">
+                        <button onclick="confirmDeleteAll()" class="modal__btn modal__btn--confirm">전체 삭제</button>
+                        <button onclick="closeDeleteAllModal()" class="modal__btn modal__btn--cancel">취소</button>
+                    </div>
                 </div>
             </div>
 

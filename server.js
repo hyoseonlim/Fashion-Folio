@@ -937,6 +937,64 @@ app.delete('/api/posts/:postId', async (req, res) => {
     }
 });
 
+// 특정 사용자의 모든 게시글 삭제
+app.delete('/api/posts/user/:userId/all', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const requestUserId = req.headers['user-id'];
+
+        if (!requestUserId || requestUserId !== userId) {
+            return res.status(401).json({
+                success: false,
+                message: '권한이 없습니다.'
+            });
+        }
+
+        const postsData = getAllPosts();
+        if (!postsData) {
+            return res.status(500).json({
+                success: false,
+                message: '게시글 데이터를 읽을 수 없습니다.'
+            });
+        }
+
+        // 사용자의 게시글 필터링
+        const userPosts = postsData.posts.filter(p => p.userId === userId);
+
+        // 이미지 파일들 삭제
+        for (const post of userPosts) {
+            const imagePath = path.join(__dirname, 'public', post.imageUrl);
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            }
+        }
+
+        // 게시글 데이터에서 제거
+        postsData.posts = postsData.posts.filter(p => p.userId !== userId);
+
+        const writeSuccess = await writeJsonFile('posts.json', postsData);
+
+        if (!writeSuccess) {
+            return res.status(500).json({
+                success: false,
+                message: '게시글 삭제 중 오류가 발생했습니다.'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: `${userPosts.length}개의 다이어리가 삭제되었습니다.`,
+            deletedCount: userPosts.length
+        });
+    } catch (error) {
+        console.error('전체 삭제 오류:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 // 특정 사용자의 게시글 가져오기
 app.get('/api/posts/user/:userId', (req, res) => {
     try {

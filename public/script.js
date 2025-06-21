@@ -1033,6 +1033,62 @@ function displayMyDiaries(posts) {
     }
 }
 
+// 전체 삭제 모달 열기
+function openDeleteAllModal() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('로그인이 필요합니다.');
+        return;
+    }
+
+    // 다이어리가 있는지 확인
+    const diaryCards = document.querySelectorAll('.diary-card');
+    if (diaryCards.length === 0) {
+        alert('삭제할 다이어리가 없습니다.');
+        return;
+    }
+
+    document.getElementById('deleteAllModal').style.display = 'flex';
+}
+
+// 전체 삭제 모달 닫기
+function closeDeleteAllModal() {
+    document.getElementById('deleteAllModal').style.display = 'none';
+}
+
+// 전체 다이어리 삭제 확인
+async function confirmDeleteAll() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('로그인이 필요합니다.');
+        closeDeleteAllModal();
+        return;
+    }
+
+    try {
+        const deleteResponse = await fetch(`${API_BASE_URL}/posts/user/${userId}/all`, {
+            method: 'DELETE',
+            headers: {
+                'user-id': userId
+            }
+        });
+
+        const deleteResult = await deleteResponse.json();
+        alert(`${deleteResult.deletedCount}개의 다이어리가 모두 삭제되었습니다.`);
+
+
+        closeDeleteAllModal();
+        // 다이어리 목록 새로고침
+        await loadMyDiaries();
+    }
+    catch (error) {
+        console.error('전체 삭제 오류:', error);
+        alert('전체 삭제 중 오류가 발생했습니다.');
+        closeDeleteAllModal();
+    }
+}
+
+
 // 날짜 포맷팅 함수
 function formatDate(dateString) {
     const date = new Date(dateString);

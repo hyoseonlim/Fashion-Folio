@@ -14,7 +14,6 @@
       "likedTrends": [],
       "subscribed": [
         "man_user2",
-        "woman_user3",
         "man_user1"
       ]
     },
@@ -214,7 +213,9 @@
       "likedTrends": [],
       "subscribed": [
         "man_user5",
-        "woman_user5"
+        "woman_user5",
+        "woman_user1",
+        "woman_user4"
       ]
     },
     {
