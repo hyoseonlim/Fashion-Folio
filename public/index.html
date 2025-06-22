@@ -356,6 +356,15 @@
                 <!-- 갤러리 카드 컨테이너 -->
                 <div class="gallery-grid" id="galleryGrid">
                 </div>
+                <div class="pagination" id="galleryPagination">
+                    <button class="pagination__btn pagination__btn--prev"
+                        onclick="changePage('gallery', -1)">이전</button>
+                    <span class="pagination__info">
+                        <span id="galleryCurrentPage">1</span> / <span id="galleryTotalPages">1</span>
+                    </span>
+                    <button class="pagination__btn pagination__btn--next" onclick="changePage('gallery', 1)">다음</button>
+                </div>
+
             </div>
 
             <!-- User Detail Page -->
@@ -387,6 +396,15 @@
                     <!-- 오른쪽: 스타일 다이어리 -->
                     <div class="user-detail__diary-panel">
                         <div class="user-detail__polaroid-grid" id="detailUserDiaries">
+                        </div>
+                        <div class="pagination" id="userDetailPagination">
+                            <button class="pagination__btn pagination__btn--prev"
+                                onclick="changePage('userDetail', -1)">이전</button>
+                            <span class="pagination__info">
+                                <span id="userDetailCurrentPage">1</span> / <span id="userDetailTotalPages">1</span>
+                            </span>
+                            <button class="pagination__btn pagination__btn--next"
+                                onclick="changePage('userDetail', 1)">다음</button>
                         </div>
                     </div>
                 </div>
@@ -446,6 +464,13 @@
                 </div>
 
                 <div class="items-grid diary-grid" id="myDiaryGrid">
+                </div>
+                <div class="pagination" id="diaryPagination">
+                    <button class="pagination__btn pagination__btn--prev" onclick="changePage('diary', -1)">이전</button>
+                    <span class="pagination__info">
+                        <span id="diaryCurrentPage">1</span> / <span id="diaryTotalPages">1</span>
+                    </span>
+                    <button class="pagination__btn pagination__btn--next" onclick="changePage('diary', 1)">다음</button>
                 </div>
             </div>
 

@@ -268,6 +268,21 @@ let currentFilters = {
 let appliedFilters = {};
 let myTrends = []; // 사용자가 좋아요한 트렌드 목록
 
+// 페이징 관련
+let currentPages = {
+    gallery: 1,
+    userDetail: 1,
+    diary: 1
+};
+
+const itemsPerPage = {
+    gallery: 5,
+    userDetail: 9,
+    diary: 8
+};
+
+
+
 // 내 트렌드 데이터 로드
 async function loadMyTrends() {
     const userId = localStorage.getItem('userId');
@@ -402,24 +417,59 @@ async function getUsers() {
         const response = await fetch(`${API_BASE_URL}/users`);
         const result = await response.json();
         if (result.success) {
-            // 로그인한 사용자 제외
             const userId = localStorage.getItem('userId');
-            const filteredUsers = result.data.users.filter(user => user.id !== userId);
+            const allUsers = result.data.users;
+            const filteredUsers = allUsers.filter(user => user.id !== userId);
 
-            // 인기도 계산 (다른 사용자들이 구독한 횟수)
+            // 각 사용자의 구독자 수 계산
             const usersWithPopularity = filteredUsers.map(user => {
-                const subscriberCount = result.data.users.filter(u =>
+                const subscriberCount = allUsers.filter(u =>
                     u.subscribed && u.subscribed.includes(user.id)
                 ).length;
                 return { ...user, subscriberCount };
             });
 
-            displayUsers(usersWithPopularity); // 변경된 부분
+            displayUsers(usersWithPopularity);
         } else {
             throw new Error(result.message);
         }
     } catch (err) {
         console.error('데이터 가져오기 실패', err);
+        // 에러 시에도 빈 배열로 표시
+        displayUsers([]);
+    }
+}
+
+function updatePaginationButtons(section, currentPage, totalPages) {
+    let paginationContainer;
+
+    switch (section) {
+        case 'gallery':
+            paginationContainer = document.getElementById('galleryPagination');
+            break;
+        case 'userDetail':
+            paginationContainer = document.getElementById('userDetailPagination');
+            break;
+        case 'diary':
+            paginationContainer = document.getElementById('diaryPagination');
+            break;
+    }
+
+    if (!paginationContainer) return;
+
+    const prevBtn = paginationContainer.querySelector('.pagination__btn--prev');
+    const nextBtn = paginationContainer.querySelector('.pagination__btn--next');
+
+    if (prevBtn) {
+        prevBtn.disabled = currentPage <= 1;
+        prevBtn.style.opacity = currentPage <= 1 ? '0.5' : '1';
+        prevBtn.style.cursor = currentPage <= 1 ? 'not-allowed' : 'pointer';
+    }
+
+    if (nextBtn) {
+        nextBtn.disabled = currentPage >= totalPages;
+        nextBtn.style.opacity = currentPage >= totalPages ? '0.5' : '1';
+        nextBtn.style.cursor = currentPage >= totalPages ? 'not-allowed' : 'pointer';
     }
 }
 
@@ -431,62 +481,92 @@ function displayUsers(users) {
     let filteredUsers = filterUsers(users);
     const currentUserInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
-    const sortType = document.querySelector('input[name="sort"]:checked').value;
+    const sortType = document.querySelector('input[name="sort"]:checked')?.value || 'join';
     if (sortType === 'join') {
-        // 가입일순 정렬 (최신순)
         filteredUsers.sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate));
     } else if (sortType === 'popular') {
-        // 인기순 정렬 (구독자 많은 순)
         filteredUsers.sort((a, b) => (b.subscriberCount || 0) - (a.subscriberCount || 0));
     }
 
-    // 구독한 유저만 보기 필터 - 추가된 부분
-    const showFavoriteOnly = document.getElementById('favoriteOnlyCheckbox').checked;
+    // 구독한 유저만 보기 필터
+    const showFavoriteOnly = document.getElementById('favoriteOnlyCheckbox')?.checked || false;
     if (showFavoriteOnly) {
-        const currentUserInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
         filteredUsers = filteredUsers.filter(user =>
             currentUserInfo.subscribed && currentUserInfo.subscribed.includes(user.id)
         );
     }
 
+    // 페이징 계산
+    const totalPages = Math.ceil(filteredUsers.length / itemsPerPage.gallery);
+
+    // 페이지 유효성 검사
     if (filteredUsers.length === 0) {
+        currentPages.gallery = 1;
+    }
+
+    // 현재 페이지가 유효한 범위를 벗어난 경우 조정
+    if (currentPages.gallery > totalPages && totalPages > 0) {
+        currentPages.gallery = totalPages;
+    } else if (currentPages.gallery < 1) {
+        currentPages.gallery = 1;
+    }
+
+    const startIndex = (currentPages.gallery - 1) * itemsPerPage.gallery;
+    const endIndex = startIndex + itemsPerPage.gallery;
+    const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
+
+    // 페이지 정보 업데이트
+    const currentPageEl = document.getElementById('galleryCurrentPage');
+    const totalPagesEl = document.getElementById('galleryTotalPages');
+
+    if (currentPageEl) currentPageEl.textContent = currentPages.gallery;
+    if (totalPagesEl) totalPagesEl.textContent = totalPages || 1;
+
+    // 페이지네이션 표시/숨기기
+    const paginationEl = document.getElementById('galleryPagination');
+    if (paginationEl) {
+        if (totalPages <= 1) {
+            paginationEl.style.display = 'none';
+        } else {
+            paginationEl.style.display = 'flex';
+        }
+    }
+
+    // 버튼 상태 업데이트 - setTimeout 제거하고 직접 업데이트
+    updatePaginationButtons('gallery', currentPages.gallery, totalPages);
+
+    if (paginatedUsers.length === 0 && filteredUsers.length === 0) {
         container.innerHTML = '<div class="no-data">조건에 맞는 사용자가 없습니다.</div>';
         return;
     }
 
-    for (const user of filteredUsers) {
+    // 사용자 카드 생성
+    for (const user of paginatedUsers) {
         let userCard = document.createElement('div');
         userCard.className = 'user-card';
 
-        // 사용자 아이콘
         let userIcon = document.createElement('div');
         userIcon.className = 'user-card__icon';
         userIcon.style.backgroundColor = user.profileColor || '#ff69b4';
 
-        // 사용자 정보 컨테이너
         let userInfo = document.createElement('div');
         userInfo.className = 'user-card__info';
 
-        // 아이디
         let userIdElement = document.createElement('h3');
         userIdElement.className = 'user-card__id';
         userIdElement.textContent = user.id;
 
-        // 상세 정보 컨테이너
         let userDetails = document.createElement('div');
         userDetails.className = 'user-card__details';
 
-        // 기본 정보 (나이, 성별)
         let basicInfo = document.createElement('p');
         basicInfo.className = 'user-card__basic-info';
         basicInfo.textContent = `${user.age}세 ${user.gender}`;
 
-        // 신체 정보 (키, 몸무게)
         let bodyInfo = document.createElement('p');
         bodyInfo.className = 'user-card__body-info';
         bodyInfo.textContent = `${user.height}cm, ${user.weight}kg`;
 
-        // 직업
         let jobInfo = document.createElement('span');
         jobInfo.className = 'user-card__job';
         jobInfo.textContent = user.job || '직업 미공개';
@@ -494,11 +574,9 @@ function displayUsers(users) {
         userDetails.append(basicInfo, bodyInfo, jobInfo);
         userInfo.append(userIdElement, userDetails);
 
-        // 구독 버튼
         let subscribeBtn = document.createElement('button');
         subscribeBtn.className = 'user-card__subscribe-btn';
 
-        // 구독 상태 확인
         const isSubscribed = currentUserInfo.subscribed &&
             currentUserInfo.subscribed.includes(user.id);
 
@@ -514,7 +592,6 @@ function displayUsers(users) {
             toggleSubscribe(user.id, subscribeBtn);
         };
 
-        // 카드 클릭 이벤트 (사용자 상세 페이지로)
         userCard.addEventListener('click', function (e) {
             if (e.target === subscribeBtn) return;
             getUser(user);
@@ -523,6 +600,7 @@ function displayUsers(users) {
         userCard.append(userIcon, userInfo, subscribeBtn);
         container.appendChild(userCard);
     }
+
     showPage('gallery');
 }
 
@@ -564,8 +642,6 @@ async function toggleSubscribe(targetUserId, buttonElement) {
                 buttonElement.classList.remove('user-card__subscribe-btn--subscribed');
                 buttonElement.textContent = '구독하기';
             }
-
-            console.log(result.message);
         } else {
             alert(result.message || '구독 처리 중 오류가 발생했습니다.');
         }
@@ -606,6 +682,21 @@ function filterUsers(users) {
 }
 
 async function getUser(user) {
+    // 구독자 수 계산
+    try {
+        const response = await fetch(`${API_BASE_URL}/users`);
+        const result = await response.json();
+        if (result.success) {
+            const allUsers = result.data.users;
+            const subscriberCount = allUsers.filter(u =>
+                u.subscribed && u.subscribed.includes(user.id)
+            ).length;
+            user.subscriberCount = subscriberCount;
+        }
+    } catch (err) {
+        console.error('구독자 수 계산 실패:', err);
+    }
+
     // 좌측 유저 정보 처리
     document.getElementById('detailUserName').innerText = user.id;
     document.getElementById('detailUserBody').innerText = `${user.height}cm, ${user.weight}kg`;
@@ -646,17 +737,53 @@ async function getUser(user) {
 
 function displayUser(posts, userData) {
     const container = document.getElementById('detailUserDiaries');
-
-    // 기존 내용 지우기
     container.innerHTML = '';
+
+    // 다른 사용자를 볼 때만 페이지 초기화
+    if (!window.currentDetailUser || window.currentDetailUser.id !== userData.id) {
+        currentPages.userDetail = 1;
+    }
+
+    // 전역 변수에 저장
+    window.currentUserPosts = posts;
+    window.currentDetailUser = userData;
 
     if (!posts || posts.length === 0) {
         container.innerHTML = '<p class="no-data">게시글이 없습니다.</p>';
+        document.getElementById('userDetailPagination').style.display = 'none';
         showPage('user-detail');
         return;
     }
 
-    for (const post of posts) {
+    // 페이징 계산
+    const totalPages = Math.ceil(posts.length / itemsPerPage.userDetail);
+
+    // 현재 페이지가 총 페이지수보다 크면 1페이지로 리셋
+    if (currentPages.userDetail > totalPages) {
+        currentPages.userDetail = 1;
+    }
+
+    const startIndex = (currentPages.userDetail - 1) * itemsPerPage.userDetail;
+    const endIndex = startIndex + itemsPerPage.userDetail;
+    const paginatedPosts = posts.slice(startIndex, endIndex);
+
+    // 페이지 정보 업데이트
+    document.getElementById('userDetailCurrentPage').textContent = currentPages.userDetail;
+    document.getElementById('userDetailTotalPages').textContent = totalPages;
+
+    // 페이지네이션 표시/숨기기
+    const paginationEl = document.getElementById('userDetailPagination');
+    if (totalPages <= 1) {
+        paginationEl.style.display = 'none';
+    } else {
+        paginationEl.style.display = 'flex';
+    }
+
+    // 버튼 상태 업데이트 - 새 함수 사용
+    updatePaginationButtons('userDetail', currentPages.userDetail, totalPages);
+
+    // 게시글 카드 생성
+    for (const post of paginatedPosts) {
         let postDiv = document.createElement('div');
         postDiv.className = 'polaroid-card';
         postDiv.addEventListener('click', function () {
@@ -668,17 +795,20 @@ function displayUser(posts, userData) {
 
         let postCaption = document.createElement('div');
         postCaption.className = 'polaroid-caption';
+
         let postDate = document.createElement('div');
         postDate.className = 'date';
         postDate.innerText = post.date;
+
         let postContents = document.createElement('div');
         postContents.className = 'desc';
         postContents.innerText = post.content.substr(0, 7) + "...";
-        postCaption.append(postDate, postContents);
 
+        postCaption.append(postDate, postContents);
         postDiv.append(postImg, postCaption);
         container.appendChild(postDiv);
     }
+
     showPage('user-detail');
 }
 
@@ -699,29 +829,66 @@ async function toggleDetailSubscribe() {
     if (!window.currentDetailUser) return;
 
     const subscribeBtn = document.getElementById('detailSubscribeBtn');
-    await toggleSubscribe(window.currentDetailUser.id, subscribeBtn);
 
-    // 팔로워 수 업데이트
-    const isSubscribed = subscribeBtn.classList.contains('user-detail__subscribe-btn--subscribed');
-    const followersEl = document.getElementById('detailUserFollowers');
-    let followersCount = parseInt(followersEl.innerText) || 0;
+    // 중복 클릭 방지를 위해 버튼 비활성화
+    subscribeBtn.disabled = true;
 
-    if (isSubscribed) {
-        followersCount++;
-    } else {
-        followersCount = Math.max(0, followersCount - 1);
+    try {
+        const currentUserId = localStorage.getItem('userId');
+        const targetUserId = window.currentDetailUser.id;
+
+        const response = await fetch(`${API_BASE_URL}/user/subscribe`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'user-id': currentUserId
+            },
+            body: JSON.stringify({
+                targetUserId: targetUserId
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // localStorage의 사용자 정보 업데이트
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            userInfo.subscribed = result.subscribed;
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+            // 버튼 UI 업데이트
+            const isSubscribed = result.subscribed.includes(targetUserId);
+            const followersEl = document.getElementById('detailUserFollowers');
+            let currentFollowers = parseInt(followersEl.innerText) || 0;
+
+            if (isSubscribed) {
+                subscribeBtn.classList.add('user-detail__subscribe-btn--subscribed');
+                subscribeBtn.textContent = '구독취소';
+                followersEl.innerText = currentFollowers + 1;
+            } else {
+                subscribeBtn.classList.remove('user-detail__subscribe-btn--subscribed');
+                subscribeBtn.textContent = '구독하기';
+                followersEl.innerText = Math.max(0, currentFollowers - 1);
+            }
+        }
+    } catch (error) {
+        console.error('구독 처리 오류:', error);
+        alert('서버 연결에 실패했습니다.');
+    } finally {
+        // 버튼 다시 활성화
+        subscribeBtn.disabled = false;
     }
-
-    followersEl.innerText = followersCount;
 }
 
 // 갤러리 정렬 함수
 function sortGallery(sortType) {
+    currentPages.gallery = 1;
     getUsers(); // 정렬 옵션이 변경되면 사용자 목록을 다시 로드
 }
 
 // 구독한 유저만 보기 토글
 function toggleFavoriteUsers() {
+    currentPages.gallery = 1;
     getUsers(); // 필터 옵션이 변경되면 사용자 목록을 다시 로드
 }
 
@@ -954,6 +1121,26 @@ function applyPresetRange() {
     filterByDate();
 }
 
+function goToUserDetail() {
+    // 현재 each-detail에 표시된 유저 정보로 user-detail 페이지로 이동
+    const username = document.getElementById('eachDetailUsername').innerText;
+
+    // 전체 유저 목록에서 해당 유저 찾기
+    fetch(`${API_BASE_URL}/users`)
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                const user = result.data.users.find(u => u.id === username);
+                if (user) {
+                    // user-detail 페이지 1로 리셋
+                    currentPages.userDetail = 1;
+                    getUser(user);
+                }
+            }
+        })
+        .catch(error => console.error('유저 정보 로드 실패:', error));
+}
+
 async function showMyDiary() {
     const userId = localStorage.getItem('userId');
     if (!userId) {
@@ -999,13 +1186,34 @@ function displayMyDiaries(posts) {
 
     if (!posts || posts.length === 0) {
         container.innerHTML = '<p class="no-data">작성한 다이어리가 없습니다.</p>';
+        document.getElementById('diaryPagination').style.display = 'none';
         return;
     }
 
     // 날짜순으로 정렬 (최신순)
     const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    for (const post of sortedPosts) {
+    // 페이징 계산
+    const totalPages = Math.ceil(sortedPosts.length / itemsPerPage.diary);
+    const startIndex = (currentPages.diary - 1) * itemsPerPage.diary;
+    const endIndex = startIndex + itemsPerPage.diary;
+    const paginatedPosts = sortedPosts.slice(startIndex, endIndex);
+
+    // 페이지 정보 업데이트
+    document.getElementById('diaryCurrentPage').textContent = currentPages.diary;
+    document.getElementById('diaryTotalPages').textContent = totalPages;
+    document.getElementById('diaryPagination').style.display = 'flex';
+
+    if (paginatedPosts.length === 0 && currentPages.diary > 1) {
+        currentPages.diary = Math.max(1, currentPages.diary - 1);
+        displayMyDiaries(posts); // 재귀 호출로 이전 페이지 표시
+        return;
+    }
+
+    // 버튼 상태 업데이트 - 새 함수 사용
+    updatePaginationButtons('diary', currentPages.diary, totalPages);
+
+    for (const post of paginatedPosts) {
         let diaryCard = document.createElement('div');
         diaryCard.className = 'diary-card';
         diaryCard.setAttribute('data-date', post.date);
@@ -1493,11 +1701,9 @@ function applyWeight() {
 
 function applyFilters() {
     appliedFilters = JSON.parse(JSON.stringify(currentFilters));
-    console.log("✅ 적용된 필터:", appliedFilters);
     closeFilterModal();
     updateMainTagUI();
-
-    // 필터 적용 후 사용자 목록 다시 로드
+    currentPages.gallery = 1;
     getUsers();
 }
 
@@ -1572,6 +1778,9 @@ function resetAllFilters() {
 async function searchById() {
     const searchInput = document.getElementById('idSearchInput');
     const searchQuery = searchInput.value.trim();
+
+    // 검색 시 페이지 1로 리셋
+    currentPages.gallery = 1;
 
     if (!searchQuery) {
         // 검색어가 없으면 전체 사용자 목록 다시 로드
@@ -1717,6 +1926,49 @@ function clearSearch() {
     getUsers(); // 전체 사용자 목록 다시 로드
 }
 
+async function changePage(section, direction) {
+    const currentPage = currentPages[section];
+    let totalPages = 1;
+
+    // 각 섹션별 총 페이지 수 가져오기
+    switch (section) {
+        case 'gallery':
+            totalPages = parseInt(document.getElementById('galleryTotalPages')?.textContent) || 1;
+            break;
+        case 'userDetail':
+            totalPages = parseInt(document.getElementById('userDetailTotalPages')?.textContent) || 1;
+            break;
+        case 'diary':
+            totalPages = parseInt(document.getElementById('diaryTotalPages')?.textContent) || 1;
+            break;
+    }
+
+    const newPage = currentPage + direction;
+
+    // 범위 체크
+    if (newPage < 1 || newPage > totalPages) {
+        return;
+    }
+
+    // 페이지 업데이트
+    currentPages[section] = newPage;
+
+    // 각 섹션별 데이터 다시 로드
+    switch (section) {
+        case 'gallery':
+            await getUsers();
+            break;
+        case 'userDetail':
+            if (window.currentUserPosts && window.currentDetailUser) {
+                displayUser(window.currentUserPosts, window.currentDetailUser);
+            }
+            break;
+        case 'diary':
+            await loadMyDiaries();
+            break;
+    }
+}
+
 // 초기화 및 이벤트 리스너 설정
 document.addEventListener('DOMContentLoaded', async function () {
     // 로컬 스토리지에서 세션 정보 확인
@@ -1766,17 +2018,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const favoritesCheckbox = document.getElementById('favoritesCheckbox');
     if (favoritesCheckbox) {
         favoritesCheckbox.addEventListener('change', toggleFavoritesFilter);
-    }
-
-    // 검색 기능 설정
-    const searchInput = document.querySelector('.search-section__input');
-    if (searchInput) {
-        searchInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                console.log('Searching for:', this.value);
-                // Add search functionality here
-            }
-        });
     }
 
     // 스타일 추천 버튼 설정
