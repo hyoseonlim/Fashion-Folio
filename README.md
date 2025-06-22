@@ -36,9 +36,9 @@ fashion-folio/
             └── *.jpg        # 다이어리 사진
 ```
 
-## 🎨 에셋 출처
+## 🎨 배경 비디오 출처
 
-- **배경 비디오**: [Top View of Black Fabric Texture](https://www.pexels.com/video/top-view-of-black-fabric-texture-7677746/) from Pexels
+- [Top View of Black Fabric Texture](https://www.pexels.com/video/top-view-of-black-fabric-texture-7677746/) from Pexels
 
 ## 🛠 사용 기술
 
@@ -58,3 +58,6 @@ fashion-folio/
 - AI 기반 맞춤형 패션 추천 (AI Stylist)
 - 사용자 검색 및 구독 시스템
 - 고급 필터링 및 검색 기능
+
+## 참고
+2025 웹프로그래밍 텀프로젝트 과제입니다.
