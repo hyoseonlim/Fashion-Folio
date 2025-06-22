@@ -240,12 +240,6 @@ function logout() {
     if (loginBtn) loginBtn.style.display = 'block';
     if (userIcon) userIcon.style.display = 'none';
 
-    // MY DIARY 메뉴 숨기기
-    const diaryNav = document.querySelector('.header__nav-item:nth-child(4)');
-    if (diaryNav) {
-        diaryNav.style.display = 'none';
-    }
-
     // 드롭다운 닫기
     const dropdown = document.getElementById('userDropdown');
     if (dropdown) {

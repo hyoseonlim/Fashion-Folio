@@ -32,18 +32,6 @@
     },
     {
       "userId": "man_user1",
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/02fb29b24fda49999fa16fc92544b1e5.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385383711486244173",
-      "createdAt": "2025-06-21T15:42:17.505Z"
-    },
-    {
-      "userId": "man_user1",
-      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/21/7d4b01fa5a814b9aa2eeeee1103541e4.jpg?w=390",
-      "linkUrl": "https://www.musinsa.com/snap/1385784780284004874",
-      "createdAt": "2025-06-21T15:42:20.675Z"
-    },
-    {
-      "userId": "man_user1",
       "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/21/bed2d264a23440d8abc6540eac4e3441.jpg?w=390",
       "linkUrl": "https://www.musinsa.com/snap/1385979472612472729",
       "createdAt": "2025-06-22T10:04:59.285Z"
@@ -59,6 +47,12 @@
       "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/22/f6dccd5a59564486b37680246eb3a3ad.jpg?w=390",
       "linkUrl": "https://www.musinsa.com/snap/1386000774403090725",
       "createdAt": "2025-06-22T10:05:03.703Z"
+    },
+    {
+      "userId": "man_user1",
+      "imageUrl": "https://image.msscdn.net/thumbnails/snap/images/2025/06/20/02fb29b24fda49999fa16fc92544b1e5.jpg?w=390",
+      "linkUrl": "https://www.musinsa.com/snap/1385383711486244173",
+      "createdAt": "2025-06-22T19:04:19.958Z"
     }
   ]
 }

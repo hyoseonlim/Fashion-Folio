@@ -3,7 +3,7 @@
     {
       "id": "diary_m1_1",
       "userId": "man_user1",
-      "date": "2024-12-01",
+      "date": "2025-05-02",
       "imageUrl": "/images/man_user1/man_user1_1.png",
       "content": "기말고사 준비하는 날. 편안한 후드티에 데님으로 캐주얼하게. 어깨가 넓어서 오버핏이 잘 어울린다.",
       "createdAt": "2024-12-01T09:00:00Z",
@@ -14,7 +14,7 @@
     {
       "id": "diary_m1_2",
       "userId": "man_user1",
-      "date": "2024-12-03",
+      "date": "2025-05-22",
       "imageUrl": "/images/man_user1/man_user1_2.png",
       "content": "도서관 가는 날. 니트와 면바지로 편안하지만 깔끔하게. 상체가 짧아서 상의는 짧은 기장으로.",
       "createdAt": "2024-12-03T10:00:00Z",
@@ -25,7 +25,7 @@
     {
       "id": "diary_m1_3",
       "userId": "man_user1",
-      "date": "2024-12-05",
+      "date": "2025-06-05",
       "imageUrl": "/images/man_user1/man_user1_3.png",
       "content": "친구들과 카페에서. 맨투맨에 청바지로 무난하게. 캐주얼한 스타일이 가장 편하다.",
       "createdAt": "2024-12-05T14:00:00Z",
@@ -36,7 +36,7 @@
     {
       "id": "diary_m1_4",
       "userId": "man_user1",
-      "date": "2024-12-07",
+      "date": "2025-06-10",
       "imageUrl": "/images/man_user1/man_user1_4.png",
       "content": "주말 브런치. 셔츠에 치노팬츠로 단정하면서도 캐주얼하게. 어깨 라인이 예쁘게 떨어진다.",
       "createdAt": "2024-12-07T11:00:00Z",
@@ -47,7 +47,7 @@
     {
       "id": "diary_m1_5",
       "userId": "man_user1",
-      "date": "2024-12-09",
+      "date": "2025-06-11",
       "imageUrl": "/images/man_user1/man_user1_5.png",
       "content": "운동 가는 날. 트레이닝복 셋업으로 스포티하게. 넓은 어깨가 운동복에서 더 돋보인다.",
       "createdAt": "2024-12-09T18:00:00Z",
@@ -58,7 +58,7 @@
     {
       "id": "diary_m1_6",
       "userId": "man_user1",
-      "date": "2024-12-11",
+      "date": "2025-06-12",
       "imageUrl": "/images/man_user1/man_user1_6.png",
       "content": "헬스장 다녀온 후. 반팔티에 쇼츠로 시원하게. 상체가 짧아서 하이웨이스트가 잘 맞는다.",
       "createdAt": "2024-12-11T20:00:00Z",
@@ -69,7 +69,7 @@
     {
       "id": "diary_m1_7",
       "userId": "man_user1",
-      "date": "2024-12-13",
+      "date": "2025-06-18",
       "imageUrl": "/images/man_user1/man_user1_7.png",
       "content": "동아리 모임. 후드집업에 조거팬츠로 편안하게. 평소 즐겨입는 캐주얼 스타일.",
       "createdAt": "2024-12-13T19:00:00Z",
