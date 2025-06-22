@@ -103,7 +103,9 @@
                     </label>
                 </div>
 
-                <div class="items-grid" id="trends">
+                <div class="trends-container">
+                    <div class="items-grid" id="trends">
+                    </div>
                 </div>
             </div>
 
@@ -376,11 +378,11 @@
 
                 <div class="user-detail">
                     <!-- 왼쪽: 유저 정보 -->
-                    <div class="user-detail__info-panel">
+                    <div class="user-detail__info-panel" id="detailUser">
+                        <div class="user-detail__profile-icon" id="detailUserIcon"></div>
                         <div class="user-detail__name" id="detailUserName"></div>
                         <div class="user-detail__tags" id="detailUserTags"></div>
                         <div class="user-detail__body" id="detailUserBody"></div>
-                        <div class="user-detail__profile-icon" id="detailUserIcon"></div>
                         <div class="user-detail__follow-section">
                             <div class="user-detail__followers">
                                 <span class="user-detail__followers-count" id="detailUserFollowers">0</span>
@@ -417,7 +419,7 @@
                     <button onclick="showPage('user-detail')" class="section-header__back-btn">← 뒤로</button>
                 </div>
 
-                <div class="each-detail">
+                <div class="each-detail" id="eachDetailContainer">
                     <!-- 왼쪽: 큰 이미지 -->
                     <div class="each-detail__image-panel">
                         <img src="" alt="스타일 이미지" class="each-detail__main-img" id="eachDetailImage" />
@@ -427,6 +429,7 @@
                     <div class="each-detail__info-panel">
                         <div class="each-detail__date" id="eachDetailDate"></div>
                         <div class="each-detail__content" id="eachDetailContent"></div>
+                        <div class="each-detail__tags" id="eachDetailStyles"></div>
                         <div class="each-detail__userbox" onclick="goToUserDetail()">
                             <div class="each-detail__user-icon" id="eachDetailUserIcon"></div>
                             <div class="each-detail__user-meta">

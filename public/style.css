@@ -217,8 +217,7 @@ textarea:focus {
 .items-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
+    gap: 30px;
 }
 
 .item-card {
@@ -1225,13 +1224,12 @@ textarea:focus {
 }
 
 .user-detail__profile-icon {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     border: 2px solid #222;
     margin-bottom: 16px;
     position: relative;
-    background-color: #ff69b4;
 }
 
 .user-detail__profile-icon::before {
@@ -1240,7 +1238,7 @@ textarea:focus {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 120px;
+    font-size: 80px;
 }
 
 .user-detail__follow-section {
@@ -1377,19 +1375,21 @@ textarea:focus {
 /* Each Detail */
 .each-detail {
     display: flex;
-    gap: 60px;
-    margin: 48px auto;
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.7);
     padding: 40px;
     border-radius: 12px;
     color: black;
+    gap: 50px;
+}
+
+.each-detail__image-panel {
+    flex: 0 0 50%;
 }
 
 .each-detail__main-img {
     width: 100%;
-    aspect-ratio: 1/1;
     object-fit: cover;
     border: 2px solid #eee;
     border-radius: 4px;
@@ -1397,10 +1397,10 @@ textarea:focus {
 }
 
 .each-detail__info-panel {
-    width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
+    flex: 1;
 }
 
 .each-detail__date {
@@ -1423,7 +1423,7 @@ textarea:focus {
     align-items: center;
     gap: 16px;
     padding: 16px;
-    background: white;
+    background-color: rgba(255, 255, 255, 0.45);
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-top: auto;
@@ -1440,7 +1440,6 @@ textarea:focus {
     border-radius: 50%;
     border: 1px solid #ddd;
     position: relative;
-    background-color: #ff69b4;
 }
 
 .each-detail__user-icon::before {

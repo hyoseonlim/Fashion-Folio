@@ -818,6 +818,7 @@ function displayPost(post, userData) {
     document.getElementById('eachDetailImage').src = post.imageUrl;
     document.getElementById('eachDetailDate').innerText = post.date;
     document.getElementById('eachDetailUsername').innerText = userData.id;
+    document.getElementById('eachDetailStyles').innerText = `# ${post.styles}`;
     document.getElementById('eachDetailUserTags').innerText = `${userData.age}세 ${userData.gender}`;
     document.getElementById('eachDetailUserBody').innerText = `${userData.height}cm, ${userData.weight}kg`;
 
