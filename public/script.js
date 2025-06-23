@@ -1,5 +1,16 @@
 const API_BASE_URL = 'http://localhost:3000/api';
 
+// 전역 변수
+let showingFavoritesOnly = false;
+let currentFilters = {
+    gender: null,
+    styles: [],
+    height: null,
+    weight: null
+};
+let appliedFilters = {};
+let myTrends = []; // 사용자가 좋아요한 트렌드 목록
+
 // 로그인 확인 함수
 function checkLoginRequired() {
     const userId = localStorage.getItem('userId');
@@ -73,6 +84,11 @@ async function handleLogin() {
 
             // UI 업데이트
             updateUserUI(result.user);
+            showingFavoritesOnly = false;
+            const favoritesCheckbox = document.getElementById('favoritesCheckbox');
+            if (favoritesCheckbox) {
+                favoritesCheckbox.checked = false;
+            }
             showPage('trend');
 
             // 성별에 맞는 트렌드로 새로고침
@@ -245,22 +261,17 @@ function logout() {
     if (dropdown) {
         dropdown.classList.remove('header__user-dropdown--active');
     }
+    myTrends = [];
+    showingFavoritesOnly = false;
+    const favoritesCheckbox = document.getElementById('favoritesCheckbox');
+    if (favoritesCheckbox) {
+        favoritesCheckbox.checked = false;
+    }
 
     // 메인 페이지로 이동하고 전체 트렌드 보기
     showPage('trend');
     getTrends();
 }
-
-// 전역 변수
-let showingFavoritesOnly = false;
-let currentFilters = {
-    gender: null,
-    styles: [],
-    height: null,
-    weight: null
-};
-let appliedFilters = {};
-let myTrends = []; // 사용자가 좋아요한 트렌드 목록
 
 // 페이징 관련
 let currentPages = {
@@ -1042,6 +1053,13 @@ function hideLoading() {
 
 // 추천 결과 표시
 function displayRecommendation(recommendation) {
+
+    document.getElementById('summaryText').textContent = '';
+    document.getElementById('topItem').textContent = '';
+    document.getElementById('shoesItem').textContent = '';
+    document.getElementById('accessoriesItem').textContent = '';
+
+
     // 데이터 채우기
     if (recommendation.summary) {
         document.getElementById('summaryText').textContent = recommendation.summary;

@@ -302,6 +302,20 @@
         "woman_user1",
         "man_user6"
       ]
+    },
+    {
+      "id": "test",
+      "password": "1234",
+      "age": 22,
+      "gender": "여성",
+      "height": 171,
+      "weight": 50,
+      "job": "대학생",
+      "bodyType": "normal",
+      "profileColor": "#ec79b3",
+      "joinDate": "2025-06-22",
+      "likedTrends": [],
+      "likedUsers": []
     }
   ]
 }
