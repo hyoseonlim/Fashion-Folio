@@ -6,7 +6,7 @@
 
 ```
 fashion-folio/
-├── app.js                      # 메인 애플리케이션 진입점
+├── server.js                      # 메인 애플리케이션 진입점
 ├── package.json               # 프로젝트 의존성 및 스크립트
 ├── .env                       # 환경 변수 (API 키)
 ├── README.md                  # 프로젝트 문서
