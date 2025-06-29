@@ -61,3 +61,4 @@ fashion-folio/
 
 ## 참고
 2025 웹프로그래밍 텀프로젝트 과제입니다.
+https://youtu.be/zCUzpK6rj3c
